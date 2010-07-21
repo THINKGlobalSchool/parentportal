@@ -12,23 +12,34 @@
 	
 	$english = array(
 		
-		// Entity/Object Related
+		// Default Content & Entity/Object Related
 		'parentportal' => 'Parent Portal',
 		
-		// Default Content
-		
-		// Menu
+		// Menu's
+		'parentportal:menu:admin:manageparent' => "Manage Parent",
 
 		// Actions
 		
 		// Action labels
 	
 		// Confirmations
+		'parentportal:confirm:addchildren' => "User Updated",
+		'parentportal:confirm:clearchildren' => "Children Cleared",
 	
 		// Errors
+		'parentportal:error:unknown_username' => "Unknown Username",
+		'parentportal:error:addchildren' => "Error updating user",
+		'parentportal:error:clearchildren' => "Error clearing children",
 			
 		// Titles/Label
-
+		'parentportal:title:manageparent' => "Create/Manage Parent Settings",
+		'parentportal:label:profile' => "%s's Profile", 
+		'parentportal:label:enableparent' => "Parent Enabled", 
+		'parentportal:label:childselect' => "Select Child",
+		'parentportal:label:currentchildren' => "Current Children",
+		'parentportal:label:clearchildren' => "Clear Current Children",
+	
+			
 		// Other
 		
 	

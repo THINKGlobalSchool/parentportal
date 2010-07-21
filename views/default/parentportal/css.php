@@ -1,0 +1,31 @@
+<?php
+	/**
+	 * ParentPortal CSS
+	 * 
+	 * @package ParentPortal
+	 * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
+	 * @author Jeff Tilson
+	 * @copyright THINK Global School 2010
+	 * @link http://www.thinkglobalschool.com/
+	 * 
+	 */
+?>
+
+
+ul.childlisting {
+	list-style: none;
+	margin:0;
+	padding:0;
+}
+
+ul.childlisting li {
+	border-bottom:1px solid #CCCCCC;
+	clear:both;
+	height:25px;
+	margin-top:5px;
+	padding:5px;
+}
+
+ul.childlisting li:first-child {
+	border-top:1px solid #cccccc;
+}
