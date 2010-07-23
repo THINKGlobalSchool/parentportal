@@ -10,8 +10,6 @@
 	 * 
 	 */
 ?>
-
-
 ul.childlisting {
 	list-style: none;
 	margin:0;
@@ -28,4 +26,23 @@ ul.childlisting li {
 
 ul.childlisting li:first-child {
 	border-top:1px solid #cccccc;
+}
+
+.pp_top_two_column #top {
+	width: 100%;
+	padding: 10px;
+}
+
+.pp_top_two_column #left_column {
+	min-width: 47%;
+	margin: 0;
+	padding: 10px;	
+	float: left;
+}
+
+.pp_top_two_column #right_column {
+	width: 47%;
+	margin: 0;
+	padding: 10px;
+	float: right;
 }

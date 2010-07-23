@@ -38,8 +38,11 @@
 		'parentportal:label:childselect' => "Select Child",
 		'parentportal:label:currentchildren' => "Current Children",
 		'parentportal:label:clearchildren' => "Clear Current Children",
-	
-			
+		'parentportal:label:urltoggle' => "URL List Toggle (List behaves as either a whitelist or blacklist)",
+		'parentportal:label:urllist' => "URL List (relative to site root, ie: pg/activity)",
+		'parentportal:label:blacklist' => "Blacklist",
+		'parentportal:label:whitelist' => "Whitelist", 
+		
 		// Other
 		
 	

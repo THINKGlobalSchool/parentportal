@@ -12,6 +12,14 @@
 
 	/** Page Functions - Used by page_handler **/
 	
+	function parentportal_get_page_content_index() {
+		return array(
+				'top' => 'Welcome!',
+				'left_column' => 'left content',
+				'right_column' => 'right content'
+				);
+	}
+	
 	function parentportal_get_page_content_manageparent($user_guid) {
 		global $CONFIG;
 		
@@ -72,4 +80,58 @@
 		}
 		return false;
 	}
+	
+	function parentportal_gatekeeper() {
+		global $CONFIG;
+		
+		$allowed = false;
+		
+		$parsed_url = parse_url($CONFIG->wwwroot);
+		$base_url = $parsed_url['scheme'] . "://" . $parsed_url['host'];
+		
+		if ((isset($parsed_url['port'])) && ($parsed_url['port'])) {
+		 	$base_url .= ":" . $parsed_url['port'];
+		}
+	
+		$uri = preg_replace('#\?.*|\#.*#', '', $_SERVER['REQUEST_URI']);
+		$url = $base_url . $uri;
+			
+		// Will be true for whitelist, false for blacklist
+		$access_toggle = get_plugin_setting('urltoggle', 'parentportal');
+		
+		$url_list = get_plugin_setting('urllist','parentportal');
+		$url_list = explode("\n", $url_list);
+		
+		if ($access_toggle) {
+			array_push($url_list, '');
+			array_push($url_list, '_css/js.php');
+			array_push($url_list, '_css/css.css');
+			array_push($url_list, 'pg/parentportal');
+		} 
+	
+		foreach($url_list as $u) {
+			$u = trim($u);
+			if ($access_toggle) {
+				// Whitelist
+				if(strcmp($url, $CONFIG->wwwroot . $u) == 0) {
+					$allowed = true;
+					break;
+				}
+			} else {
+				// Blacklist
+				if(strcmp($url, $CONFIG->wwwroot . $u) == 0) {
+					$allowed = false;
+					break;
+				} else {
+					$allowed = true;
+				}
+			}
+		}
+		
+		if (!$allowed) {
+		    //register_error(elgg_echo('parentportal')); 
+		    forward('pg/parentportal');
+		}
+    }
+	
 ?>
