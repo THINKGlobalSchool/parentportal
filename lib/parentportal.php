@@ -12,11 +12,28 @@
 
 	/** Page Functions - Used by page_handler **/
 	
-	function parentportal_get_page_content_index() {
+	function parentportal_get_page_content_index($parent) {
+		$header = elgg_view_title(elgg_echo('parentportal:title:header'));
+	
+		$children = get_parents_children($parent->getGUID());
+		
+		if ($children) {
+			// temp hack
+			$child = $children[0];
+		
+			$col_left .= elgg_view('parentportal/childprofile', array('entity' => $child, 'section' => 'details'));
+			$col_left .= elgg_view('parentportal/childactivity', array('entity' => $child));
+			$col_left .= elgg_view('parentportal/childtodos', array('entity' => $child));
+			
+			$col_right = '<h3>' . elgg_echo('parentportal:title:parentinfo') . '</h3>';
+		} else {
+			$header .= '<br />' . elgg_echo('parentportal:label:nochildren');
+		}
+
 		return array(
-				'top' => 'Welcome!',
-				'left_column' => 'left content',
-				'right_column' => 'right content'
+				'top' => $header,
+				'left_column' => $col_left,
+				'right_column' => $col_right,
 				);
 	}
 	
@@ -56,7 +73,7 @@
 	 * @return array 
 	 */
 	function get_parents_children($parent_guid) {
-		return elgg_get_entities_from_relationship(array(
+		$children = elgg_get_entities_from_relationship(array(
 														'relationship' => PARENT_CHILD_RELATIONSHIP,
 														'relationship_guid' => $parent_guid,
 														'inverse_relationship' => TRUE,
@@ -65,7 +82,8 @@
 														'offset' => 0,
 														'count' => false,
 													));
-
+													
+		return $children ? $children : array();
 	}
 	
 	/**
@@ -103,28 +121,22 @@
 		$url_list = explode("\n", $url_list);
 		
 		if ($access_toggle) {
+			// exceptions for blacklist
 			array_push($url_list, '');
 			array_push($url_list, '_css/js.php');
 			array_push($url_list, '_css/css.css');
 			array_push($url_list, 'pg/parentportal');
+			array_push($url_list, 'action/logout');
+			array_push($url_list, 'mod/profile/icondirect.php');
 		} 
-	
+		
+		// Allowed is defaulted to the opposite (false for white, true for blacklist)
+		$allowed = $access_toggle ? false : true;
 		foreach($url_list as $u) {
 			$u = trim($u);
-			if ($access_toggle) {
-				// Whitelist
-				if(strcmp($url, $CONFIG->wwwroot . $u) == 0) {
-					$allowed = true;
-					break;
-				}
-			} else {
-				// Blacklist
-				if(strcmp($url, $CONFIG->wwwroot . $u) == 0) {
-					$allowed = false;
-					break;
-				} else {
-					$allowed = true;
-				}
+			if(strcmp($url, $CONFIG->wwwroot . $u) == 0) {
+				$allowed = $access_toggle ? true : false;
+				break;
 			}
 		}
 		

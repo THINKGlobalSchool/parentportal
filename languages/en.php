@@ -33,6 +33,11 @@
 			
 		// Titles/Label
 		'parentportal:title:manageparent' => "Create/Manage Parent Settings",
+		'parentportal:title:header' => 'Welcome to the THINK Spot Parent Portal',
+		'parentportal:title:childinfo' => 'Your Child', 
+		'parentportal:title:parentinfo' => 'Parent Information',
+		'parentportal:title:childactivity' => 'Your Child\'s Recent Activity', 
+		'parentportal:title:childtodos' => 'Your Child\'s To Do\'s', 
 		'parentportal:label:profile' => "%s's Profile", 
 		'parentportal:label:enableparent' => "Parent Enabled", 
 		'parentportal:label:childselect' => "Select Child",
@@ -42,6 +47,7 @@
 		'parentportal:label:urllist' => "URL List (relative to site root, ie: pg/activity)",
 		'parentportal:label:blacklist' => "Blacklist",
 		'parentportal:label:whitelist' => "Whitelist", 
+		'parentportal:label:nochildren' => "Sorry. You have no Children",
 		
 		// Other
 		

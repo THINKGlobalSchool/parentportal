@@ -12,7 +12,7 @@
 ?>
 <div id="elgg_content" class="clearfloat pp_top_two_column">
 	
-	<div id="top">
+	<div id="pp_top">
 		<?php
 			if (isset($vars['area1'])) {
 				echo $vars['area1'];
@@ -20,7 +20,7 @@
 		?>
 	</div>
 	
-	<div id="left_column" class="clearfloat">
+	<div id="pp_left_column" class="clearfloat">
 		<?php
 			if (isset($vars['area2'])) {
 				echo $vars['area2'];
@@ -28,7 +28,7 @@
 		?>
 	</div>
 	
-	<div id="right_column" class="clearfloat">
+	<div id="pp_right_column" class="clearfloat">
 		<?php 
 			if (isset($vars['area3'])) {
 				echo $vars['area3'];

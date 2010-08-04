@@ -68,9 +68,11 @@
 				$layout = "one_column";
 				break;
 			default:
+				gatekeeper();
+				$user = get_loggedin_user();
 				set_input('parentportal', true);
 				$title = elgg_echo('parentportal');
-				$content_info = parentportal_get_page_content_index();
+				$content_info = parentportal_get_page_content_index($user);
 				$layout = "pp_top_two_column";
 				break;
 		}
