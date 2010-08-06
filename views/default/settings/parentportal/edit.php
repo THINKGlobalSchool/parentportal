@@ -29,3 +29,35 @@
 										); 
 	?>
 </p>
+<p>
+	<label><?php echo elgg_echo('parentportal:label:parentchannel'); ?></label><br />
+	<?php 
+	
+	$channels = elgg_get_entities(array('types' => 'object',
+										'subtypes' => 'shared_access',
+										'limit' => 9999
+								  		));
+								
+	$channels_array = array();
+
+	foreach ($channels as $channel) {
+		$channels_array[$channel->getGUID()] = $channel->title;
+	}
+	
+	
+	echo elgg_view('input/pulldown', array(
+										'internalname' => 'params[parentchannel]', 
+										'value' => $vars['entity']->parentchannel, 
+										'options_values' => $channels_array
+										));
+	?>
+</p>
+<p>
+	<label><?php echo elgg_echo('parentportal:label:parentcontacts'); ?></label><br />
+	<?php 
+	echo elgg_view('input/plaintext', array(
+										'internalname' => 'params[parentcontacts]', 
+										'value' => $vars['entity']->parentcontacts)
+										); 
+	?>
+</p>

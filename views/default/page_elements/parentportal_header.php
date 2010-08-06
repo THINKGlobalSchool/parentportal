@@ -21,8 +21,8 @@
 			//echo elgg_view('account/forms/login_dropdown');
 		
 			// insert site-wide navigation
-			//echo elgg_view('navigation/site_nav');
-
+			echo elgg_view('navigation/parentportal_site_nav');
+		
 			// insert a view which can be extended
 			echo elgg_view('header/extend');
 		?>

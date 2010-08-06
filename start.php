@@ -31,10 +31,11 @@
 		// Actions	
 		register_action('parentportal/addchildren', false, $CONFIG->pluginspath . 'parentportal/actions/addchildren.php');
 		register_action('parentportal/clearchildren', false, $CONFIG->pluginspath . 'parentportal/actions/clearchildren.php');
+		register_action('parentportal/submitquestion', false, $CONFIG->pluginspath . 'parentportal/actions/submitquestion.php');
 		
 		// Plugin hook for index redirect
 		register_plugin_hook('index', 'system', 'parentportal_redirect');
-
+		
 		// Page handler
 		register_page_handler('parentportal','parentportal_page_handler');
 		
@@ -94,7 +95,7 @@
 				break;
 		}
 	}
-	
+
 	/**
 	 * Plugin hook to redirect parent users from index
 	 *

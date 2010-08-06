@@ -20,7 +20,7 @@
 	$parent 	= get_input('parent');
 	$children 	= get_input('children');
 	$enabled 	= get_input('parent_enabled');
-				
+	
 	$success = false;
 
 	// Check values and save
@@ -34,6 +34,14 @@
 			$success = true;
 		}
 	} 
+	
+	if ($enabled) {
+		// Set up relationship to add parent to channel
+		$success &= add_entity_relationship($parent, 'shared_access_member', get_plugin_setting('parentchannel','parentportal'));
+	} else {
+		// Remove from channel
+		$success &= remove_entity_relationship($parent, 'shared_access_member', get_plugin_setting('parentchannel','parentportal'));
+	}
 		
 	if ($success) {
 		// Save successful, forward to index

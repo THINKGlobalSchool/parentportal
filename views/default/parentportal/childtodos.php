@@ -35,7 +35,7 @@
 			    $info = "<div class='entity_listing_icon'>" . elgg_view('profile/icon',array('entity' => $todo->getOwnerEntity(), 'size' => 'tiny')) . "</div>";
 
 				//get the bookmark entries body
-				$info .= "<div class='entity_listing_info' style='width: auto;'><p class='entity_title'><a href=\"{$todo->getURL()}\">{$todo->title}</a></p>";
+				$info .= "<div class='entity_listing_info' style='width: auto;'><p class='entity_title'><a href='{$todo->getURL()}'>{$todo->title}</a></p>";
 				
 				//get the user details
 				$info .= "<p class='entity_subtext'><b>Due: {$due_date}</b></p>";

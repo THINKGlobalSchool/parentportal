@@ -80,6 +80,7 @@ h3.pp {
 
 .child_block_icon {
 	margin-right: 10px;
+	width: 200px;
 }
 
 .child_block_contents {
@@ -100,3 +101,40 @@ h3.pp {
 	padding:0;
 	color: #666666;
 }
+
+
+#parent_announcements {
+	
+}
+
+#parent_infocenter {
+	margin-top: 10px;
+}
+
+#parent_questions {
+	margin-top: 10px;	
+}
+
+#parent_info_block {
+	height: 200px;
+	margin-top: 10px;
+	background: #ddd;
+	padding: 10px;
+	-webkit-border-radius: 8px; 
+	-moz-border-radius: 8px;
+	-moz-box-shadow: 1px 1px 0px #999;
+	-webkit-box-shadow: 1px 1px 0px #999;
+}
+
+#parent_question_form {
+	margin-top: 10px;	
+}
+
+#parent_question_form input, textarea, table {
+	width: 98% !important;
+}
+
+#parent_question_form td {
+	width: auto;
+}
+

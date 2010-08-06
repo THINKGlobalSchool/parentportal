@@ -32,7 +32,7 @@
 	<div id="child_block">
 		<table> 
 			<tr>
-				<td>
+				<td style='width: 200px;'>
 					<div class="child_block_icon {$icon_class}">
 						{$icon}
 					</div>
