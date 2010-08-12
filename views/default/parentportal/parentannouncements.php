@@ -20,18 +20,21 @@
 			'access_id' => $channel->acl_id,
 			'group_by' => 'e.guid',
 		));
-		$entity_guids = array();
-		foreach ($entities as $entity) {
-			if ($entity->getSubtype() == 'blog' || $entity->getSubtype() == 'thewire') {
-				$entity_guids[] = $entity->getGUID();
-			}
+		
+		foreach ($entities as $idx => $entity) {
+			if ($entity->getSubtype() == 'blog') {
+				$body .=  elgg_view('parentportal/announcement_blog', array('entity' => $entity));
+			} else if ($entity->getSubtype() == 'thewire') {
+				$body .= elgg_view('parentportal/announcement_wire', array('entity' => $entity));
+			} else {
+				unset($entities[$idx]);
+				continue;
+			} 
 		}
-
-		if (count($entity_guids) > 0) {
-			$body = elgg_view_river_items('', $entity_guids, '', '', '', '', $limit);
-		} else {
+		
+		if (!$body) {
 			$body .= '<center>' . elgg_echo('parentportal:label:noannouncements') . '</center>';
-		}
+		} 
 		
 		echo $body;
 ?>

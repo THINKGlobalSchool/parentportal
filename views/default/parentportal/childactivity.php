@@ -14,12 +14,12 @@
 	<h3 class="pp"><?php echo elgg_echo("parentportal:title:childactivity"); ?></h3>
 	<?php
 
-		$limit = 10;
+		$limit = 5;
 		$offset = (int) get_input('offset', 0);
 		$limit = (int) $limit;
 		$offset = (int) $offset;
 
-		$river_items = elgg_view_river_items($vars['entity']->getGuid(), 0, '', '', '', 'create', $limit,0,0,false,false);
+		$river_items = elgg_view_river_items($vars['entity']->getGuid(), 0, '', '', '', 'create', $limit,0,0,true,false);
 
 	    if (count($items) > 0) {
 			$river_items = elgg_view('river/item/list',array(
@@ -28,7 +28,7 @@
 									'items' => $items
 									));
 		}
-		echo $river_items;
+		echo $river_items . elgg_view('riverdashboard/js');
 
 	?>
 </div>
