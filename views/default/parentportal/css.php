@@ -130,7 +130,7 @@ h3.pp {
 	margin-top: 10px;	
 }
 
-#parent_question_form input, textarea, table {
+#parent_question_form input textarea table {
 	width: 98% !important;
 }
 
