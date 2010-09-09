@@ -10,7 +10,7 @@
  * 
  */
 ?>
-<div id="elgg_content" class="clearfloat pp_top_two_column">
+<div id="elgg_content" class="clearfloat pp_top_two_column" style='margin-bottom: 20px;'>
 	
 	<div id="pp_top">
 		<?php

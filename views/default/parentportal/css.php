@@ -28,6 +28,10 @@ ul.childlisting li:first-child {
 	border-top:1px solid #cccccc;
 }
 
+.pp_top_two_column {
+	padding-right: 40px !important;
+}
+
 .pp_top_two_column #pp_top {
 	width: 100%;
 	padding: 10px;
@@ -135,6 +139,6 @@ h3.pp {
 }
 
 #parent_question_form td {
-	width: auto;
+	width: 100%;
 }
 
