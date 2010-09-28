@@ -20,20 +20,24 @@
 		if ($children) {
 			
 			if (count($children) > 1) {
-				$header .= elgg_view('parentportal/forms/childselect', array('children' => $children));
+				if (get_input('child_select')) {
+					$_SESSION['child_select'] = get_input('child_select');
+				}
+				$child = get_user($_SESSION['child_select']);
+				$header .= elgg_view('parentportal/forms/childselect', array('children' => $children));	
 			} 
 			
-			if (!$child = get_user(get_input('child_select'))) {
+			if (!$child) {
 				$child = $children[0];
 			}
 
 			$col_left .= elgg_view('parentportal/childprofile', array('entity' => $child, 'section' => 'details'));
-			$col_left .= elgg_view('parentportal/childactivity', array('entity' => $child));
-			$col_left .= elgg_view('parentportal/childtodos', array('entity' => $child));
+			$col_right .= elgg_view('parentportal/childactivity', array('entity' => $child));
+			$col_right.= elgg_view('parentportal/childtodos', array('entity' => $child));
 			
-			$col_right .= elgg_view('parentportal/parentannouncements', array('entity' => $child, 'section' => 'details'));
-			$col_right .= elgg_view('parentportal/parentquestions', array('entity' => $child, 'section' => 'details'));
-			$col_right .= elgg_view('parentportal/parentinfocenter', array('entity' => $child, 'section' => 'details'));
+			$col_left .= elgg_view('parentportal/parentannouncements', array('entity' => $child, 'section' => 'details'));
+			$col_left .= elgg_view('parentportal/parentquestions', array('entity' => $child, 'section' => 'details'));
+			//$col_left .= elgg_view('parentportal/parentinfocenter', array('entity' => $child, 'section' => 'details'));
 			
 		} else {
 			$header .= '<br />' . elgg_echo('parentportal:label:nochildren');

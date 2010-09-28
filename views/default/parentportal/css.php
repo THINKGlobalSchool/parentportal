@@ -64,7 +64,7 @@ ul.childlisting li:first-child {
 }
 
 #child_activity {
-	margin-top: 10px;
+	/*margin-top: 10px;*/
 }
 
 #child_todo {
@@ -108,7 +108,7 @@ h3.pp {
 
 
 #parent_announcements {
-	
+	margin-top: 10px;
 }
 
 #parent_infocenter {
@@ -117,6 +117,16 @@ h3.pp {
 
 #parent_questions {
 	margin-top: 10px;	
+}
+
+#parent_questions #question_link:hover, #question_link:selected {
+	text-decoration: underline;
+	color: #555555;
+}
+
+#parent_questions #question_link h3 {
+	text-decoration: none;
+	color: #9D1520
 }
 
 #parent_info_block {

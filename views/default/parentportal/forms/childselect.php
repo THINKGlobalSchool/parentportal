@@ -26,13 +26,13 @@
 	foreach ($children as $child) {
 		$children_array[$child->getGUID()] = $child->name;
 	}
-	
+		
 	// Form labels/inputs
 	$select_label = elgg_echo('parentportal:label:selectchild');
 	$select_input = elgg_view('input/pulldown', array(
 											'internalname' => 'child_select',  
 											'options_values' => $children_array,
-											'value' => get_input('child_select'),
+											'value' => $_SESSION['child_select'],
 											));
 			
 	// Form content
