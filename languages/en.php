@@ -43,7 +43,7 @@
 		'parentportal:title:childinfo' => 'Your Child', 
 		'parentportal:title:parentinfo' => 'Parent Information',
 		'parentportal:title:parentannouncements' => 'Announcements',
-		'parentportal:title:parentquestions' => 'Ask a Question',
+		'parentportal:title:parentquestions' => 'Ask a Question >>',
 		'parentportal:title:parentinfocenter' => 'Information Center',
 		'parentportal:title:childactivity' => 'Your Child\'s Recent Activity', 
 		'parentportal:title:childtodos' => 'Your Child\'s To Do\'s', 
