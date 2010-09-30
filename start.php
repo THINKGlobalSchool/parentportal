@@ -39,6 +39,13 @@
 		// Page handler
 		register_page_handler('parentportal','parentportal_page_handler');
 		
+		// Check if parent has children, if so add a menu item (for admin-type users)
+		$children = get_parents_children(get_loggedin_userid());
+		
+		if ($children) {
+			add_menu(elgg_echo('parentportal'), $CONFIG->wwwroot . "pg/parentportal");
+		}
+		
 		if (isloggedin() && is_user_parent(get_loggedin_user())) {
 			parentportal_gatekeeper();
 	    }	

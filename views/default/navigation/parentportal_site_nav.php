@@ -16,11 +16,19 @@ $home->value->url = $CONFIG->url . 'pg/parentportal';
 $home->value->context = 'parentportal';
 
 $logout_url = elgg_add_action_tokens_to_url($CONFIG->url . 'action/logout');
-
 $logout->name = 'Logout';
 $logout->value->url = $logout_url;
 
-$parent_nav = array($home, $logout);
+// If user doesn't have the flag set, add a link back to regular homepage
+if (!is_user_parent(get_loggedin_user())) {
+	$normal_home->name = 'Spot Home';
+	$normal_home->value->url = $CONFIG->url . 'pg/dashboard';
+	$parent_nav = array($normal_home, $home, $logout);
+} else {
+	$parent_nav = array($home, $logout);
+}
+
+
 
 $nav_html = '';
 $context = get_context();
