@@ -46,6 +46,7 @@
 		'parentportal:title:parentquestions' => 'Ask a Question >>',
 		'parentportal:title:parentinfocenter' => 'Information Center',
 		'parentportal:title:childactivity' => 'Your Child\'s Recent Activity', 
+		'parentportal:title:childgroups' => 'You Childs\'s Groups', 
 		'parentportal:title:childtodos' => 'Your Child\'s To Do\'s', 
 		'parentportal:label:profile' => "%s's Profile", 
 		'parentportal:label:enableparent' => "Parent Enabled", 
@@ -66,6 +67,14 @@
 		'parentportal:label:questionsubject' => 'Subject',
 		'parentportal:label:questionbody' => 'Message',
 		'parentportal:label:selectchild' => 'Select Child: ',
+		
+		// Stat labels
+		'parentportal:stats:blog' => 'Blog Posts',
+		'parentportal:stats:photo' => 'Photos',
+		'parentportal:stats:bookmark' => 'Bookmarks',
+		'parentportal:stats:rubric' => 'Rubrics',
+		'parentportal:stats:group' => 'Groups',
+		'parentportal:stats:todo' => 'Complete To Do\'s',
 		
 		// Other
 		

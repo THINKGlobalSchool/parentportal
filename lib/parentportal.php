@@ -24,20 +24,21 @@
 					$_SESSION['child_select'] = get_input('child_select');
 				}
 				$child = get_user($_SESSION['child_select']);
-				$header .= elgg_view('parentportal/forms/childselect', array('children' => $children));	
+				$header .= elgg_view('parentportal/forms/child_select', array('children' => $children));	
 			} 
 			
 			if (!$child) {
 				$child = $children[0];
 			}
 
-			$col_left .= elgg_view('parentportal/childprofile', array('entity' => $child, 'section' => 'details'));
-			$col_right .= elgg_view('parentportal/childactivity', array('entity' => $child));
-			$col_right.= elgg_view('parentportal/childtodos', array('entity' => $child));
+			$col_left .= elgg_view('parentportal/child_profile', array('entity' => $child, 'section' => 'details'));
+			$col_right .= elgg_view('parentportal/parent_questions', array('entity' => $child, 'section' => 'details'));
+			$col_right .= elgg_view('parentportal/child_activity', array('entity' => $child));
+			$col_right .= elgg_view('parentportal/child_todos', array('entity' => $child));
 			
-			$col_left .= elgg_view('parentportal/parentannouncements', array('entity' => $child, 'section' => 'details'));
-			$col_left .= elgg_view('parentportal/parentquestions', array('entity' => $child, 'section' => 'details'));
-			//$col_left .= elgg_view('parentportal/parentinfocenter', array('entity' => $child, 'section' => 'details'));
+			$col_left .= elgg_View('parentportal/child_groups', array('entity' => $child));
+			$col_left .= elgg_view('parentportal/parent_announcements', array('entity' => $child, 'section' => 'details'));
+			//$col_left .= elgg_view('parentportal/parent_infocenter', array('entity' => $child, 'section' => 'details'));
 			
 		} else {
 			$header .= '<br />' . elgg_echo('parentportal:label:nochildren');
@@ -60,7 +61,7 @@
 			elgg_push_breadcrumb(elgg_echo('parentportal:menu:admin:manageparent'));
 			
 			$content = elgg_view_title(elgg_echo('parentportal:title:manageparent'));
-			$content .= elgg_view('parentportal/forms/manageparent', array('user_guid' => $user_guid));
+			$content .= elgg_view('parentportal/forms/manage_parent', array('user_guid' => $user_guid));
 		}
 		
 		return array('content' => $content);

@@ -24,6 +24,8 @@
 	
 	$username = $user->username;
 
+	$child_stats = elgg_vieW('parentportal/child_stats', $vars);
+
 	//contruct the display
 	$display = <<<EOT
 	<div>
@@ -32,7 +34,7 @@
 	<div id="child_block">
 		<table> 
 			<tr>
-				<td style='width: 200px;'>
+				<td style='width: 175px;'>
 					<div class="child_block_icon {$icon_class}">
 						{$icon}
 					</div>
@@ -42,6 +44,9 @@
 						<h3>{$user->name}</h3>
 						<p class='child_profile_info briefdescription'>{$user->briefdescription}</p>
 						<p class='child_profile_info location'>{$location}</p>
+						<div class='child_stats'>
+							$child_stats
+						</div>
 					</div>
 				</td>
 			</tr>

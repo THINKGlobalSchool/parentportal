@@ -67,6 +67,10 @@ ul.childlisting li:first-child {
 	/*margin-top: 10px;*/
 }
 
+#child_groups {
+	margin-top: 10px;
+}
+
 #child_todo {
 	margin-top: 10px;
 }
@@ -116,7 +120,7 @@ h3.pp {
 }
 
 #parent_questions {
-	margin-top: 10px;	
+	margin-bottom: 10px;
 }
 
 #parent_questions #question_link:hover, #question_link:selected {
@@ -151,4 +155,39 @@ h3.pp {
 #parent_question_form td {
 	width: 100%;
 }
+
+/** Stats **/
+.child_stats table#stats_table {
+	width: 225px;
+	margin-top: 10px;
+	border-top: 1px solid #CCCCCC;
+	border-left: 1px solid #CCCCCC;
+	border-right: 1px solid #CCCCCC;
+}
+.child_stats table#stats_table td {
+	font-weight: bold;
+	font-size: 110%;
+	color: #555555;
+	padding: 4px;
+}
+
+.child_stats table#stats_table td.label {
+	width: 80%;
+	text-shadow: 1px 1px 1px #AAAAAA;
+}
+
+.child_stats table#stats_table td.stat {
+	color: #800518;
+	width: 20%;
+}
+
+.child_stats table#stats_table tr.odd {
+	background: #EEEEEE;
+	border-bottom: 1px solid #CCCCCC;
+}
+.child_stats table#stats_table tr.even {
+	background: #DDDDDD;
+	border-bottom: 1px solid #CCCCCC;
+}
+
 

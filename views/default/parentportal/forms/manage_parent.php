@@ -38,7 +38,7 @@
 	
 	$current_children_label = elgg_echo('parentportal:label:currentchildren');
 	$current_children = get_parents_children($user->getGUID());
-	$current_children_content = elgg_view('parentportal/childlist', array('children' => $current_children));
+	$current_children_content = elgg_view('parentportal/child_list', array('children' => $current_children));
 
 	$form_body = <<<EOT
 	<br />
