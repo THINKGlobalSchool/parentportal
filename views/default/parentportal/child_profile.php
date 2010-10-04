@@ -32,7 +32,7 @@
 		<h3 class="pp">$title</h3>
 	</div>
 	<div id="child_block">
-		<table> 
+		<table style='width: 100%;'> 
 			<tr>
 				<td style='width: 175px;'>
 					<div class="child_block_icon {$icon_class}">

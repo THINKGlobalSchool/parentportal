@@ -158,7 +158,7 @@ h3.pp {
 
 /** Stats **/
 .child_stats table#stats_table {
-	width: 225px;
+	width: 75%;
 	margin-top: 10px;
 	border-top: 1px solid #CCCCCC;
 	border-left: 1px solid #CCCCCC;
@@ -166,7 +166,7 @@ h3.pp {
 }
 .child_stats table#stats_table td {
 	font-weight: bold;
-	font-size: 110%;
+	font-size: 100%;
 	color: #555555;
 	padding: 4px;
 }
