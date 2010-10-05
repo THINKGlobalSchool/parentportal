@@ -87,16 +87,24 @@
 	 * @return array 
 	 */
 	function get_parents_children($parent_guid) {
-		$children = elgg_get_entities_from_relationship(array(
-														'relationship' => PARENT_CHILD_RELATIONSHIP,
-														'relationship_guid' => $parent_guid,
-														'inverse_relationship' => TRUE,
-														'types' => array('user'),
-														'limit' => 9999,
-														'offset' => 0,
-														'count' => false,
-													));
-													
+		
+		$parent = get_user($parent_guid);
+		
+		if ($parent) {
+			if (!$parent->isAdmin()) {
+				$children = elgg_get_entities_from_relationship(array(
+															'relationship' => PARENT_CHILD_RELATIONSHIP,
+															'relationship_guid' => $parent_guid,
+															'inverse_relationship' => TRUE,
+															'types' => array('user'),
+															'limit' => 9999,
+															'offset' => 0,
+															'count' => false,
+														));
+			} else {
+				$children = elgg_get_entities(array('types' => array('user'), 'limit' => 9999));
+			}	
+		} 
 		return $children ? $children : array();
 	}
 	
