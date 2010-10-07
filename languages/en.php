@@ -67,6 +67,8 @@
 		'parentportal:label:questionsubject' => 'Subject',
 		'parentportal:label:questionbody' => 'Message',
 		'parentportal:label:selectchild' => 'Select Child: ',
+		'parentportal:label:todo:complete' => 'Complete To Do\'s',
+		'parentportal:label:todo:incomplete' => 'Incomplete To Do\'s',
 		
 		// Stat labels
 		'parentportal:stats:blog' => 'Blog Posts',

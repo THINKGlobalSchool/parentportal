@@ -10,39 +10,90 @@
 	 * 
 	 */
 			
-	// get the user's todos
-	$todos = get_users_todos($vars['entity']->getGUID());
-										
-	foreach ($todos as $idx => $todo) {
-		if (have_assignees_completed_todo($todo->getGUID())) {
-			unset($todos[$idx]);
-		}
-	}
-?>
-<div id="child_todo">
-	<h3 class="pp"><?php echo elgg_echo('parentportal:title:childtodos') ?></h3>
-	<?php	
-		if($todos){
-			foreach($todos as $todo){
+	$title = elgg_echo('parentportal:title:childtodos');		
 			
-				//get the owner
-				$owner = $todo->getOwnerEntity();
-
-				//get the time
-				$due_date = date("F j, Y", $todo->due_date);
-				//$friendlytime = friendly_time($todo->time_created);
-		
-			    $info = "<div class='entity_listing_icon'>" . elgg_view('profile/icon',array('entity' => $todo->getOwnerEntity(), 'size' => 'tiny')) . "</div>";
-
-				//get the bookmark entries body
-				$info .= "<div class='entity_listing_info' style='width: auto;'><p class='entity_title'><a href='{$todo->getURL()}'>{$todo->title}</a></p>";
-				
-				//get the user details
-				$info .= "<p class='entity_subtext'><b>Due: {$due_date}</b></p>";
-				$info .= "</div>";
-				//display 
-				echo "<div class='entity_listing clearfloat'>" . $info . "</div>";
-			} 
+	// get the user's todos, will be seperating complete/incomplete
+	$incomplete_todos = get_users_todos($vars['entity']->getGUID());
+	$complete_todos = array();
+	
+	$selected = get_input('selected', 'complete');
+										
+	foreach ($incomplete_todos as $idx => $todo) {
+		if (have_assignees_completed_todo($todo->getGUID())) {
+			$complete_todos[] = $todo;
+			unset($incomplete_todos[$idx]);
 		} 
+	}
+	
+	//Content for tabs
+	$complete_todos_content = elgg_view('parentportal/todo_simple_listing', array('todos' => $complete_todos, 'count' => 10)) . "<br /><span class='pp_see_all'><a href='{$vars['url']}pg/todo/{$vars['entity']->username}?status=complete'>View all complete</a></span>";
+	$incomplete_todos_content = elgg_view('parentportal/todo_simple_listing', array('todos' => $incomplete_todos, 'count' => 10)) . "<br /><span class='pp_see_all'><a href='{$vars['url']}pg/todo/{$vars['entity']->username}?status=incomplete'>View all incomplete</a></span>";
+	
+	// Build up tab array with id's, labels, and content	
+	$tabs = array(array('id' => 'tab_complete', 
+						'label' => elgg_echo('parentportal:label:todo:complete'), 
+						'content' => $complete_todos_content
+				  ),
+				  array('id' => 'tab_incomplete', 
+						'label' => elgg_echo('parentportal:label:todo:incomplete'), 
+						'content' => $incomplete_todos_content
+				  )
+			);
+	 		
+	// Set default tab	  
+	foreach ($tabs as $tab) {
+		if ($vars['tab'] == $tab['id'])
+			$selected_tab = $vars['tab'];
+	}
+	if (!$selected_tab)
+		$selected_tab = 'tab_complete';
+		
+	
+	// Build tab nav and content
+	for ($i = 0; $i < count($tabs); $i++) {
+		// Tab Nav
+		$selected = ($selected_tab == $tabs[$i]['id']) ? "selected" : ""; 
+		$tab_items .= "<li id='{$tabs[$i]['id']}' class='$selected edt_tab_nav'><a href=\"javascript:ppChildTodoSwitchTab('{$tabs[$i]['id']}')\">{$tabs[$i]['label']}</a></li>";
+		// Tab Content
+		$tabcontent .= "<div class='child_todo_listing' id='{$tabs[$i]['id']}'>{$tabs[$i]['content']}</div>";
+	}
+	
+	$content = <<<EOT
+		$entities
+		<div id='child_todo'>
+			<h3 class="pp">$title</h3>
+			<div class="elgg_horizontal_tabbed_nav margin_top">
+				<ul>
+					$tab_items
+				</ul>
+			</div>
+			<br />
+			$tabcontent
+		</div>
+EOT;
+
+	$script = <<<EOT
+	<script type="text/javascript">
+	
+	$(document).ready(function() {
+		$(".child_todo_listing").hide();
+		$("div#$selected_tab").show();
+	});
+
+	function ppChildTodoSwitchTab(tab_id)
+	{
+		var nav_name = "li#" + tab_id;
+		var tab_name = "div#" + tab_id;
+
+		$(".child_todo_listing").hide();
+		$(tab_name).show();
+		$(".edt_tab_nav").removeClass("selected");
+		$(nav_name).addClass("selected");
+	}
+	</script>
+EOT;
+
+	echo $script . $content;
+	
+	
 ?>
-</div>

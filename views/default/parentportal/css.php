@@ -156,6 +156,16 @@ h3.pp {
 	width: 100%;
 }
 
+.pp_see_all {
+	width: auto;
+	padding: 4px;
+	background: #ddd;
+	-webkit-border-radius: 8px; 
+	-moz-border-radius: 8px;
+	font-size: 11px;
+}
+
+
 /** Stats **/
 .child_stats table#stats_table {
 	width: 75%;
