@@ -26,8 +26,17 @@
 	}
 	
 	//Content for tabs
-	$complete_todos_content = elgg_view('parentportal/todo_simple_listing', array('todos' => $complete_todos, 'count' => 10)) . "<br /><span class='pp_see_all'><a href='{$vars['url']}pg/todo/{$vars['entity']->username}?status=complete'>View all complete</a></span>";
-	$incomplete_todos_content = elgg_view('parentportal/todo_simple_listing', array('todos' => $incomplete_todos, 'count' => 10)) . "<br /><span class='pp_see_all'><a href='{$vars['url']}pg/todo/{$vars['entity']->username}?status=incomplete'>View all incomplete</a></span>";
+	if ($complete_todos) {
+		$complete_todos_content = elgg_view('parentportal/todo_simple_listing', array('todos' => $complete_todos, 'count' => 10)) . "<br /><span class='pp_see_all'><a href='{$vars['url']}pg/todo/{$vars['entity']->username}?status=complete'>View all complete</a></span>";
+	} else {
+		$complete_todos_content = "<center>No " . elgg_echo('parentportal:label:todo:complete') . "</center>";
+	}
+	
+	if ($incomplete_todos) {
+		$incomplete_todos_content = elgg_view('parentportal/todo_simple_listing', array('todos' => $incomplete_todos, 'count' => 10)) . "<br /><span class='pp_see_all'><a href='{$vars['url']}pg/todo/{$vars['entity']->username}?status=incomplete'>View all incomplete</a></span>";
+	} else {
+		$incomplete_todos_content = "<center>No " . elgg_echo('parentportal:label:todo:incomplete') . "</center>";
+	}
 	
 	// Build up tab array with id's, labels, and content	
 	$tabs = array(array('id' => 'tab_complete', 
