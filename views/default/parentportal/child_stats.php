@@ -19,9 +19,6 @@
 	$bookmark_label = elgg_echo('parentportal:stats:bookmark');
 	$bookmark_count = elgg_get_entities(array('owner_guid' => $vars['entity']->getGUID(), 'type' => 'object', 'subtype' => 'bookmarks', 'count' => true));
 	
-	$rubric_label = elgg_echo('parentportal:stats:rubric');
-	$rubric_count = elgg_get_entities(array('owner_guid' => $vars['entity']->getGUID(), 'type' => 'object', 'subtype' => 'rubric', 'count' => true));
-	
 	$todo_label = elgg_echo('parentportal:stats:todo');
 	$todos = get_users_todos($vars['entity']->getGUID());
 	
@@ -47,10 +44,6 @@
 				<td class='stat'>$bookmark_count</td>
 			</tr>
 			<tr class='even'>
-				<td class='label'>$rubric_label</td>
-				<td class='stat'>$rubric_count</td>
-			</tr>
-			<tr class='odd'>
 				<td class='label'>$todo_label</td>
 				<td class='stat'>$todo_count</td>
 			</tr>
