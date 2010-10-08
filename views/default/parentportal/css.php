@@ -64,7 +64,7 @@ ul.childlisting li:first-child {
 }
 
 #child_activity {
-	/*margin-top: 10px;*/
+	margin-top: 10px;
 }
 
 #child_groups {
@@ -163,6 +163,12 @@ h3.pp {
 	-webkit-border-radius: 8px; 
 	-moz-border-radius: 8px;
 	font-size: 11px;
+}
+
+.pp_blog_excerpt {
+	display: block;
+	margin-top: 8px;
+	margin-bottom: 8px;
 }
 
 

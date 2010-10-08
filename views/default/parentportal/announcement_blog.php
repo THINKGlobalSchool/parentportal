@@ -11,16 +11,19 @@
 	 */
 
 	$title = "<a href='{$vars['entity']->getURL()}'>{$vars['entity']->title}</a>";
+	$owner = get_user($vars['entity']->owner_guid);
 	$excerpt = $vars['entity']->excerpt;
 	$time = friendly_time($vars['entity']->time_created);
+	
+	$owner_link = "<a href='{$vars['url']}pg/profile/{$owner->username}/'>{$owner->name}</a>";
 	
 	echo <<<EOT
 		<div class='river_item riverdashboard'> 
 			<div class='river_item_contents clearfloat' style='margin-left: 5px; margin-bottom: 5px;'>
-				<b>$title</b><br />
-				$excerpt
+				<h3>$title</h3>
+				<span class='pp_blog_excerpt'>$excerpt</span>
 				<span class='entity_subtext'>
-					$time
+					by $owner_link $time
 				</span>
 			</div>
 		</div>

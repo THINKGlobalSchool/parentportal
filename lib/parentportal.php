@@ -32,12 +32,13 @@
 			}
 
 			$col_left .= elgg_view('parentportal/child_profile', array('entity' => $child, 'section' => 'details'));
+			$col_left .= elgg_View('parentportal/child_groups', array('entity' => $child));
+			$col_left .= elgg_view('parentportal/child_activity', array('entity' => $child));
+			
 			$col_right .= elgg_view('parentportal/parent_questions', array('entity' => $child, 'section' => 'details'));
-			$col_right .= elgg_view('parentportal/child_activity', array('entity' => $child));
+			$col_right .= elgg_view('parentportal/parent_announcements', array('entity' => $child, 'section' => 'details'));
 			$col_right .= elgg_view('parentportal/child_todos', array('entity' => $child));
 			
-			$col_left .= elgg_View('parentportal/child_groups', array('entity' => $child));
-			$col_left .= elgg_view('parentportal/parent_announcements', array('entity' => $child, 'section' => 'details'));
 			//$col_left .= elgg_view('parentportal/parent_infocenter', array('entity' => $child, 'section' => 'details'));
 			
 		} else {
