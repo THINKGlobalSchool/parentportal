@@ -13,7 +13,11 @@
 	/** Page Functions - Used by page_handler **/
 	
 	function parentportal_get_page_content_index($parent) {
-		$header = elgg_view_title(elgg_echo('parentportal:title:header'));
+		global $CONFIG;
+		
+		$header .= "<span style='float: right; display: block;'><a href='{$CONFIG->wwwroot}pg/parentportal/settings'>Edit your settings</a></span>";
+		$header .= elgg_view_title(elgg_echo('parentportal:title:header'));
+		
 	
 		$children = get_parents_children($parent->getGUID());
 		
@@ -30,7 +34,7 @@
 			if (!$child) {
 				$child = $children[0];
 			}
-
+			
 			$col_left .= elgg_view('parentportal/child_profile', array('entity' => $child, 'section' => 'details'));
 			$col_left .= elgg_View('parentportal/child_groups', array('entity' => $child));
 			$col_left .= elgg_view('parentportal/child_activity', array('entity' => $child));

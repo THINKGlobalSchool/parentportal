@@ -75,6 +75,12 @@
 				$content_info = parentportal_get_page_content_manageparent($user->getGUID());
 				$layout = "one_column";
 				break;
+			case 'settings':
+				gatekeeper();
+				$title = elgg_echo('parentportal:title:usersettings');
+				$layout = 'one_column';
+				$content_info['content'] = elgg_view('parentportal/parent_settings');
+				break;
 			default:
 				gatekeeper();
 				$user = get_loggedin_user();

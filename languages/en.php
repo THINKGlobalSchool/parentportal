@@ -48,6 +48,8 @@
 		'parentportal:title:childactivity' => 'Your Child\'s Recent Activity', 
 		'parentportal:title:childgroups' => 'Your Childs\'s Groups', 
 		'parentportal:title:childtodos' => 'Your Child\'s To Do\'s', 
+		'parentportal:title:usersettings' => 'User Settings', 
+		
 		'parentportal:label:profile' => "%s's Profile", 
 		'parentportal:label:enableparent' => "Parent Enabled", 
 		'parentportal:label:childselect' => "Select Child",

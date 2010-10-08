@@ -33,8 +33,9 @@ ul.childlisting li:first-child {
 }
 
 .pp_top_two_column #pp_top {
-	width: 100%;
+	width: 98%;
 	padding: 10px;
+	padding-right: 50px;
 }
 
 .pp_top_two_column #pp_left_column {
@@ -169,6 +170,10 @@ h3.pp {
 	display: block;
 	margin-top: 8px;
 	margin-bottom: 8px;
+}
+
+#pp_settings .language {
+	display: none;
 }
 
 
