@@ -49,7 +49,7 @@ if ($parent_nav) {
 // only display, if there are nav items to display
 if ($nav_html) {
 	echo <<<___END
-	<div id="elgg_main_nav" class="clearfloat">
+	<div id="elgg_main_nav" class="clearfix">
 		<ul class="navigation">
 			$nav_html
 		</ul>

@@ -19,7 +19,7 @@
 	
 	echo <<<EOT
 		<div class='river_item riverdashboard'> 
-			<div class='river_item_contents clearfloat' style='margin-left: 5px; margin-bottom: 5px;'>
+			<div class='river_item_contents clearfix' style='margin-left: 5px; margin-bottom: 5px;'>
 				<b>$desc</b> 
 				<br />
 				<span class='entity_subtext'>

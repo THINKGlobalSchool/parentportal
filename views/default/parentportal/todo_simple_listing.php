@@ -31,7 +31,7 @@
 			$info .= "<p class='entity_subtext'><b>Due: {$due_date}</b></p>";
 			$info .= "</div>";
 			//display 
-			echo "<div class='entity_listing clearfloat'>" . $info . "</div>";
+			echo "<div class='entity_listing clearfix'>" . $info . "</div>";
 			
 			if ($vars['count']) {
 				$counter++;
