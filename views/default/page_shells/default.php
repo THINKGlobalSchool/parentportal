@@ -37,12 +37,12 @@ if (is_user_parent($user)) {
 	}
 
 	echo elgg_view('page_elements/html_begin', $vars);
-	echo elgg_view('page_elements/elgg_topbar', $vars);
+	echo elgg_view('page_elements/topbar', $vars);
 	// @todo this probably should be somewhere else 
 	echo elgg_view('messages/list', array('object' => $vars['sysmessages']));
-	echo elgg_view('page_elements/elgg_header', $vars);
-	echo elgg_view('page_elements/elgg_content', $vars);
-	echo elgg_view('page_elements/elgg_footer', $vars);
+	echo elgg_view('page_elements/header', $vars);
+	echo elgg_view('page_elements/content', $vars);
+	echo elgg_view('page_elements/footer', $vars);
 	echo elgg_view('page_elements/html_end', $vars);
 
 }

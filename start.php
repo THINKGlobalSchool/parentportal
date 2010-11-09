@@ -26,7 +26,7 @@
 		elgg_extend_view('css','parentportal/css');
 		
 		// Redirect view
-		elgg_extend_view('page_elements/elgg_topbar', 'parentportal/redirect');
+		elgg_extend_view('page_elements/topbar', 'parentportal/redirect');
 		
 		// Actions	
 		register_action('parentportal/addchildren', false, $CONFIG->pluginspath . 'parentportal/actions/addchildren.php');
