@@ -39,6 +39,9 @@
 			$col_left .= elgg_View('parentportal/child_groups', array('entity' => $child));
 			$col_left .= elgg_view('parentportal/child_activity', array('entity' => $child));
 			
+			if (is_plugin_enabled('announcements')) {
+				$col_right .= elgg_view('parentportal/sticky_announcement_container', array('sac' => $sac));
+			}
 			$col_right .= elgg_view('parentportal/parent_questions', array('entity' => $child, 'section' => 'details'));
 			$col_right .= elgg_view('parentportal/parent_announcements', array('entity' => $child, 'section' => 'details'));
 			$col_right .= elgg_view('parentportal/child_todos', array('entity' => $child));

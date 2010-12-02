@@ -176,6 +176,15 @@ h3.pp {
 	display: none;
 }
 
+/** Sticky announcement container **/
+#pp_sticky_announcement_container .announcement_access_display {
+	display: none;
+}
+
+#pp_sticky_announcement_container div.announcement {
+	margin: 0px !important;
+	margin-bottom: 10px !important;
+}
 
 /** Stats **/
 .child_stats table#stats_table {
