@@ -96,7 +96,7 @@
 				$sidebar = isset($content_info['sidebar']) ? $content_info['sidebar'] : '';
 				$content = elgg_view('navigation/breadcrumbs') . $content_info['content'];
 				$body = elgg_view_layout($layout, $content, $sidebar);
-				page_draw($title, $body);
+				echo elgg_view_page($title, $body);
 				break;
 			case 'pp_top_two_column':
 				$top = elgg_view('navigation/breadcrumbs');
@@ -104,7 +104,7 @@
 				$left_column = isset($content_info['left_column']) ? $content_info['left_column'] : '';
 				$right_column = isset($content_info['right_column']) ? $content_info['right_column'] : '';
 				$body = elgg_view_layout($layout, $top, $left_column, $right_column);
-				page_draw($title, $body, 'parentportal');
+				echo elgg_view_page($title, $body, 'parentportal');
 				break;
 		}
 	}
