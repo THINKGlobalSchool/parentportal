@@ -21,7 +21,7 @@ $user = get_loggedin_user();
 
 if (is_user_parent($user)) {
 	
-	echo elgg_view('page_shells/parentportal', $vars);
+	echo elgg_view('parentportal', $vars);
 	
 } else {
 	

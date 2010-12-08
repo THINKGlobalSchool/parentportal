@@ -104,7 +104,7 @@
 				$left_column = isset($content_info['left_column']) ? $content_info['left_column'] : '';
 				$right_column = isset($content_info['right_column']) ? $content_info['right_column'] : '';
 				$body = elgg_view_layout($layout, $top, $left_column, $right_column);
-				page_draw($title, $body, 'page_shells/parentportal');
+				page_draw($title, $body, 'parentportal');
 				break;
 		}
 	}
