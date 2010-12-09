@@ -29,8 +29,8 @@
 		elgg_extend_view('page_elements/topbar', 'parentportal/redirect');
 		
 		// Actions	
-		elgg_register_action('parentportal/addchildren', $CONFIG->pluginspath . 'parentportal/actions/addchildren.php');
-		elgg_register_action('parentportal/clearchildren', $CONFIG->pluginspath . 'parentportal/actions/clearchildren.php');
+		elgg_register_action('parentportal/addchildren', $CONFIG->pluginspath . 'parentportal/actions/addchildren.php', 'admin');
+		elgg_register_action('parentportal/clearchildren', $CONFIG->pluginspath . 'parentportal/actions/clearchildren.php', 'admin');
 		elgg_register_action('parentportal/submitquestion', $CONFIG->pluginspath . 'parentportal/actions/submitquestion.php');
 		
 		// Plugin hook for index redirect

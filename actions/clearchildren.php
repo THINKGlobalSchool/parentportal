@@ -9,13 +9,7 @@
 	 * @link http://www.thinkglobalschool.com/
 	 * 
 	 */
-		
-	// admin only
-	admin_gatekeeper();
-	
-	// must have security token 
-	action_gatekeeper();
-	
+			
 	// get input
 	$parent = get_input('parent');
 				

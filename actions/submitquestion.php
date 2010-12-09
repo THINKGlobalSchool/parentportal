@@ -10,12 +10,6 @@
 	 * 
 	 */
 	
-	// Logged in users only
-	gatekeeper();
-	
-	// must have security token 
-	action_gatekeeper();
-	
 	// get input
 	$to = get_input('question_to');
 	$from_guid = get_input('from_guid');
