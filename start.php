@@ -23,7 +23,7 @@
 		elgg_extend_view('profile/menu/adminlinks', 'parentportal/adminlinks');
 		
 		// CSS 
-		elgg_extend_view('css','parentportal/css');
+		elgg_extend_view('css/screen','parentportal/css');
 		
 		// Redirect view
 		elgg_extend_view('page_elements/topbar', 'parentportal/redirect');
