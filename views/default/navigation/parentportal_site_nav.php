@@ -15,6 +15,10 @@ $home->name = 'Parent Portal Home';
 $home->value->url = $CONFIG->url . 'pg/parentportal';
 $home->value->context = 'parentportal';
 
+$calendar->name = elgg_echo('tgscalendar:calendars');
+$calendar->value->url = $CONFIG->url . 'pg/calendar';
+$calendar->value->context = 'calendar';
+
 $logout_url = elgg_add_action_tokens_to_url($CONFIG->url . 'action/logout');
 $logout->name = 'Logout';
 $logout->value->url = $logout_url;
@@ -23,9 +27,9 @@ $logout->value->url = $logout_url;
 if (!is_user_parent(get_loggedin_user())) {
 	$normal_home->name = 'Spot Home';
 	$normal_home->value->url = $CONFIG->url . 'pg/dashboard';
-	$parent_nav = array($normal_home, $home, $logout);
+	$parent_nav = array($normal_home, $home, $calendar, $logout);
 } else {
-	$parent_nav = array($home, $logout);
+	$parent_nav = array($home, $calendar, $logout);
 }
 
 
