@@ -176,4 +176,18 @@
 		}
     }
 	
+	/** 
+	 * Compare given entities by date updated
+	 *  
+	 * @param ElggEntity $a 
+	 * @param ElggEntity $b
+	 * @return bool
+	 */
+	function compare_entities_updated_dates($a, $b) {
+		if ($a->time_updated == $b->time_updated) {
+			return 0;
+		}
+		return ($a->time_updated > $b->time_updated) ? -1 : 1;
+	}
+	
 ?>

@@ -13,8 +13,13 @@
 	$desc = $vars['entity']->description;
 	$owner = get_user($vars['entity']->owner_guid);
 	$desc = parse_urls($desc);
-	$time = friendly_time($vars['entity']->time_created);
 	
+	// Strip out hashtags
+	$regex = '/#([A-Aa-z0-9_-]+)/is';
+	$desc = (preg_replace($regex, '', $desc));
+	
+	$time = friendly_time($vars['entity']->time_created);
+		
 	$owner_link = "<a href='{$vars['url']}pg/profile/{$owner->username}/'>{$owner->name}</a>";
 	
 	echo <<<EOT

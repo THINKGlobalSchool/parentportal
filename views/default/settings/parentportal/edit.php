@@ -53,6 +53,15 @@
 	?>
 </p>
 <p>
+    <label><?php echo elgg_echo('parentportal:label:parenttag'); ?></label><br />
+    <?php 
+	echo elgg_view('input/text', array(
+										'internalname' => 'params[parenttag]', 
+										'value' => $vars['entity']->parenttag)
+										); 
+	?>
+</p>
+<p>
 	<label><?php echo elgg_echo('parentportal:label:parentcontacts'); ?></label><br />
 	<?php 
 	echo elgg_view('input/plaintext', array(
