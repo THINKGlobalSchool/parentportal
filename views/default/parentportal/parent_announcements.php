@@ -26,16 +26,17 @@
 			'limit' => $limit
 		));
 		
-		
-		$tag_entities = elgg_get_entities_from_metadata(array(
-			'type' => 'object',
-			'subtypes' => array('blog', 'thewire'),
-			'metadata_name_value_pairs' => array(	'name' => 'tags', 
-													'value' => $tag, 
-													'operand' => '=',
-													'case_sensitive' => FALSE),
-			'limit' => $limit
-		));
+		if ($tag) {
+			$tag_entities = elgg_get_entities_from_metadata(array(
+				'type' => 'object',
+				'subtypes' => array('blog', 'thewire'),
+				'metadata_name_value_pairs' => array(	'name' => 'tags', 
+														'value' => $tag, 
+														'operand' => '=',
+														'case_sensitive' => FALSE),
+				'limit' => $limit
+			));
+		}
 		
 		// Make sure we have something 
 		if (!$entities) {
