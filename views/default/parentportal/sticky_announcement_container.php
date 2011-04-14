@@ -10,7 +10,7 @@
  * 
  */	
 // Grab the parent channel id
-$parent_channel_id = get_plugin_setting('parentchannel', 'parentportal');
+$parent_channel_id = elgg_get_plugin_setting('parentchannel', 'parentportal');
 $sac = get_entity($parent_channel_id);
 $content = elgg_view('announcements/announcement_container', array('sac' => $sac));
 

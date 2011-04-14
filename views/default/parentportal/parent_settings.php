@@ -13,7 +13,7 @@ gatekeeper();
 
 // Make sure we don't open a security hole ...
 if ((!page_owner_entity()) || (!page_owner_entity()->canEdit())) {
-	set_page_owner(get_loggedin_userid());
+	set_page_owner(elgg_get_logged_in_user_guid());
 }
 
 $content = elgg_view_title(elgg_echo('usersettings:user'));
