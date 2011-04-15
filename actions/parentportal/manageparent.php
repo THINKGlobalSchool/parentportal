@@ -23,7 +23,7 @@ if ($user = get_user($parent)) {
 	// Loop through and assign children
 	if ($children) {
 		foreach($children as $child) {
-			assign_child_to_parent($child, $user->getGUID());
+			parentportal_assign_child_to_parent($child, $user->getGUID());
 		}	
 	}
 	if ($user->save()) {

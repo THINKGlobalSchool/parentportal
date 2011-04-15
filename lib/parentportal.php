@@ -12,12 +12,16 @@
 
 /** Page Functions - Used by page_handler **/
 
+/**
+ * Get parent portal index content
+ */
 function parentportal_get_page_content_index($parent) {
 
-	$header .= "<span style='float: right; display: block;'><a href='{elgg_get_site_url()}parentportal/settings'>Edit your settings</a></span>";
+	$url = elgg_get_site_url();
+	$header .= "<span style='float: right; display: block;'><a href='{$url}parentportal/settings'>Edit your settings</a></span>";
 	$header .= elgg_view_title(elgg_echo('parentportal:title:header'));
 	
-	$children = get_parents_children($parent->getGUID());
+	$children = parentportal_get_parents_children($parent->getGUID());
 	
 	if ($children) {
 		
@@ -65,13 +69,17 @@ function parentportal_get_page_content_index($parent) {
 			'left_column' => $col_left,
 			'right_column' => $col_right,
 			'title' => elgg_echo('parentportal'),
+			'layout' => 'pp_header_two_column',
 	);
 
 	return $params;
 }
 
-
+/**
+ * Get admin manage parent content
+ */
 function parentportal_get_page_content_manageparent($user_guid) {	
+	$params = array();
 	if ($user_guid) {	
 		$user = get_user($user_guid);
 	
@@ -83,13 +91,29 @@ function parentportal_get_page_content_manageparent($user_guid) {
 			'name' => 'manage_parent',
 		);
 		
-		$content .= elgg_view_form('parentportal/manageparent', $form_vars, array('user_guid' => $user_guid));
+		$params['content'] = elgg_view_form('parentportal/manageparent', $form_vars, array('user_guid' => $user_guid));
+	} else {
+		$params['content'] = elgg_echo('parentportal:error:unknown_username');
+ 	}
+	
+	$params['title'] = elgg_echo('parentportal:title:manageparent');
+	$params['layout'] = 'one_sidebar';
+	return $params;
+}
+
+function parentportal_get_page_content_user_settings() {
+	$params = array();
+
+	// Make sure we don't open a security hole ...
+	if ((!elgg_get_page_owner_entity()) || (!elgg_get_page_owner_entity()->canEdit())) {
+		set_page_owner(elgg_get_logged_in_user_guid());
 	}
 	
-	return array(
-		'title' => elgg_echo('parentportal:title:manageparent'),
-		'content' => $content
-	);
+	$params['title'] = elgg_echo('parentportal:title:usersettings');
+	$params['content'] = elgg_view('core/settings/account');
+	$params['layout'] = 'one_sidebar';
+	
+	return $params;
 }
 
 /** Helper Functions **/
@@ -101,7 +125,7 @@ function parentportal_get_page_content_manageparent($user_guid) {
  * @param int $parent_guid
  * @return bool 
  */
-function assign_child_to_parent($child_guid, $parent_guid) {
+function parentportal_assign_child_to_parent($child_guid, $parent_guid) {
 	return add_entity_relationship($child_guid, PARENT_CHILD_RELATIONSHIP, $parent_guid);
 }
 	
@@ -111,7 +135,7 @@ function assign_child_to_parent($child_guid, $parent_guid) {
  * @param int $parent_guid
  * @return array 
  */
-function get_parents_children($parent_guid) {
+function parentportal_get_parents_children($parent_guid) {
 	
 	$parent = get_user($parent_guid);
 	
@@ -139,7 +163,7 @@ function get_parents_children($parent_guid) {
  * @param ElggUser $user
  * @return bool
  */
-function is_user_parent($user) {
+function parentportal_is_user_parent($user) {
 	if ($user instanceof ElggUser) {
 		return $user->is_parent;
 	}

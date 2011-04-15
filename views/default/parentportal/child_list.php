@@ -25,6 +25,3 @@ foreach ($children as $child) {
 		<?php echo $content; ?>
 	</ul>
 </div>
-	
-	
-	

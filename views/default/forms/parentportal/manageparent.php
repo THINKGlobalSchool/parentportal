@@ -17,7 +17,7 @@ $enable_input = elgg_view('input/dropdown', array(
 	'id' => 'parent-enabled', 
 	'name' => 'parent_enabled',
 	'options_values' => array(1 => 'Enabled', 0 => 'Disabled'),
-	'value' => is_user_parent($user) ? 1 : 0,
+	'value' => parentportal_is_user_parent($user) ? 1 : 0,
 ));
 											
 $child_label = elgg_echo('parentportal:label:childselect');
@@ -42,7 +42,7 @@ $clear_link = elgg_view('output/confirmlink', array(
 ));
 
 $current_children_label = elgg_echo('parentportal:label:currentchildren');
-$current_children = get_parents_children($user->getGUID());
+$current_children = parentportal_get_parents_children($user->getGUID());
 $current_children_content = elgg_view('parentportal/child_list', array(
 	'children' => $current_children
 ));

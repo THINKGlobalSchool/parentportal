@@ -6,7 +6,7 @@
  * - No topbar
  * - Custom header (page/elements/parentportal_header) 
  * @TODO parents always see this:
- * ie: $user = elgg_get_logged_in_user_entity(); is_user_parent($user)
+ * ie: $user = elgg_get_logged_in_user_entity(); parentportal_is_user_parent($user)
  *
  * @package ParentPortal
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2

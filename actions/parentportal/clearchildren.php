@@ -17,7 +17,7 @@ $success = false;
 
 // Check values and save
 if ($user = get_user($parent)) {	
-	$children = get_parents_children($parent); 
+	$children = parentportal_get_parents_children($parent); 
 	foreach ($children as $child) {
  		remove_entity_relationship($child->getGUID(),PARENT_CHILD_RELATIONSHIP, $parent);
 	}

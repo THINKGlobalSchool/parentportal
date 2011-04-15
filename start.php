@@ -15,7 +15,6 @@ elgg_register_event_handler('init', 'system', 'parentportal_init');
 
 // Init
 function parentportal_init() {
-	
 	// Register and load library
 	elgg_register_library('parentportal', elgg_get_plugins_path() . 'parentportal/lib/parentportal.php');
 	elgg_load_library('parentportal');
@@ -25,11 +24,7 @@ function parentportal_init() {
 	
 	// CSS 
 	elgg_extend_view('css/elgg','parentportal/css');
-	
-	// Extend the default pageshell
-//	elgg_extend_view('page/default', )
-	
-	
+		
 	// Register for view plugin hook 
 	elgg_register_plugin_hook_handler('view', 'page/default', 'parentportal_default_view_handler');
 	
@@ -52,7 +47,7 @@ function parentportal_init() {
 	elgg_register_page_handler('parentportal','parentportal_page_handler');
 	
 	// Check if parent has children, if so add a menu item (for admin-type users)
-	$children = get_parents_children(elgg_get_logged_in_user_guid());
+	$children = parentportal_get_parents_children(elgg_get_logged_in_user_guid());
 	
 	if ($children) {
 		// add a site navigation item
@@ -61,7 +56,7 @@ function parentportal_init() {
 	}
 	
 	// PP Gatekeeper
-	if (elgg_is_logged_in() && is_user_parent(elgg_get_logged_in_user_entity())) {
+	if (elgg_is_logged_in() && parentportal_is_user_parent(elgg_get_logged_in_user_entity())) {
 		parentportal_gatekeeper();
     }	
 }
@@ -86,32 +81,28 @@ function parentportal_page_handler($page) {
 				forward(REFERER);
 			}
 			$params = parentportal_get_page_content_manageparent($user->getGUID());
-			$layout = "one_sidebar";
 			break;
 		case 'settings':
 			gatekeeper();
-			$title = elgg_echo('parentportal:title:usersettings');
-			$layout = 'content';
-			$content_info['content'] = elgg_view('parentportal/parent_settings');
+			$params = parentportal_get_page_content_user_settings();
 			break;
 		default:
 			gatekeeper();
 			$user = elgg_get_logged_in_user_entity();
 			set_input('parentportal', true);
 			$params = parentportal_get_page_content_index($user);
-			$layout = 'pp_header_two_column';
 			break;
 	}
 	
-	
-	switch ($layout) {
+	switch ($params['layout']) {
+		default:
 		case 'one_sidebar':
-			$body = elgg_view_layout($layout, $params);
+			$body = elgg_view_layout($params['layout'], $params);
 			echo elgg_view_page($params['title'], $body);
 			break;
 		case 'pp_header_two_column':
 			$params['header'] = elgg_view('navigation/breadcrumbs') . $params['header'];
-			$body = elgg_view_layout($layout, $params);
+			$body = elgg_view_layout($params['layout'], $params);
 			echo elgg_view_page($params['title'], $body, 'parentportal');
 			break;
 	}
@@ -126,7 +117,7 @@ function parentportal_site_menu_setup($hook, $type, $return, $params) {
 		$return = array();
 				
 		// If user doesn't have the flag set, add a link back to regular homepage
-		if (!is_user_parent(elgg_get_logged_in_user_entity())) {
+		if (!parentportal_is_user_parent(elgg_get_logged_in_user_entity())) {
 			$options = array(
 				'name' => 'spot_home',
 				'text' => elgg_echo('parentportal:menu:spothome'),
@@ -203,7 +194,7 @@ function parentportal_default_view_handler($hook, $type, $value, $params) {
 	$user = elgg_get_logged_in_user_entity(); 
 
 	// If the user is a parent, output the parentportal page shell instead of the default
-	if (is_user_parent($user)) {
+	if (parentportal_is_user_parent($user)) {
 		elgg_set_context('parentportal');
 		$value = elgg_view('page/parentportal', $params['vars']);
 	}
@@ -221,7 +212,7 @@ function parentportal_default_view_handler($hook, $type, $value, $params) {
  * @return unknown
  */
 function parentportal_redirect($hook, $entity_type, $returnvalue, $params) {
-	if (is_user_parent(elgg_get_logged_in_user_entity())) {
+	if (parentportal_is_user_parent(elgg_get_logged_in_user_entity())) {
 		forward('parentportal');
 	}
 	return $returnvalue;
