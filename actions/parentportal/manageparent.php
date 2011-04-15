@@ -15,10 +15,10 @@ $parent 	= get_input('parent');
 $children 	= get_input('children');
 $enabled 	= get_input('parent_enabled');
 
-$success = false;
 
-// Check values and save
-if ($user = get_user($parent)) {	
+// Get user and add children
+$user = get_user($parent);
+if (elgg_instanceof($user, 'user')) {	
 	$user->is_parent = $enabled;
 	// Loop through and assign children
 	if ($children) {
@@ -29,14 +29,36 @@ if ($user = get_user($parent)) {
 	if ($user->save()) {
 		$success = true;
 	}
-} 
-
-if ($enabled) {
-	// Set up relationship to add parent to channel
-	$success &= add_entity_relationship($parent, 'shared_access_member', elgg_get_plugin_setting('parentchannel','parentportal'));
 } else {
-	// Remove from channel
-	$success &= remove_entity_relationship($parent, 'shared_access_member', elgg_get_plugin_setting('parentchannel','parentportal'));
+	register_error(elgg_echo('parentportal:error:unknown_username'));
+	forward(REFERER);
+} 	
+
+// Get group
+$group = get_entity(elgg_get_plugin_setting('parentgroup','parentportal'));
+if (!elgg_instanceof($group, 'group')) {
+	register_error(elgg_echo('parentportal:error:invalidparentgroup'));
+	forward(REFERER);
+}
+
+// Enable/Disable parent
+if ($enabled) {
+	// access ignore so user can be added to access collection of invisible group
+	$ia = elgg_set_ignore_access(TRUE);
+	$success &= $group->join($user);
+	elgg_set_ignore_access($ia);
+	
+	if ($success) {
+		// flush user's access info so the collection is added
+		get_access_list($user->guid, 0, true);
+
+		// Remove any invite or join request flags
+		remove_entity_relationship($group->guid, 'invited', $user->guid);
+		remove_entity_relationship($user->guid, 'membership_request', $group->guid);
+	}
+} else {
+	// Remove parent from group
+	$success &= $group->leave($user);
 }
 	
 if ($success) {

@@ -15,15 +15,18 @@
 <h3 class="pp"><?php echo elgg_echo('parentportal:title:parentannouncements') ?></h3>
 <?php	
 	$limit = get_input('limit', 20);
+	$offset = get_input('offset', 0);
 	
-	$channel = get_entity(elgg_get_plugin_setting('parentchannel','parentportal'));
+	$group = get_entity(elgg_get_plugin_setting('parentgroup','parentportal'));
+	
 	$tag = elgg_get_plugin_setting('parenttag', 'parentportal');
-	$entities = elgg_get_entities_from_access_id(array(
+	
+	$entities = elgg_get_entities(array(
 		'type' => 'object',
 		'subtypes' => array('blog', 'thewire'),
-		'access_id' => $channel->acl_id,
-		'group_by' => 'e.guid',
-		'limit' => $limit
+		'container_guid' => $group->getGUID(),
+		//'group_by' => 'e.guid', ...why??
+		'limit' => 0,
 	));
 	
 	if ($tag) {
@@ -34,7 +37,7 @@
 													'value' => $tag, 
 													'operand' => '=',
 													'case_sensitive' => FALSE),
-			'limit' => $limit
+			'limit' => 0,
 		));
 	}
 	
@@ -50,15 +53,11 @@
 	$entities = array_merge($entities, $tag_entities);
 	usort($entities, "compare_entities_updated_dates");	
 	
+	$entities = array_slice($entities, $offset, $limit);
+	
 	foreach ($entities as $idx => $entity) {
-		if ($entity->getSubtype() == 'blog') {
-			$body .=  elgg_view('parentportal/announcement_blog', array('entity' => $entity));
-		} else if ($entity->getSubtype() == 'thewire') {
-			$body .= elgg_view('parentportal/announcement_wire', array('entity' => $entity));
-		} else {
-			unset($entities[$idx]);
-			continue;
-		} 
+		// Display entities in their custom container
+		$body .=  elgg_view('parentportal/announcement', array('entity' => $entity));
 	}
 	
 	if (!$body) {
