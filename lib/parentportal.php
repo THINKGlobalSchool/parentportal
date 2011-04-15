@@ -43,15 +43,20 @@ function parentportal_get_page_content_index($parent) {
 			$child = $children[0];
 		}
 		
+		// Left column view extender
+		$col_left .= elgg_view('parentportal/extend_left');
+		
+		// Left content
 		$col_left .= elgg_view('parentportal/module/profile', array('entity' => $child, 'section' => 'details'));
 		$col_left .= elgg_View('parentportal/module/groups', array('entity' => $child));
 		$col_left .= elgg_view('parentportal/module/activity', array('entity' => $child));
 		
-		if (elgg_is_active_plugin('announcements')) {
-			$col_right .= elgg_view('parentportal/sticky_announcement_container', array('sac' => $sac));
-		}
+		// Right column view extender
+		$col_right .= elgg_view('parentportal/extend_right');
+		
+		// Right content
 		$col_right .= elgg_view('parentportal/module/questions', array('entity' => $child, 'section' => 'details'));
-		$col_right .= elgg_view('parentportal/module/announcements', array('entity' => $child, 'section' => 'details'));
+		$col_right .= elgg_view('parentportal/module/information', array('entity' => $child, 'section' => 'details'));
 		
 		// Check if todos is enabled
 		if (elgg_is_active_plugin('todo')) {

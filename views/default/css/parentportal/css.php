@@ -113,11 +113,8 @@ ul.parentportal-child-list li:first-child {
 	font-size: 11px;
 }
 
-
-/** Sticky announcement container **/
-#parentportal-sticky-announcement-container div.announcement {
-	margin: 0px !important;
-	margin-bottom: 10px !important;
+.elgg-announcement-access-display { 
+	display: none;
 }
 
 /** Stats **/

@@ -1,6 +1,6 @@
 <?php
 /**
- * Parent Portal Announcement module
+ * Parent Portal information module
  * 
  * @package ParentPortal
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
@@ -10,7 +10,7 @@
  * 
  */
 
-$title = elgg_echo('parentportal:title:parentannouncements');
+$title = elgg_echo('parentportal:title:parentinformation');
 
 $limit = get_input('limit', 20);
 $offset = get_input('offset', 0);
@@ -55,7 +55,7 @@ $entities = array_slice($entities, $offset, $limit);
 
 foreach ($entities as $idx => $entity) {
 	// Display entities in their custom container
-	$body .=  elgg_view('parentportal/announcement', array('entity' => $entity));
+	$body .=  elgg_view('parentportal/infoitem', array('entity' => $entity));
 }
 
 if (!$body) {
