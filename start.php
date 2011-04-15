@@ -22,8 +22,13 @@ function parentportal_init() {
 	// Constants
 	define('PARENT_CHILD_RELATIONSHIP', "is_child_of");
 	
-	// CSS 
-	elgg_extend_view('css/elgg','parentportal/css');
+	// Register CSS
+	$parentportal_css = elgg_get_simplecache_url('css', 'parentportal/css');
+	elgg_register_css('elgg.parentportal', $parentportal_css);
+	
+	// Register JS
+	$parentportal_js = elgg_get_simplecache_url('js', 'parentportal/parentportal');
+	elgg_register_js('elgg.parentportal', $parentportal_js);
 		
 	// Register for view plugin hook 
 	elgg_register_plugin_hook_handler('view', 'page/default', 'parentportal_default_view_handler');
@@ -69,6 +74,10 @@ function parentportal_init() {
 *
 */
 function parentportal_page_handler($page) {
+	// Load JS/CSS
+	elgg_load_js('elgg.parentportal');
+	elgg_load_css('elgg.parentportal');
+	
 	switch ($page[0]) {
 		// Manage Parent
 		case 'manageparent':

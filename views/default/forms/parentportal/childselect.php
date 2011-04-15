@@ -10,17 +10,7 @@
  * 
  */
 
-$script = "<script type='text/javascript'>
-				$(document).ready(function() {							
-					// Submit form on change event
-					$('#parentportal-select-child-form').change(function() {
-					    this.submit();
-					});
-				});			
-			</script>";
-
 $children = $vars['children'];
-
 
 $children_array = array();
 foreach ($children as $child) {
@@ -42,4 +32,4 @@ $form_body = <<<HTML
 	$send_button
 HTML;
 
-echo $script . $form_body;
+echo $form_body;
