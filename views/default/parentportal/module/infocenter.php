@@ -11,9 +11,5 @@
  */
 
 ?>
-<div id="parent_infocenter">
-<h3 class="pp"><?php echo elgg_echo('parentportal:title:parentinfocenter') ?></h3>
-<div id='parent_info_block'><center><b>Coming Soon...</b></center></div>
-<?php
-?>
+<div id="parentportal-module-parent-infocenter">
 </div>

@@ -12,12 +12,15 @@
 
 $blog_label = elgg_echo('parentportal:stats:blog');
 $blog_count = elgg_get_entities(array('owner_guid' => $vars['entity']->getGUID(), 'type' => 'object', 'subtype' => 'blog', 'count' => true));
+$blog_count = $blog_count ? $blog_count : 0;
 
 $photo_label = elgg_echo('parentportal:stats:photo');
 $photo_count = elgg_get_entities(array('owner_guid' => $vars['entity']->getGUID(), 'type' => 'object', 'subtype' => 'image', 'count' => true));
+$photo_count = $photo_count ? $photo_count : 0;
 
 $bookmark_label = elgg_echo('parentportal:stats:bookmark');
 $bookmark_count = elgg_get_entities(array('owner_guid' => $vars['entity']->getGUID(), 'type' => 'object', 'subtype' => 'bookmarks', 'count' => true));
+$bookmark_count = $bookmark_count ? $bookmark_count : 0;
 
 if (elgg_is_active_plugin('todo')) {
 	$todo_label = elgg_echo('parentportal:stats:todo');
@@ -31,25 +34,32 @@ if (elgg_is_active_plugin('todo')) {
 			}
 		}
 	}
+	
+	$todo_content = <<<HTML
+	<tr>
+		<td class='label'>$todo_label</td>
+		<td class='stat'>$todo_count</td>
+	</tr>
+HTML;
 }
 
-echo "
-	<table id='stats_table'>
-		<tr class='odd'>
-			<td class='label'>$blog_label</td>
-			<td class='stat'>$blog_count</td>
-		</tr>
-		<tr class='even'>
-			<td class='label'>$photo_label</td>
-			<td class='stat'>$photo_count</td>
-		</tr>
-		<tr class='odd'>
-			<td class='label'>$bookmark_label</td>
-			<td class='stat'>$bookmark_count</td>
-		</tr>
-		<tr class='even'>
-			<td class='label'>$todo_label</td>
-			<td class='stat'>$todo_count</td>
-		</tr>
-	</table>
-";
+echo <<<HTML
+	<div id='parentportal-child-stats'>
+		<table id='stats_table'>
+			<tr>
+				<td class='label'>$blog_label</td>
+				<td class='stat'>$blog_count</td>
+			</tr>
+			<tr>
+				<td class='label'>$photo_label</td>
+				<td class='stat'>$photo_count</td>
+			</tr>
+			<tr>
+				<td class='label'>$bookmark_label</td>
+				<td class='stat'>$bookmark_count</td>
+			</tr>
+			$todo_content
+		</table>
+	</div>
+HTML;
+?>

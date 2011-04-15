@@ -10,7 +10,7 @@
  * 
  */
 ?>
-<div id='child_groups'>
+<div id='parentportal-module-child-groups'>
 	<h3 class="pp" style='margin-bottom: 2px;'><?php echo elgg_echo("parentportal:title:childgroups"); ?></h3>
 <?php
 

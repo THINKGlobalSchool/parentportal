@@ -10,7 +10,7 @@
  * 
  */
 ?>
-<div id='child_activity'>
+<div id='parentportal-module-child-activity'>
 	<h3 class="pp"><?php echo elgg_echo("parentportal:title:childactivity"); ?></h3>
 <?php
 	$params = array(

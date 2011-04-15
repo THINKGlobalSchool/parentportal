@@ -11,9 +11,9 @@
  */
 
 ?>
-<div id="parent_questions">
-	<h3 class="pp"><a id='question_link' href='#'><?php echo elgg_echo('parentportal:title:parentquestions') ?></a></h3>
-	<div id="parent_question_form">
+<div id="parentportal-module-parent-questions">
+	<h3 class="pp"><a id='question-link' href='#'><?php echo elgg_echo('parentportal:title:parentquestions') ?></a></h3>
+	<div id="parentportal-question-form">
 <?php
 	// Display form 
 	echo elgg_echo('parentportal:label:havequestions');
@@ -32,14 +32,14 @@
 $(document).ready(
 	function() {	
 		// Hide the question form
-		$("#parent_question_form").hide();
+		$("#parentportal-question-form").hide();
 			
-		$("#question_link").click(
+		$("#question-link").click(
 			function () {
-				if ($("#parent_question_form").is(":hidden")) {
-					$("#parent_question_form").slideDown("fast");
+				if ($("#parentportal-question-form").is(":hidden")) {
+					$("#parentportal-question-form").slideDown("fast");
 				} else {
-					$("#parent_question_form").hide();
+					$("#parentportal-question-form").hide();
 				}
 				return false;
 			}

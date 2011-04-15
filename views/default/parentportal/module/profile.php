@@ -27,29 +27,27 @@ $icon_class = "large";
 
 $username = $user->username;
 
-$child_stats = elgg_vieW('parentportal/child_stats', $vars);
+$child_stats = elgg_view('parentportal/stats', $vars);
 
 //contruct the display
 $display = <<<HTML
 <div>
 	<h3 class="pp">$title</h3>
 </div>
-<div id="child_block">
+<div id="parentportal-child-profile">
 	<table style='width: 100%;'> 
 		<tr>
 			<td style='width: 175px;'>
-				<div class="child_block_icon {$icon_class}">
+				<div class="parentportal-child-profile-icon {$icon_class}">
 					{$icon}
 				</div>
 			</td>
 			<td>
-				<div class='child_block_contents'>
+				<div class='parentportal-child-profile-contents'>
 					<h3>{$user->name}</h3>
-					<p class='child_profile_info briefdescription'>{$user->briefdescription}</p>
-					<p class='child_profile_info location'>{$location}</p>
-					<div class='child_stats'>
-						$child_stats
-					</div>
+					<p class='parentportal-child-profile-info briefdescription'>{$user->briefdescription}</p>
+					<p class='parentportal-child-profile-info location'>{$location}</p>
+					$child_stats
 				</div>
 			</td>
 		</tr>

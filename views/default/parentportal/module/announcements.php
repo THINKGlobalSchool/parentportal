@@ -11,7 +11,7 @@
  */
 
 ?>
-<div id="parent_announcements">
+<div id="parentportal-module-parent-announcements">
 <h3 class="pp"><?php echo elgg_echo('parentportal:title:parentannouncements') ?></h3>
 <?php	
 	$limit = get_input('limit', 20);

@@ -13,7 +13,7 @@
 $params = $vars;
 
 ?>
-<div id="elgg_content" class="clearfix pp_top_two_column" style='margin-bottom: 20px;'>
+<div id="elgg_content" class="clearfix parentportal-header-two-column" style='margin-bottom: 20px;'>
 	
 	<div id="pp_top">
 		<?php

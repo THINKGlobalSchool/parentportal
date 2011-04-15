@@ -10,13 +10,13 @@
 	 * 
 	 */
 ?>
-ul.childlisting {
+ul.parentportal-child-list {
 	list-style: none;
 	margin:0;
 	padding:0;
 }
 
-ul.childlisting li {
+ul.parentportal-child-list li {
 	border-bottom:1px solid #CCCCCC;
 	clear:both;
 	height:25px;
@@ -24,21 +24,21 @@ ul.childlisting li {
 	padding:5px;
 }
 
-ul.childlisting li:first-child {
+ul.parentportal-child-list li:first-child {
 	border-top:1px solid #cccccc;
 }
 
-.pp_top_two_column {
+.parentportal-header-two-column {
 	padding-right: 40px !important;
 }
 
-.pp_top_two_column #pp_top {
+.parentportal-header-two-column #pp_top {
 	width: 98%;
 	padding: 10px;
 	padding-right: 50px;
 }
 
-.pp_top_two_column #pp_left_column {
+.parentportal-header-two-column #pp_left_column {
 	min-width: 47%;
 	max-width: 47%;
 	margin: 0;
@@ -46,7 +46,7 @@ ul.childlisting li:first-child {
 	float: left;
 }
 
-.pp_top_two_column #pp_right_column {
+.parentportal-header-two-column #pp_right_column {
 	width: 47%;
 	max-width: 47%;
 	margin: 0;
@@ -54,7 +54,7 @@ ul.childlisting li:first-child {
 	float: right;
 }
 
-#child_block {
+#parentportal-child-profile {
 	margin-top: 5px;
 	padding: 8px 6px 6px 6px;
 	background: #ddd;
@@ -64,100 +64,57 @@ ul.childlisting li:first-child {
 	-webkit-box-shadow: 1px 1px 0px #999;
 }
 
-#child_activity {
-	margin-top: 10px;
-}
-
-#child_groups {
-	margin-top: 10px;
-}
-
-#child_todo {
-	margin-top: 10px;
-}
-
-h3.pp {
-	background: #E4E4E4;
-	border-top-left-radius: 4px 4px;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	-moz-box-shadow: 1px 1px 0px #999;
-	-webkit-box-shadow: 1px 1px 0px #999;
-	color: #333;
-	padding: 5px 5px 3px;
-}
-
-.child_block_icon {
+.parentportal-child-profile-icon {
 	margin-right: 10px;
 	width: 200px;
 }
 
-.child_block_contents {
+.parentportal-child-profile-contents {
 }
 
-.child_profile_info.briefdescription {
+.parentportal-child-profile-info.briefdescription {
 	font-size: 90%;
 	line-height:1.2em;
 	font-style: italic;
 }
 
-.child_profile_info.location {
+.parentportal-child-profile-info.location {
 	font-size: 90%;
 }
 
-.child_profile_info {
+.parentportal-child-profile-info {
 	margin:0;
 	padding:0;
 	color: #666666;
 }
 
-
-#parent_announcements {
-	margin-top: 10px;
-}
-
-#parent_infocenter {
-	margin-top: 10px;
-}
-
-#parent_questions {
+#parentportal-module-parent-questions {
 	margin-bottom: 10px;
 }
 
-#parent_questions #question_link:hover, #question_link:selected {
+#parentportal-module-parent-questions #question-link:hover, #question-link:selected {
 	text-decoration: underline;
 	color: #555555;
 }
 
-#parent_questions #question_link h3 {
+#parentportal-module-parent-questions #question-link h3 {
 	text-decoration: none;
 	color: #9D1520
 }
 
-#parent_info_block {
-	height: 200px;
-	margin-top: 10px;
-	background: #ddd;
-	padding: 10px;
-	-webkit-border-radius: 8px; 
-	-moz-border-radius: 8px;
-	-moz-box-shadow: 1px 1px 0px #999;
-	-webkit-box-shadow: 1px 1px 0px #999;
-}
-
-#parent_question_form {
+#parentportal-question-form {
 	margin-top: 10px;	
 }
 
-#parent_question_form input textarea table {
+#parentportal-question-form input textarea table {
 	width: 98% !important;
 }
 
-#parent_question_form td {
+#parentportal-question-form td {
 	width: 100%;
 }
 
-.pp_see_all {
+.parentportal-view-all-link {
 	width: auto;
 	padding: 4px;
 	background: #ddd;
@@ -166,58 +123,43 @@ h3.pp {
 	font-size: 11px;
 }
 
-.pp_blog_excerpt {
-	display: block;
-	margin-top: 8px;
-	margin-bottom: 8px;
-}
-
-#pp_settings .language {
-	display: none;
-}
 
 /** Sticky announcement container **/
-#pp_sticky_announcement_container .announcement_access_display {
-	display: none;
-}
-
-#pp_sticky_announcement_container div.announcement {
+#parentportal-sticky-announcement-container div.announcement {
 	margin: 0px !important;
 	margin-bottom: 10px !important;
 }
 
 /** Stats **/
-.child_stats table#stats_table {
+#parentportal-child-stats table#stats_table {
 	width: 75%;
 	margin-top: 10px;
 	border-top: 1px solid #CCCCCC;
 	border-left: 1px solid #CCCCCC;
 	border-right: 1px solid #CCCCCC;
 }
-.child_stats table#stats_table td {
+#parentportal-child-stats table#stats_table td {
 	font-weight: bold;
 	font-size: 100%;
 	color: #555555;
 	padding: 4px;
 }
 
-.child_stats table#stats_table td.label {
+#parentportal-child-stats table#stats_table td.label {
 	width: 80%;
 	text-shadow: 1px 1px 1px #AAAAAA;
 }
 
-.child_stats table#stats_table td.stat {
+#parentportal-child-stats table#stats_table td.stat {
 	color: #800518;
 	width: 20%;
 }
 
-.child_stats table#stats_table tr.odd {
+#parentportal-child-stats table#stats_table tr:nth-child(odd) {
 	background: #EEEEEE;
 	border-bottom: 1px solid #CCCCCC;
 }
-.child_stats table#stats_table tr.even {
+#parentportal-child-stats table#stats_table tr:nth-child(even) {
 	background: #DDDDDD;
 	border-bottom: 1px solid #CCCCCC;
 }
-
-

@@ -21,7 +21,7 @@ foreach ($children as $child) {
 }
 ?>
 <div>
-	<ul class="childlisting">
+	<ul class="parentportal-child-list">
 		<?php echo $content; ?>
 	</ul>
 </div>
