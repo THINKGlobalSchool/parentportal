@@ -9,19 +9,23 @@
  * @link http://www.thinkglobalschool.com/
  * 
  */
-?>
-<div id='parentportal-module-child-groups'>
-	<h3 class="pp" style='margin-bottom: 2px;'><?php echo elgg_echo("parentportal:title:childgroups"); ?></h3>
-<?php
 
-	$content = elgg_list_entities_from_relationship_count(array(
-		'type' => 'group',
-		'relationship' => 'member',
-		'relationship_guid' => $vars['entity']->getGUID(),
-		'inverse_relationship' => false,
-		'full_view' => false,
-	));
+$title = elgg_echo("parentportal:title:childgroups");
 
-	echo $content;
-?>
-</div>
+$body = elgg_list_entities_from_relationship_count(array(
+	'type' => 'group',
+	'relationship' => 'member',
+	'relationship_guid' => $vars['entity']->getGUID(),
+	'inverse_relationship' => false,
+	'full_view' => false,
+	'pagination' => false,
+	'limit' => 0,
+	'offset' => 0,
+));
+
+$options = array(
+	'id' => 'parentportal-module-child-groups',
+	'class' => 'parentportal-module',
+);
+
+echo elgg_view_module('featured', $title, $body, $options);

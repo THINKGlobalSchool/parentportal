@@ -10,30 +10,19 @@
  * 
  */
 
-$user = get_entity($vars['entity']->guid);
-$more_info = '';
-
 $title = elgg_echo('parentportal:title:childinfo');
 
-//set some variables
-$location = elgg_view("output/tags",array('value' => $user->location));
-$section = $vars['section'];
+$user = get_entity($vars['entity']->guid);
 
-$icon = elgg_view("profile/icon",array('entity' => $user, 'size' => 'large', 'override' => 'true'));
+$location = elgg_view("output/tags",array('value' => $user->location));
 
 $icon = elgg_view_entity_icon($user, 'large', array('hover' => FALSE));
-
-$icon_class = "large";
 
 $username = $user->username;
 
 $child_stats = elgg_view('parentportal/stats', $vars);
 
-//contruct the display
-$display = <<<HTML
-<div>
-	<h3 class="pp">$title</h3>
-</div>
+$body = <<<HTML
 <div id="parentportal-child-profile">
 	<table style='width: 100%;'> 
 		<tr>
@@ -53,7 +42,12 @@ $display = <<<HTML
 		</tr>
 	</table>
 </div>
-
 HTML;
 
-echo $display;
+$options = array(
+	'id' => 'parentportal-module-child-profile',
+	'class' => 'parentportal-module',
+);
+
+echo elgg_view_module('featured', $title, $body, $options);
+

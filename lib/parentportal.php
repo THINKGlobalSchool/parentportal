@@ -10,7 +10,7 @@
  * 
  */
 
-/** Page Functions - Used by page_handler **/
+/* Page Functions - Used by page_handler */
 
 /**
  * Get parent portal index content

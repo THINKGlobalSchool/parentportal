@@ -54,16 +54,6 @@ ul.parentportal-child-list li:first-child {
 	float: right;
 }
 
-#parentportal-child-profile {
-	margin-top: 5px;
-	padding: 8px 6px 6px 6px;
-	background: #ddd;
-	-webkit-border-radius: 8px; 
-	-moz-border-radius: 8px;
-	-moz-box-shadow: 1px 1px 0px #999;
-	-webkit-box-shadow: 1px 1px 0px #999;
-}
-
 .parentportal-child-profile-icon {
 	margin-right: 10px;
 	width: 200px;
@@ -103,7 +93,7 @@ ul.parentportal-child-list li:first-child {
 }
 
 #parentportal-question-form {
-	margin-top: 10px;	
+	display: none;
 }
 
 #parentportal-question-form input textarea table {

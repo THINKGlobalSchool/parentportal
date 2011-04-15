@@ -10,40 +10,28 @@
  * 
  */
 
-?>
-<div id="parentportal-module-parent-questions">
-	<h3 class="pp"><a id='question-link' href='#'><?php echo elgg_echo('parentportal:title:parentquestions') ?></a></h3>
-	<div id="parentportal-question-form">
-<?php
-	// Display form 
-	echo elgg_echo('parentportal:label:havequestions');
-	echo "<br /><br />";
-	
-	$form_vars = array(
-		'id' => 'parentportal-submit-question-form',
-		'name' => 'parentportal_submit_question_form',
-	);
-	
-	echo elgg_view_form('parentportal/submitquestion', $form_vars);
-?>
-	</div>
-</div><!-- <input type="text" class="feedbackText"  size="30" id="feedback_text" value="Title" name="feedback_title"> -->
-<script>
-$(document).ready(
-	function() {	
-		// Hide the question form
-		$("#parentportal-question-form").hide();
-			
-		$("#question-link").click(
-			function () {
-				if ($("#parentportal-question-form").is(":hidden")) {
-					$("#parentportal-question-form").slideDown("fast");
-				} else {
-					$("#parentportal-question-form").hide();
-				}
-				return false;
-			}
-		);
-	}
+$title = "<a class='elgg-toggler' href='#parentportal-question-form'>" . elgg_echo('parentportal:title:parentquestions') . "</a>";
+
+$questions = elgg_echo('parentportal:label:havequestions');
+
+$form_vars = array(
+	'id' => 'parentportal-submit-question-form',
+	'name' => 'parentportal_submit_question_form',
 );
-</script>
+
+$form .=  elgg_view_form('parentportal/submitquestion', $form_vars);
+
+$body = <<<HTML
+	<div id="parentportal-question-form">
+		<strong>$questions</strong>
+		<br /><br />
+		$form
+	</div>
+HTML;
+
+$options = array(
+	'id' => 'parentportal-module-parent-questions',
+	'class' => 'parentportal-module',
+);
+
+echo elgg_view_module('info', $title, $body, $options);
