@@ -46,7 +46,7 @@
 		'parentportal:title:parentquestions' => 'Ask a Question >>',
 		'parentportal:title:parentinfocenter' => 'Information Center',
 		'parentportal:title:childactivity' => 'Your Child\'s Recent Activity', 
-		'parentportal:title:childgroups' => 'Your Childs\'s Groups', 
+		'parentportal:title:childgroups' => 'Your Child\'s Groups', 
 		'parentportal:title:childtodos' => 'Your Child\'s To Do\'s', 
 		'parentportal:title:usersettings' => 'User Settings', 
 		
