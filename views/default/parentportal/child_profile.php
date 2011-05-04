@@ -17,7 +17,6 @@
 	
 	//set some variables
 	$location = elgg_view("output/tags",array('value' => $user->location));
-	$section = $vars['section'];
 
 	$icon = elgg_view("profile/icon",array('entity' => $user, 'size' => 'large', 'override' => 'true'));
 	$icon_class = "large";

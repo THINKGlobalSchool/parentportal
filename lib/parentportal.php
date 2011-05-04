@@ -21,6 +21,10 @@ function parentportal_get_page_content_index($parent) {
 
 	$children = get_parents_children($parent->getGUID());
 	
+	// Definitely need a better way of building the content..
+	$col_right .= elgg_view('parentportal/parent_questions');
+	$col_right .= elgg_view('parentportal/parent_announcements');
+	
 	if ($children) {
 		
 		if (count($children) > 1) {
@@ -42,16 +46,19 @@ function parentportal_get_page_content_index($parent) {
 		if (is_plugin_enabled('announcements')) {
 			$col_right .= elgg_view('parentportal/sticky_announcement_container', array('sac' => $sac));
 		}
-		$col_right .= elgg_view('parentportal/parent_questions', array('entity' => $child, 'section' => 'details'));
-		$col_right .= elgg_view('parentportal/parent_announcements', array('entity' => $child, 'section' => 'details'));
+		
 		$col_right .= elgg_view('parentportal/child_todos', array('entity' => $child));
 		
 		//$col_left .= elgg_view('parentportal/parent_infocenter', array('entity' => $child, 'section' => 'details'));
 		
 	} else {
 		$header .= '<br />' . elgg_echo('parentportal:label:nochildren');
+		$col_left = $col_right;
+		$col_right = null;
 	}
-
+	
+	
+	
 	return array(
 			'top' => $header,
 			'left_column' => $col_left,
