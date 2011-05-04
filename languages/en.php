@@ -60,7 +60,7 @@
 		'parentportal:label:blacklist' => "Blacklist",
 		'parentportal:label:whitelist' => "Whitelist", 
 		'parentportal:label:nochildren' => "Sorry. You have no Children",
-		'parentportal:label:parentchannel' => 'Parent Channel',
+		'parentportal:label:parentgroup' => 'Parent Group',
 		'parentportal:label:parentcontacts' => 'Parent Portal Contacts',
 		'parentportal:label:noannouncements' => 'No Announcements',
 		'parentportal:label:havequestions' => 'Have a question? Use the form below and we\'ll get back to you!',

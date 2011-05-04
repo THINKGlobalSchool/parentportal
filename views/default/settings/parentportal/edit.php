@@ -30,25 +30,24 @@
 	?>
 </p>
 <p>
-	<label><?php echo elgg_echo('parentportal:label:parentchannel'); ?></label><br />
+	<label><?php echo elgg_echo('parentportal:label:parentgroup'); ?></label><br />
 	<?php 
 	
-	$channels = elgg_get_entities(array('types' => 'object',
-										'subtypes' => 'shared_access',
-										'limit' => 9999
-								  		));
-								
-	$channels_array = array();
+	$groups = elgg_get_entities(array(
+		'type' => 'group',
+		'limit' => 0,
+	));
+							
+	$groups_array = array();
 
-	foreach ($channels as $channel) {
-		$channels_array[$channel->getGUID()] = $channel->title;
+	foreach ($groups as $group) {
+		$groups_array[$group->getGUID()] = $group->name;
 	}
 	
-	
 	echo elgg_view('input/pulldown', array(
-										'internalname' => 'params[parentchannel]', 
-										'value' => $vars['entity']->parentchannel, 
-										'options_values' => $channels_array
+										'internalname' => 'params[parentgroup]', 
+										'value' => $vars['entity']->parentgroup, 
+										'options_values' => $groups_array,
 										));
 	?>
 </p>
