@@ -23,6 +23,16 @@ function parentportal_get_page_content_index($parent) {
 	
 	$children = parentportal_get_parents_children($parent->getGUID());
 	
+	// Left column view extender
+	$col_left .= elgg_view('parentportal/extend_left');
+	
+	// Right column view extender
+	$col_right .= elgg_view('parentportal/extend_right');
+	
+	// Right content
+	$col_right .= elgg_view('parentportal/module/questions');
+	$col_right .= elgg_view('parentportal/module/information');
+	
 	if ($children) {
 		
 		if (count($children) > 1) {
@@ -43,20 +53,10 @@ function parentportal_get_page_content_index($parent) {
 			$child = $children[0];
 		}
 		
-		// Left column view extender
-		$col_left .= elgg_view('parentportal/extend_left');
-		
 		// Left content
 		$col_left .= elgg_view('parentportal/module/profile', array('entity' => $child, 'section' => 'details'));
 		$col_left .= elgg_View('parentportal/module/groups', array('entity' => $child));
 		$col_left .= elgg_view('parentportal/module/activity', array('entity' => $child));
-		
-		// Right column view extender
-		$col_right .= elgg_view('parentportal/extend_right');
-		
-		// Right content
-		$col_right .= elgg_view('parentportal/module/questions', array('entity' => $child, 'section' => 'details'));
-		$col_right .= elgg_view('parentportal/module/information', array('entity' => $child, 'section' => 'details'));
 		
 		// Check if todos is enabled
 		if (elgg_is_active_plugin('todo')) {
@@ -67,6 +67,8 @@ function parentportal_get_page_content_index($parent) {
 		
 	} else {
 		$header .= '<br />' . elgg_echo('parentportal:label:nochildren');
+		$col_left = $col_right;
+		$col_right = null;
 	}
 
 	$params = array(
