@@ -13,17 +13,61 @@
 	$title = elgg_echo('parentportal:title:childtodos');		
 			
 	// get the user's todos, will be seperating complete/incomplete
-	$incomplete_todos = get_users_todos($vars['entity']->getGUID());
-	$complete_todos = array();
+	global $CONFIG;
+
+	$test_id = get_metastring_id('manual_complete');
+	$one_id = get_metastring_id(1);
+	$wheres = array();
+
+	$user_guid = $vars['entity']->getGUID();		
+	$relationship = COMPLETED_RELATIONSHIP;
 	
-	$selected = get_input('selected', 'complete');
-										
-	foreach ($incomplete_todos as $idx => $todo) {
-		if (have_assignees_completed_todo($todo->getGUID())) {
-			$complete_todos[] = $todo;
-			unset($incomplete_todos[$idx]);
-		} 
-	}
+	$options = array(
+		'type' => 'object',
+		'subtype' => 'todo',
+		'relationship' => TODO_ASSIGNEE_RELATIONSHIP, 
+		'relationship_guid' => $user_guid, 
+		'inverse_relationship' => FALSE,
+		'metadata_name' => 'status',
+		'metadata_value' => TODO_STATUS_PUBLISHED,
+		'order_by_metadata' => array('name' => 'due_date', 'as' => 'int', 'direction' => 'DESC'),
+	);
+
+	// Complete
+	$wheres[] = "(EXISTS (
+			SELECT 1 FROM {$CONFIG->dbprefix}entity_relationships r2 
+			WHERE r2.guid_one = '$user_guid'
+			AND r2.relationship = '$relationship'
+			AND r2.guid_two = e.guid) OR 
+				EXISTS (
+			SELECT 1 FROM {$CONFIG->dbprefix}metadata md
+			WHERE md.entity_guid = e.guid
+				AND md.name_id = $test_id
+				AND md.value_id = $one_id))";
+
+	$options['wheres'] = $wheres;
+
+	$complete_todos = elgg_get_entities_from_relationship($options);
+
+	$wheres = array();
+	
+	// Incomplete
+	$wheres[] = "NOT EXISTS (
+			SELECT 1 FROM {$CONFIG->dbprefix}metadata md
+			WHERE md.entity_guid = e.guid
+				AND md.name_id = $test_id
+				AND md.value_id = $one_id)";
+
+	$wheres[] = "NOT EXISTS (
+			SELECT 1 FROM {$CONFIG->dbprefix}entity_relationships r2 
+			WHERE r2.guid_one = '$user_guid'
+			AND r2.relationship = '$relationship'
+			AND r2.guid_two = e.guid)";
+	
+	$options['wheres'] = $wheres;
+	
+	$incomplete_todos = elgg_get_entities_from_relationship($options);
+
 	
 	//Content for tabs
 	if ($complete_todos) {
@@ -39,14 +83,17 @@
 	}
 	
 	// Build up tab array with id's, labels, and content	
-	$tabs = array(array('id' => 'tab_complete', 
-						'label' => elgg_echo('parentportal:label:todo:complete'), 
-						'content' => $complete_todos_content
-				  ),
-				  array('id' => 'tab_incomplete', 
-						'label' => elgg_echo('parentportal:label:todo:incomplete'), 
-						'content' => $incomplete_todos_content
-				  )
+	$tabs = array(
+				array(
+					'id' => 'tab_incomplete', 
+					'label' => elgg_echo('parentportal:label:todo:incomplete'), 
+					'content' => $incomplete_todos_content
+				),
+				array(
+					'id' => 'tab_complete', 
+					'label' => elgg_echo('parentportal:label:todo:complete'), 
+					'content' => $complete_todos_content
+				 )
 			);
 	 		
 	// Set default tab	  
@@ -54,8 +101,9 @@
 		if ($vars['tab'] == $tab['id'])
 			$selected_tab = $vars['tab'];
 	}
-	if (!$selected_tab)
-		$selected_tab = 'tab_complete';
+	if (!$selected_tab) {
+		$selected_tab = 'tab_incomplete';
+	}
 		
 	
 	// Build tab nav and content
