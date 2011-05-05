@@ -14,6 +14,7 @@
 	function parentportal_init() {
 	
 		include_once('lib/parentportal.php');
+		include_once('lib/ajaxmodule.php');
 		global $CONFIG;
 		
 		// Constants
@@ -24,7 +25,7 @@
 		
 		// CSS 
 		elgg_extend_view('css/screen','parentportal/css');
-		
+				
 		// Redirect view
 		elgg_extend_view('page_elements/topbar', 'parentportal/redirect');
 		
@@ -39,6 +40,9 @@
 		// Page handler
 		register_page_handler('parentportal','parentportal_page_handler');
 		
+		// Ajax module page handler
+		register_page_handler('ajaxmodule', 'ajaxmodule_page_handler');
+		
 		// Check if parent has children, if so add a menu item (for admin-type users)
 		$children = get_parents_children(get_loggedin_userid());
 		
@@ -49,6 +53,11 @@
 		if (isloggedin() && is_user_parent(get_loggedin_user())) {
 			parentportal_gatekeeper();
 	    }	
+	}
+	
+	// Register JS
+	function parentportal_js() {
+		elgg_register_js(elgg_get_site_url() . 'mod/parentportal/views/default/js/ajaxmodule/ajaxmodule.php', 'elgg.ajaxmodule');
 	}
 	
 	/**
@@ -108,6 +117,29 @@
 				break;
 		}
 	}
+	
+	
+	/**
+	* Ajaxmodule page handler
+	* 
+	* @param array $page From the page_handler function
+	* @return true|false Depending on success
+	*
+	*/
+	function ajaxmodule_page_handler($page) {
+		switch ($page[0]) {
+			case 'load':
+			default:
+				$options['container_guid'] 	= get_input('container_guid');
+				$options['tag']				= get_input('tag');
+				$options['subtypes']		= json_decode(get_input('subtypes'));
+				$options['limit']			= get_input('limit', 10);
+				$options['offset']			= get_input('offset', 0);
+				echo am_list_entities_by_group_or_tag($options);
+			break;
+		}
+		exit;
+	}
 
 	/**
 	 * Plugin hook to redirect parent users from index
@@ -126,4 +158,5 @@
 	}
 
 	register_elgg_event_handler('init', 'system', 'parentportal_init');
+	register_elgg_event_handler('pagesetup', 'system', 'parentportal_js');
 ?>

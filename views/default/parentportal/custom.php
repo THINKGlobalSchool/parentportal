@@ -11,43 +11,53 @@
  * @uses $vars['container_guid'] 	Container guid for content
  * @uses $vars['tag']				Tag to match
  * @uses $vars['subtypes'] 			Subtypes
- * @uses $vars['limit'] 			Limit to list
+ * @uses $vars['title'] 			Module title
+ * @uses $vars['limit] 				Limit
  */
 
+$id = uniqid();
 
-// Get and check vars
-$container_guid = ($vars['container_guid'] === NULL) ? 0 : $vars['container_guid'];
-$tag			= ($vars['tag'] === NULL) ? '' : $vars['tag'];
-$subtypes		= (is_array($vars['subtypes'])) ? $vars['subtypes'] : array();
-$limit			= ($vars['limit'] === NULL) ? 10 : $vars['limit']; 
-
-
-global $CONFIG;
-
-$joins[] = "JOIN {$CONFIG->dbprefix}metadata tag_meta_table on e.guid = tag_meta_table.entity_guid";
-$joins[] = "JOIN {$CONFIG->dbprefix}metastrings tag_msn on tag_meta_table.name_id = tag_msn.id";
-$joins[] = "JOIN {$CONFIG->dbprefix}metastrings tag_msv on tag_meta_table.value_id = tag_msv.id";
-
-$access_sql = get_access_sql_suffix('tag_meta_table');
-
-$wheres[] = "
-		e.container_guid IN ({$container_guid})
-		OR
-		(
-			(tag_msn.string IN ('tags')) AND ( BINARY tag_msv.string IN ('{$tag}')) 
-			AND
-			$access_sql
-		)
-";
-
-
-$entities = elgg_list_entities_from_metadata(array(
-	'type' => 'object',
-	'subtypes' => $subtypes,
-	'joins' => $joins,
-	'wheres' => $wheres,
-	'full_view' => FALSE,
-	'limit' => $limit
+$container_input = elgg_view('input/hidden', array(
+	'internalname' => "container_guid",
+	'internalid' => "container_guid",
+	'value' => $vars['container_guid'],
 ));
 
-echo $entities;
+$tag_input = elgg_view('input/hidden', array(
+	'internalname' => "tag",
+	'internalid' => "tag",
+	'value' => $vars['tag']
+));
+
+$subtypes_input = elgg_view('input/hidden', array(
+	'internalname' => "subtypes",
+	'internalid' => "subtypes",
+	'value' => json_encode($vars['subtypes']),
+));
+
+$limit_input = elgg_view('input/hidden', array(
+	'internalname' => "limit",
+	'internalid' => "limit",
+	'value' => $vars['limit'],
+));
+
+$spinner = elgg_get_site_url() . "_graphics/ajax_loader_bw.gif";
+
+echo <<<HTML
+	<div style='margin-bottom: 10px;'>
+		<h3 class="pp">{$vars['title']}</h3>
+		<div id="$id" class="ajaxmodule-content-container">
+			<div class='options'>
+				$container_input
+				$tag_input
+				$subtypes_input
+				$limit_input
+			</div>
+			<div class='content'>
+				<div style='margin: 10px; text-align: center;'><img src="{$spinner}" /></div>
+			</div>
+		</div>
+	</div>
+HTML;
+
+?>

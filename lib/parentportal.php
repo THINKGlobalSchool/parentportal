@@ -22,6 +22,15 @@ function parentportal_get_page_content_index($parent) {
 	$children = get_parents_children($parent->getGUID());
 	
 	// Definitely need a better way of building the content..
+	
+	$col_right .= elgg_view('parentportal/custom', array(
+		'title' => 'Welcome Documents',
+		'container_guid' => get_plugin_setting('parentgroup','parentportal'),
+		'tag' => 'welcome',
+		'subtypes' => array('document'),
+		'limit' => 5,
+	));
+
 	$col_right .= elgg_view('parentportal/parent_questions');
 	$col_right .= elgg_view('parentportal/parent_announcements');
 	
