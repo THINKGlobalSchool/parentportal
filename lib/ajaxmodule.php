@@ -68,5 +68,9 @@ function am_list_entities_by_group_or_tag($options) {
 		'offset' => $offset,
 	));
 	
-	return $entities;
+	if ($entities) {
+		return $entities;
+	} else {
+		return "<div style='width: 100%; text-align: center; margin: 10px;'><strong>No results</strong></div>";
+	}
 }
