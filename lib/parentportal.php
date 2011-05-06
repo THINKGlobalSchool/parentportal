@@ -30,6 +30,7 @@ function parentportal_get_page_content_index($parent) {
 		'tag' => 'welcome',
 		'subtypes' => array('document'),
 		'limit' => 5,
+		'header_class' => 'pp',
 	));
 	
 	$col_right .= elgg_view('modules/ajaxmodule', array(
@@ -39,6 +40,7 @@ function parentportal_get_page_content_index($parent) {
 		'subtypes' => array('blog', 'thewire'),
 		'listing_type' => 'simple',
 		'limit' => 3,
+		'header_class' => 'pp',
 	));
 		
 	if ($children) {
