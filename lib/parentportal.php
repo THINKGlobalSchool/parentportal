@@ -31,8 +31,30 @@ function parentportal_get_page_content_index($parent) {
 	
 	// Right content
 	$col_right .= elgg_view('parentportal/module/questions');
-	$col_right .= elgg_view('parentportal/module/information');
 	
+	$col_right .= elgg_view('modules/ajaxmodule', array(
+		'title' => 'Welcome Documents',
+		'container_guid' => elgg_get_plugin_setting('parentgroup','parentportal'),
+		'tag' => 'welcome',
+		'subtypes' => array('file'),
+		'limit' => 5,
+		'module_type' => 'featured',
+		'module_id' => 'parentportal-module-welcome-documents',
+		'module_class' => 'parentportal-module',
+	));
+	
+	$col_right .= elgg_view('modules/ajaxmodule', array(
+		'title' => elgg_echo('parentportal:title:parentinformation'),
+		'container_guid' => elgg_get_plugin_setting('parentgroup','parentportal'),
+		'tag' => elgg_get_plugin_setting('parenttag', 'parentportal'),
+		'subtypes' => array('blog', 'thewire'),
+		'listing_type' => 'simple',
+		'limit' => 3,
+		'module_type' => 'featured',
+		'module_id' => 'parentportal-module-parent-announcements',
+		'module_class' => 'parentportal-module',
+ 	));
+		
 	if ($children) {
 		
 		if (count($children) > 1) {
