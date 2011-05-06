@@ -1,8 +1,8 @@
 <?php
 /**
- * Parent Portal Custom Module
+ * Ajaxmodule Custom Module
  *
- * @package ParentPortal
+ * @package Ajaxmodule
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
  * @author Jeff Tilson
  * @copyright THINK Global School 2010
@@ -14,6 +14,14 @@
  * @uses $vars['title'] 			Module title
  * @uses $vars['limit] 				Limit
  */
+
+if ($vars['listing_type']) {
+	$listing_type_input = elgg_view('input/hidden', array(
+		'internalname' => "listing_type",
+		'internalid' => "listing_type",
+		'value' => $vars['listing_type'],
+	));
+}
 
 $id = uniqid();
 
@@ -48,6 +56,7 @@ echo <<<HTML
 		<h3 class="pp">{$vars['title']}</h3>
 		<div id="$id" class="ajaxmodule-content-container">
 			<div class='options'>
+				$listing_type_input
 				$container_input
 				$tag_input
 				$subtypes_input

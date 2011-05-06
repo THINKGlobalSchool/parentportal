@@ -22,18 +22,25 @@ function parentportal_get_page_content_index($parent) {
 	$children = get_parents_children($parent->getGUID());
 	
 	// Definitely need a better way of building the content..
+	$col_right .= elgg_view('parentportal/parent_questions');
 	
-	$col_right .= elgg_view('parentportal/custom', array(
+	$col_right .= elgg_view('ajaxmodule/ajaxmodule', array(
 		'title' => 'Welcome Documents',
 		'container_guid' => get_plugin_setting('parentgroup','parentportal'),
 		'tag' => 'welcome',
 		'subtypes' => array('document'),
 		'limit' => 5,
 	));
-
-	$col_right .= elgg_view('parentportal/parent_questions');
-	$col_right .= elgg_view('parentportal/parent_announcements');
 	
+	$col_right .= elgg_view('ajaxmodule/ajaxmodule', array(
+		'title' => elgg_echo('parentportal:title:parentannouncements'),
+		'container_guid' => get_plugin_setting('parentgroup','parentportal'),
+		'tag' => get_plugin_setting('parenttag', 'parentportal'),
+		'subtypes' => array('blog', 'thewire'),
+		'listing_type' => 'simple',
+		'limit' => 3,
+	));
+		
 	if ($children) {
 		
 		if (count($children) > 1) {

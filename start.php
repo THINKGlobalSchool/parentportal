@@ -53,11 +53,24 @@
 		if (isloggedin() && is_user_parent(get_loggedin_user())) {
 			parentportal_gatekeeper();
 	    }	
+	
+		elgg_register_plugin_hook_handler('view', 'all', 'ajaxmodule_view_hook');
 	}
 	
 	// Register JS
 	function parentportal_js() {
 		elgg_register_js(elgg_get_site_url() . 'mod/parentportal/views/default/js/ajaxmodule/ajaxmodule.php', 'elgg.ajaxmodule');
+	}
+	
+	// Ajaxmodule view hook handler
+	function ajaxmodule_view_hook($hook, $entity_type, $returnvalue, $params) {
+		if (get_input('search_viewtype') == 'simple' && $params['view'] != 'object/simple') {
+			if (strpos($params['view'], 'object/') === 0) {
+				return elgg_view('object/simple', $params['vars']);	
+			}
+		} else {
+			return $returnvalue;
+		}
 	}
 	
 	/**
@@ -135,6 +148,12 @@
 				$options['subtypes']		= json_decode(get_input('subtypes'));
 				$options['limit']			= get_input('limit', 10);
 				$options['offset']			= get_input('offset', 0);
+				
+				// Set 'listing type' for new simple listing if supplied
+				if ($listing_type = get_input('listing_type', FALSE)) {
+					set_input('search_viewtype', $listing_type);
+				}
+				
 				echo am_list_entities_by_group_or_tag($options);
 			break;
 		}

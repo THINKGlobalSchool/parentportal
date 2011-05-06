@@ -57,6 +57,7 @@ function am_list_entities_by_group_or_tag($options) {
 	}
 	
 	set_context('search');
+	
 
 	$entities = elgg_list_entities_from_metadata(array(
 		'type' => 'object',
