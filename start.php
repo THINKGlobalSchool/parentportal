@@ -14,7 +14,7 @@
 	function parentportal_init() {
 	
 		include_once('lib/parentportal.php');
-		include_once('lib/ajaxmodule.php');
+
 		global $CONFIG;
 		
 		// Constants
@@ -40,9 +40,6 @@
 		// Page handler
 		register_page_handler('parentportal','parentportal_page_handler');
 		
-		// Ajax module page handler
-		register_page_handler('ajaxmodule', 'ajaxmodule_page_handler');
-		
 		// Check if parent has children, if so add a menu item (for admin-type users)
 		$children = get_parents_children(get_loggedin_userid());
 		
@@ -54,23 +51,6 @@
 			parentportal_gatekeeper();
 	    }	
 	
-		elgg_register_plugin_hook_handler('view', 'all', 'ajaxmodule_view_hook');
-	}
-	
-	// Register JS
-	function parentportal_js() {
-		elgg_register_js(elgg_get_site_url() . 'mod/parentportal/views/default/js/ajaxmodule/ajaxmodule.php', 'elgg.ajaxmodule');
-	}
-	
-	// Ajaxmodule view hook handler
-	function ajaxmodule_view_hook($hook, $entity_type, $returnvalue, $params) {
-		if (get_input('search_viewtype') == 'simple' && $params['view'] != 'object/simple') {
-			if (strpos($params['view'], 'object/') === 0) {
-				return elgg_view('object/simple', $params['vars']);	
-			}
-		} else {
-			return $returnvalue;
-		}
 	}
 	
 	/**
@@ -130,35 +110,6 @@
 				break;
 		}
 	}
-	
-	
-	/**
-	* Ajaxmodule page handler
-	* 
-	* @param array $page From the page_handler function
-	* @return true|false Depending on success
-	*
-	*/
-	function ajaxmodule_page_handler($page) {
-		switch ($page[0]) {
-			case 'load':
-			default:
-				$options['container_guid'] 	= get_input('container_guid');
-				$options['tag']				= get_input('tag');
-				$options['subtypes']		= json_decode(get_input('subtypes'));
-				$options['limit']			= get_input('limit', 10);
-				$options['offset']			= get_input('offset', 0);
-				
-				// Set 'listing type' for new simple listing if supplied
-				if ($listing_type = get_input('listing_type', FALSE)) {
-					set_input('search_viewtype', $listing_type);
-				}
-				
-				echo am_list_entities_by_group_or_tag($options);
-			break;
-		}
-		exit;
-	}
 
 	/**
 	 * Plugin hook to redirect parent users from index
@@ -177,5 +128,4 @@
 	}
 
 	register_elgg_event_handler('init', 'system', 'parentportal_init');
-	register_elgg_event_handler('pagesetup', 'system', 'parentportal_js');
 ?>
