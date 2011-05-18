@@ -24,6 +24,7 @@ function parentportal_get_page_content_index($parent) {
 	// Definitely need a better way of building the content..
 	$col_right .= elgg_view('parentportal/parent_questions');
 	
+	/*
 	$col_right .= elgg_view('modules/ajaxmodule', array(
 		'title' => 'Welcome Documents',
 		'container_guid' => get_plugin_setting('parentgroup','parentportal'),
@@ -32,6 +33,7 @@ function parentportal_get_page_content_index($parent) {
 		'limit' => 5,
 		'header_class' => 'pp',
 	));
+	*/
 	
 	$col_right .= elgg_view('modules/ajaxmodule', array(
 		'title' => elgg_echo('parentportal:title:parentannouncements'),
