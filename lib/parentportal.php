@@ -18,72 +18,122 @@ function parentportal_get_page_content_index($parent) {
 	$header .= "<span style='float: right; display: block;'><a href='{$CONFIG->wwwroot}pg/parentportal/settings'>Edit your settings</a></span>";
 	$header .= elgg_view_title(elgg_echo('parentportal:title:header'));
 	
-
+	// Definitely need a better way of building the content..
 	$children = get_parents_children($parent->getGUID());
 	
-	// Definitely need a better way of building the content..
-	$col_right .= elgg_view('parentportal/parent_questions');
+	// I'm doing this here for now, and I'll make this pretty for 1.8 
+	$tab = get_input('tab');
+	switch($tab) {
+		case 'student':
+		default:
+			if ($children) {
+				$student_selected = "class='selected'";
+			} else {
+				$parent_selected = "class='selected'";
+			}
+			break;
+		case 'parent':
+			$parent_selected = "class='selected'";
+			break;
+	}
 	
-	/*
-	$col_right .= elgg_view('modules/ajaxmodule', array(
-		'title' => 'Welcome Documents',
-		'container_guid' => get_plugin_setting('parentgroup','parentportal'),
-		'tag' => 'welcome',
-		'subtypes' => array('document'),
-		'limit' => 5,
-		'header_class' => 'pp',
-	));
-	*/
 	
-	$col_right .= elgg_view('modules/ajaxmodule', array(
-		'title' => elgg_echo('parentportal:title:parentannouncements'),
-		'container_guid' => get_plugin_setting('parentgroup','parentportal'),
-		'tag' => get_plugin_setting('parenttag', 'parentportal'),
-		'subtypes' => array('blog', 'thewire'),
-		'listing_type' => 'simple',
-		'limit' => 3,
-		'header_class' => 'pp',
-	));
+	if ($parent_selected) {
+		$col_right .= elgg_view('parentportal/parent_questions');
+	
+	
+		$col_left .= elgg_view('modules/ajaxmodule', array(
+			'title' => elgg_echo('Student Services Info'),
+			'container_guid' => get_plugin_setting('parentgroup','parentportal'),
+			'tag' => 'studentservices',
+			'subtypes' => array('blog', 'bookmarks', 'document'),
+			'limit' => 4,
+			'restrict_tag' => TRUE,
+			'header_class' => 'pp',
+		));
+	
+	
+		$col_left .= elgg_view('modules/ajaxmodule', array(
+			'title' => elgg_echo('weXplore Info'),
+			'container_guid' => get_plugin_setting('parentgroup','parentportal'),
+			'tag' => 'wexplore',
+			'subtypes' => array('blog', 'bookmarks', 'document'),
+			'limit' => 4,
+			'restrict_tag' => TRUE,
+			'header_class' => 'pp',
+		));
+		
+		
+		/*
+		$col_right .= elgg_view('modules/ajaxmodule', array(
+			'title' => 'Welcome Documents',
+			'container_guid' => get_plugin_setting('parentgroup','parentportal'),
+			'tag' => 'welcome',
+			'subtypes' => array('document'),
+			'limit' => 5,
+			'header_class' => 'pp',
+		));
+		*/
+	
+		$col_right .= elgg_view('modules/ajaxmodule', array(
+			'title' => elgg_echo('parentportal:title:parentannouncements'),
+			'container_guid' => get_plugin_setting('parentgroup','parentportal'),
+			'tag' => get_plugin_setting('parenttag', 'parentportal'),
+			'subtypes' => array('blog', 'thewire'),
+			'listing_type' => 'simple',
+			'limit' => 3,
+			'header_class' => 'pp',
+		));
+	}
 		
 	if ($children) {
 		
-		if (count($children) > 1) {
-			if (get_input('child_select')) {
-				$_SESSION['child_select'] = get_input('child_select');
+		$student_tab = "<li $student_selected ><a href='?tab=student'>" . elgg_echo('parentportal:title:childinfo') . "</a></li>";
+		
+		if ($student_selected) {
+			
+			if (count($children) > 1) {
+				if (get_input('child_select')) {
+					$_SESSION['child_select'] = get_input('child_select');
+				}
+				$child = get_user($_SESSION['child_select']);
+				$header .= elgg_view('parentportal/forms/child_select', array('children' => $children));	
 			}
-			$child = get_user($_SESSION['child_select']);
-			$header .= elgg_view('parentportal/forms/child_select', array('children' => $children));	
-		} 
-		
-		if (!$child) {
-			$child = $children[0];
-		}
-		
-		$col_left .= elgg_view('parentportal/child_profile', array('entity' => $child, 'section' => 'details'));
-		$col_left .= elgg_View('parentportal/child_groups', array('entity' => $child));
-		$col_left .= elgg_view('parentportal/child_activity', array('entity' => $child));
-		
-		if (is_plugin_enabled('announcements')) {
-			$col_right .= elgg_view('parentportal/sticky_announcement_container', array('sac' => $sac));
-		}
-		
-		$col_right .= elgg_view('parentportal/child_todos', array('entity' => $child));
-		
-		//$col_left .= elgg_view('parentportal/parent_infocenter', array('entity' => $child, 'section' => 'details'));
-		
-	} else {
-		$header .= '<br />' . elgg_echo('parentportal:label:nochildren');
-		$col_left = $col_right;
-		$col_right = null;
-	}
+
+			if (!$child) {
+				$child = $children[0];
+			}
+			
+			$col_left .= elgg_view('parentportal/child_profile', array('entity' => $child, 'section' => 'details'));
+			$col_left .= elgg_view('parentportal/child_activity', array('entity' => $child));
+
+			$col_right .= elgg_View('parentportal/child_groups', array('entity' => $child));
+
+			if (is_plugin_enabled('announcements')) {
+				$col_right .= elgg_view('parentportal/sticky_announcement_container', array('sac' => $sac));
+			}
+
+			$col_right .= elgg_view('parentportal/child_todos', array('entity' => $child));
+			//$col_left .= elgg_view('parentportal/parent_infocenter', array('entity' => $child, 'section' => 'details'));
+		}		
+	} 
+	
+	
+	$header .= "<div class='elgg_horizontal_tabbed_nav'>
+		<br />
+		<ul>
+			$student_tab
+			<li $parent_selected ><a href='?tab=parent'>" . elgg_echo('parentportal:title:parentinfo') . "</a></li>
+		</ul>
+	</div>";
 	
 	
 	
 	return array(
-			'top' => $header,
-			'left_column' => $col_left,
-			'right_column' => $col_right,
-			);
+		'top' => $header,
+		'left_column' => $col_left,
+		'right_column' => $col_right,
+	);
 }
 
 function parentportal_get_page_content_manageparent($user_guid) {

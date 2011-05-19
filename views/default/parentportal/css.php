@@ -69,11 +69,11 @@ ul.childlisting li:first-child {
 }
 
 #child_groups {
-	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 #child_todo {
-	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 h3.pp {
