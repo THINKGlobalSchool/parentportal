@@ -25,7 +25,6 @@ function parentportal_get_page_content_index($parent) {
 	$tab = get_input('tab');
 	switch($tab) {
 		case 'student':
-		default:
 			if ($children) {
 				$student_selected = "class='selected'";
 			} else {
@@ -33,6 +32,7 @@ function parentportal_get_page_content_index($parent) {
 			}
 			break;
 		case 'parent':
+		default:
 			$parent_selected = "class='selected'";
 			break;
 	}
@@ -97,7 +97,7 @@ function parentportal_get_page_content_index($parent) {
 					$_SESSION['child_select'] = get_input('child_select');
 				}
 				$child = get_user($_SESSION['child_select']);
-				$header .= elgg_view('parentportal/forms/child_select', array('children' => $children));	
+				$child_select = elgg_view('parentportal/forms/child_select', array('children' => $children));	
 			}
 
 			if (!$child) {
@@ -122,10 +122,11 @@ function parentportal_get_page_content_index($parent) {
 	$header .= "<div class='elgg_horizontal_tabbed_nav'>
 		<br />
 		<ul>
-			$student_tab
 			<li $parent_selected ><a href='?tab=parent'>" . elgg_echo('parentportal:title:parentinfo') . "</a></li>
+			$student_tab
 		</ul>
-	</div>";
+	</div>
+	$child_select";
 	
 	
 	
