@@ -44,7 +44,7 @@ EOT;
 	echo '<br />' . $script . elgg_view('input/form', array(
 		'internalid' => 'select_child',
 		'internalname' => 'select_child',
-		'action' => "{$vars['url']}pg/parentportal",
+		'action' => "{$vars['url']}pg/parentportal?tab=student",
 		'body' => $form_body
 	));
 ?>
