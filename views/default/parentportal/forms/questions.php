@@ -54,7 +54,7 @@
 	$body_input = elgg_view('input/plaintext', array(
 											'internalname' => 'question_body',
 											'value' => $body ? $body : $body_label,
-											'js' => "onblur=\"if (this.value == '') {this.value = '$body_label';}\" onfocus=\"if (this.value == '$body_label') {this.value = '';}\""
+											'js' => "style='height: 100px' onblur=\"if (this.value == '') {this.value = '$body_label';}\" onfocus=\"if (this.value == '$body_label') {this.value = '';}\""
 											));
 											
 	$send_button = elgg_view('input/submit', array('value' => elgg_echo('Submit'), 'class' => 'submit_button'));

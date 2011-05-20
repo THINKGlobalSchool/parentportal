@@ -38,10 +38,7 @@ function parentportal_get_page_content_index($parent) {
 	}
 	
 	
-	if ($parent_selected) {
-		$col_right .= elgg_view('parentportal/parent_questions');
-	
-	
+	if ($parent_selected) {	
 		$col_left .= elgg_view('modules/ajaxmodule', array(
 			'title' => elgg_echo('Student Services Info'),
 			'container_guid' => get_plugin_setting('parentgroup','parentportal'),
@@ -86,7 +83,9 @@ function parentportal_get_page_content_index($parent) {
 			'limit' => 3,
 			'header_class' => 'pp',
 		));
-	}
+	
+		$col_right .= elgg_view('parentportal/parent_questions');
+	}	
 		
 	if ($children) {
 		
