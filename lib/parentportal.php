@@ -12,7 +12,7 @@
 
 /** Page Functions - Used by page_handler **/
 
-function parentportal_get_page_content_index($parent) {
+function parentportal_get_page_content_index($parent) {	
 	global $CONFIG;
 	
 	$header .= "<span style='float: right; display: block;'><a href='{$CONFIG->wwwroot}pg/parentportal/settings'>Edit your settings</a></span>";
@@ -48,6 +48,7 @@ function parentportal_get_page_content_index($parent) {
 			'tag' => 'studentservices',
 			'subtypes' => array('blog', 'bookmarks', 'document'),
 			'limit' => 4,
+			'listing_type' => 'simpleicon',
 			'restrict_tag' => TRUE,
 			'header_class' => 'pp',
 		));
@@ -59,6 +60,7 @@ function parentportal_get_page_content_index($parent) {
 			'tag' => 'wexplore',
 			'subtypes' => array('blog', 'bookmarks', 'document'),
 			'limit' => 4,
+			'listing_type' => 'simpleicon',
 			'restrict_tag' => TRUE,
 			'header_class' => 'pp',
 		));
