@@ -3,7 +3,8 @@
 	<name>Parent Portal</name>
 	<author>Jeff Tilson</author>
 	<version>1.8</version>
-	<category>extension</category>
+	<category>enhancement</category>
+	<category>tgs</category>
 	<blurb>Parent Portal Plugin</blurb>
 	<description>Provides parent users with a customized portal/landing page</description>
 	<website>http://www.thinkglobalschool.org/</website>
