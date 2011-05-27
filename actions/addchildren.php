@@ -39,6 +39,9 @@ if (!elgg_instanceof($group, 'group')) {
 if ($enabled) {
 	// access ignore so user can be added to access collection of invisible group
 	$ia = elgg_set_ignore_access(TRUE);
+	// This is stupid.. but need to set the page owner here to the group otherwise the
+	// Group ACL isn't available
+	set_page_owner($group->guid);
 	$success &= $group->join($user);
 	elgg_set_ignore_access($ia);
 
