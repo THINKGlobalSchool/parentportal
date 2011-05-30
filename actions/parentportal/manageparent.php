@@ -41,6 +41,9 @@ if (!elgg_instanceof($group, 'group')) {
 	forward(REFERER);
 }
 
+// Set group as page owner (this is required it seems to properly join/leave a group)
+elgg_set_page_owner_guid($group->guid);
+
 // Enable/Disable parent
 if ($enabled) {
 	// access ignore so user can be added to access collection of invisible group
