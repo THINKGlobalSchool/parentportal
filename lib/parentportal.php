@@ -36,8 +36,6 @@ function parentportal_get_page_content_index($parent) {
 		set_input('tab', 'parent');
 	}
 	
-
-	
 	// Left column view extender
 	$col_left .= elgg_view('parentportal/extend_left', array('tab' => $tab));
 	

@@ -41,6 +41,9 @@ function parentportal_init() {
 	
 	// Handler to prepare child/parent menu
 	elgg_register_plugin_hook_handler('register', 'menu:parentportal-nav', 'parentportal_nav_menu_setup');
+	
+	// Tabbed nav for todo module
+	elgg_register_plugin_hook_handler('register', 'menu:parentportal-todo-nav', 'parentportal_todo_nav_menu_setup');
 
 	// Actions	
 	$action_base = elgg_get_plugins_path() . 'parentportal/actions/parentportal';
@@ -213,6 +216,39 @@ function parentportal_nav_menu_setup($hook, $type, $return, $params) {
 	
 		$return[] = ElggMenuItem::factory($options);
 	}
+	return $return;
+}
+
+/**
+ * Prepare the parentportal todo nav menu
+ */
+function parentportal_todo_nav_menu_setup($hook, $type, $return, $params) {	
+	$tab = get_input('show_todo', 'incomplete');
+	
+	if (!in_array($tab, array('incomplete', 'complete'))) {
+		$tab = 'incomplete';
+	}
+	
+	$options = array(
+		'name' => 'incomplete_tab',
+		'text' => "<a class='parentportal-todos-nav' href='#parentportal-todos-incomplete'>" . elgg_echo('parentportal:label:todo:incomplete') . "</a>",
+		'href' => FALSE,
+		'selected' => $tab == 'incomplete',
+		'priority' => 0,
+	);
+	
+	$return[] = ElggMenuItem::factory($options);
+	
+ 	$options = array(
+		'name' => 'complete_tab',
+		'text' => "<a class='parentportal-todos-nav' href='#parentportal-todos-complete'>" . elgg_echo('parentportal:label:todo:complete') . "</a>",
+		'href' => FALSE,
+		'selected' => $tab == 'complete',
+		'priority' => 1,
+	);
+
+	$return[] = ElggMenuItem::factory($options);
+
 	return $return;
 }
 

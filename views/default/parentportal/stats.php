@@ -44,21 +44,23 @@ HTML;
 }
 
 echo <<<HTML
-	<div id='parentportal-child-stats'>
-		<table id='stats_table'>
-			<tr>
-				<td class='label'>$blog_label</td>
-				<td class='stat'>$blog_count</td>
-			</tr>
-			<tr>
-				<td class='label'>$photo_label</td>
-				<td class='stat'>$photo_count</td>
-			</tr>
-			<tr>
-				<td class='label'>$bookmark_label</td>
-				<td class='stat'>$bookmark_count</td>
-			</tr>
-			$todo_content
+	<div id='parentportal-child-stats' >
+		<table class='elgg-table' id='parentportal-stats-table'>
+			<tbody>
+				<tr>
+					<td class='label'>$blog_label</td>
+					<td class='stat'>$blog_count</td>
+				</tr>
+				<tr>
+					<td class='label'>$photo_label</td>
+					<td class='stat'>$photo_count</td>
+				</tr>
+				<tr>
+					<td class='label'>$bookmark_label</td>
+					<td class='stat'>$bookmark_count</td>
+				</tr>
+				$todo_content
+			</tbody>
 		</table>
 	</div>
 HTML;

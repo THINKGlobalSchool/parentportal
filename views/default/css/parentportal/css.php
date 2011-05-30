@@ -1,14 +1,14 @@
 <?php
-	/**
-	 * ParentPortal CSS
-	 * 
-	 * @package ParentPortal
-	 * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
-	 * @author Jeff Tilson
-	 * @copyright THINK Global School 2010
-	 * @link http://www.thinkglobalschool.com/
-	 * 
-	 */
+/**
+ * ParentPortal CSS
+ * 
+ * @package ParentPortal
+ * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
+ * @author Jeff Tilson
+ * @copyright THINK Global School 2010
+ * @link http://www.thinkglobalschool.com/
+ * 
+ */
 ?>
 ul.parentportal-child-list {
 	list-style: none;
@@ -59,9 +59,6 @@ ul.parentportal-child-list li:first-child {
 	width: 200px;
 }
 
-.parentportal-child-profile-contents {
-}
-
 .parentportal-child-profile-info.briefdescription {
 	font-size: 90%;
 	line-height:1.2em;
@@ -78,10 +75,6 @@ ul.parentportal-child-list li:first-child {
 	color: #666666;
 }
 
-#parentportal-module-parent-questions {
-	margin-bottom: 10px;
-}
-
 #parentportal-question-form input textarea table {
 	width: 98% !important;
 }
@@ -92,47 +85,32 @@ ul.parentportal-child-list li:first-child {
 
 .parentportal-view-all-link {
 	width: auto;
-	padding: 4px;
-	background: #ddd;
-	-webkit-border-radius: 8px; 
-	-moz-border-radius: 8px;
 	font-size: 11px;
+	float: right;
 }
 
 .elgg-announcement-access-display { 
 	display: none;
 }
 
+/** Todo Module **/
+#parentportal-todos-complete {
+	display: none;
+}
+
 /** Stats **/
-#parentportal-child-stats table#stats_table {
-	width: 75%;
+#parentportal-child-stats table#parentportal-stats-table {
 	margin-top: 10px;
-	border-top: 1px solid #CCCCCC;
-	border-left: 1px solid #CCCCCC;
-	border-right: 1px solid #CCCCCC;
 }
-#parentportal-child-stats table#stats_table td {
+
+#parentportal-child-stats table#parentportal-stats-table td {
 	font-weight: bold;
-	font-size: 100%;
-	color: #555555;
-	padding: 4px;
 }
 
-#parentportal-child-stats table#stats_table td.label {
-	width: 80%;
-	text-shadow: 1px 1px 1px #AAAAAA;
+#parentportal-child-stats table#parentportal-stats-table td.label {
+	color: #333333;
 }
 
-#parentportal-child-stats table#stats_table td.stat {
+#parentportal-child-stats table#parentportal-stats-table td.stat {
 	color: #800518;
-	width: 20%;
-}
-
-#parentportal-child-stats table#stats_table tr:nth-child(odd) {
-	background: #EEEEEE;
-	border-bottom: 1px solid #CCCCCC;
-}
-#parentportal-child-stats table#stats_table tr:nth-child(even) {
-	background: #DDDDDD;
-	border-bottom: 1px solid #CCCCCC;
 }

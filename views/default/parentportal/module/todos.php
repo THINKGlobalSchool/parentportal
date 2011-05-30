@@ -9,6 +9,9 @@
  * @link http://www.thinkglobalschool.com/
  * 
  */
+
+// Use modules' simpleicon view here
+set_input('ajaxmodule_listing_type', 'simpleicon');
 		
 $title = elgg_echo('parentportal:title:childtodos');		
 		
@@ -31,6 +34,10 @@ $options = array(
 	'metadata_name' => 'status',
 	'metadata_value' => TODO_STATUS_PUBLISHED,
 	'order_by_metadata' => array('name' => 'due_date', 'as' => 'int', 'direction' => 'DESC'),
+	'full_view' => FALSE,
+	'pagination' => FALSE,
+	'limit' => 10,
+	'offset' => 0,
 );
 
 // Complete
@@ -47,7 +54,7 @@ $wheres[] = "(EXISTS (
 
 $options['wheres'] = $wheres;
 
-$complete_todos = elgg_get_entities_from_relationship($options);
+$complete_todos = elgg_list_entities_from_relationship($options);
 
 $wheres = array();
 
@@ -66,88 +73,30 @@ $wheres[] = "NOT EXISTS (
 
 $options['wheres'] = $wheres;
 
-$incomplete_todos = elgg_get_entities_from_relationship($options);
+$incomplete_todos = elgg_list_entities_from_relationship($options);
 
+$todo_nav .= elgg_view_menu('parentportal-todo-nav', array(
+	'sort_by' => 'priority',
+	// recycle the menu filter css
+	'class' => 'elgg-menu-hz elgg-menu-filter elgg-menu-filter-default'
+));
 
-//Content for tabs
-if ($complete_todos) {
-	$complete_todos_content = elgg_view('parentportal/todo_simple_listing', array('todos' => $complete_todos, 'count' => 10)) . "<br /><span class='pp_see_all'><a href='{$vars['url']}pg/todo/{$vars['entity']->username}?status=complete'>View all complete</a></span>";
-} else {
-	$complete_todos_content = "<center>No " . elgg_echo('parentportal:label:todo:complete') . "</center>";
-}
-
-if ($incomplete_todos) {
-	$incomplete_todos_content = elgg_view('parentportal/todo_simple_listing', array('todos' => $incomplete_todos, 'count' => 10)) . "<br /><span class='pp_see_all'><a href='{$vars['url']}pg/todo/{$vars['entity']->username}?status=incomplete'>View all incomplete</a></span>";
-} else {
-	$incomplete_todos_content = "<center>No " . elgg_echo('parentportal:label:todo:incomplete') . "</center>";
-}
-
-// Build up tab array with id's, labels, and content	
-$tabs = array(
-			array(
-				'id' => 'tab_incomplete', 
-				'label' => elgg_echo('parentportal:label:todo:incomplete'), 
-				'content' => $incomplete_todos_content
-			),
-			array(
-				'id' => 'tab_complete', 
-				'label' => elgg_echo('parentportal:label:todo:complete'), 
-				'content' => $complete_todos_content
-			 )
-		);
- 		
-// Set default tab	  
-foreach ($tabs as $tab) {
-	if ($vars['tab'] == $tab['id'])
-		$selected_tab = $vars['tab'];
-}
-if (!$selected_tab) {
-	$selected_tab = 'tab_incomplete';
-}
-	
-
-// Build tab nav and content
-for ($i = 0; $i < count($tabs); $i++) {
-	// Tab Nav
-	$selected = ($selected_tab == $tabs[$i]['id']) ? "selected" : ""; 
-	$tab_items .= "<li id='{$tabs[$i]['id']}' class='$selected edt_tab_nav'><a href=\"javascript:ppChildTodoSwitchTab('{$tabs[$i]['id']}')\">{$tabs[$i]['label']}</a></li>";
-	// Tab Content
-	$tabcontent .= "<div class='child_todo_listing' id='{$tabs[$i]['id']}'>{$tabs[$i]['content']}</div>";
-}
-
-$content = <<<EOT
-	$entities
-	<div id='child_todo'>
-		<h3 class="pp">$title</h3>
-		<div class="elgg_horizontal_tabbed_nav margin_top">
-			<ul>
-				$tab_items
-			</ul>
-		</div>
-		<br />
-		$tabcontent
+$body = <<<HTML
+	$todo_nav
+	<div class='parentportal-todos-content' id='parentportal-todos-incomplete'>
+		$incomplete_todos
+		<span class='parentportal-view-all-link'><a href="todo/assigned/{$vars['entity']->username}?status=incomplete">View all incomplete</a></span>
 	</div>
-EOT;
+	<div class='parentportal-todos-content' id='parentportal-todos-complete'>
+		$complete_todos
+		<span class='parentportal-view-all-link'><a href="todo/assigned/{$vars['entity']->username}?status=complete">View all complete</a></span>
+	</div>
+HTML;
 
-$script = <<<EOT
-<script type="text/javascript">
+$options = array(
+	'id' => 'parentportal-module-child-todos',
+	'class' => 'parentportal-module',
+);
 
-$(document).ready(function() {
-	$(".child_todo_listing").hide();
-	$("div#$selected_tab").show();
-});
+echo elgg_view_module('featured', $title, $body, $options);
 
-function ppChildTodoSwitchTab(tab_id)
-{
-	var nav_name = "li#" + tab_id;
-	var tab_name = "div#" + tab_id;
-
-	$(".child_todo_listing").hide();
-	$(tab_name).show();
-	$(".edt_tab_nav").removeClass("selected");
-	$(nav_name).addClass("selected");
-}
-</script>
-EOT;
-
-echo $script . $content;
