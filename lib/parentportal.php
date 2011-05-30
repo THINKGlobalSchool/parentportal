@@ -16,7 +16,7 @@
  * Get parent portal index content
  */
 function parentportal_get_page_content_index($parent) {
-
+	
 	$url = elgg_get_site_url();
 	$header .= "<span style='float: right; display: block;'><a href='{$url}parentportal/settings'>Edit your settings</a></span>";
 	$header .= elgg_view_title(elgg_echo('parentportal:title:header'));
@@ -46,16 +46,31 @@ function parentportal_get_page_content_index($parent) {
 	if ($tab == 'parent') {
 		
 		$col_left .= elgg_view('modules/ajaxmodule', array(
-			'title' => 'Welcome Documents',
+			'title' => elgg_echo('Student Services Info'),
 			'container_guid' => elgg_get_plugin_setting('parentgroup','parentportal'),
-			'tag' => 'welcome',
-			'subtypes' => array('file'),
-			'limit' => 5,
+			'tag' => 'studentservices',
+			'subtypes' => array('blog', 'bookmarks', 'file'),
+			'limit' => 4,
+			'listing_type' => 'simpleicon',
+			'restrict_tag' => TRUE,
 			'module_type' => 'featured',
-			'module_id' => 'parentportal-module-welcome-documents',
+			'module_id' => 'parentportal-module-parent-announcements',
 			'module_class' => 'parentportal-module',
 		));
-		
+	
+	
+		$col_left .= elgg_view('modules/ajaxmodule', array(
+			'title' => elgg_echo('weXplore Info'),
+			'container_guid' => elgg_get_plugin_setting('parentgroup','parentportal'),
+			'tag' => 'wexplore',
+			'subtypes' => array('blog', 'bookmarks', 'file'),
+			'limit' => 4,
+			'listing_type' => 'simpleicon',
+			'restrict_tag' => TRUE,
+			'module_type' => 'featured',
+			'module_id' => 'parentportal-module-parent-announcements',
+			'module_class' => 'parentportal-module',
+		));
 		
 		$col_right .= elgg_view('modules/ajaxmodule', array(
 			'title' => elgg_echo('parentportal:title:parentinformation'),
@@ -68,6 +83,7 @@ function parentportal_get_page_content_index($parent) {
 			'module_id' => 'parentportal-module-parent-announcements',
 			'module_class' => 'parentportal-module',
 	 	));
+	
 	
 		$col_right .= elgg_view('parentportal/module/questions');
 		
