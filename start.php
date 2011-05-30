@@ -38,6 +38,9 @@ function parentportal_init() {
 	
 	// Extend Admin Menu 
 	elgg_register_plugin_hook_handler('register', 'menu:user_hover', 'parentportal_user_hover_menu_setup');
+	
+	// Handler to prepare child/parent menu
+	elgg_register_plugin_hook_handler('register', 'menu:parentportal-nav', 'parentportal_nav_menu_setup');
 
 	// Actions	
 	$action_base = elgg_get_plugins_path() . 'parentportal/actions/parentportal';
@@ -174,6 +177,46 @@ function parentportal_site_menu_setup($hook, $type, $return, $params) {
 }
 
 /**
+ * Prepare the parentportal nav menu
+ */
+function parentportal_nav_menu_setup($hook, $type, $return, $params) {	
+	if (elgg_in_context('parentportal')) {	
+		
+		$tab = get_input('tab', 'parent');
+		
+		if ($tab != 'parent' || $tab != 'student') {
+			$tab = 'parent';
+		}
+		
+		$children = get_input('children', FALSE);
+	
+		if ($children) {
+			$options = array(
+				'name' => 'student_tab',
+				'text' => elgg_echo('parentportal:title:childinfo'),
+				'href' => '?tab=student',
+				'selected' => $tab == 'student',
+				'priority' => 1,
+			);
+			
+			$return[] = ElggMenuItem::factory($options);
+		}
+	
+			
+	 	$options = array(
+			'name' => 'parent_tab',
+			'text' => elgg_echo('parentportal:title:parentinfo'),
+			'href' => '?tab=parent',
+			'selected' => $tab == 'parent',
+			'priority' => 0,
+		);
+	
+		$return[] = ElggMenuItem::factory($options);
+	}
+	return $return;
+}
+
+/**
  * Extend the user hover menu
  */
 function parentportal_user_hover_menu_setup($hook, $type, $return, $params) {
@@ -187,6 +230,7 @@ function parentportal_user_hover_menu_setup($hook, $type, $return, $params) {
 	
 	return $return;
 }
+
 
 
 /**

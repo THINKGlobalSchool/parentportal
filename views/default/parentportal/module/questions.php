@@ -10,7 +10,7 @@
  * 
  */
 
-$title = "<a class='elgg-toggler' href='#parentportal-question-form'>" . elgg_echo('parentportal:title:parentquestions') . "</a>";
+$title = elgg_echo('parentportal:title:parentquestions');
 
 $questions = elgg_echo('parentportal:label:havequestions');
 
@@ -34,4 +34,4 @@ $options = array(
 	'class' => 'parentportal-module',
 );
 
-echo elgg_view_module('info', $title, $body, $options);
+echo elgg_view_module('featured', $title, $body, $options);

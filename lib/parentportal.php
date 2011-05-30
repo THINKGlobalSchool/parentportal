@@ -23,76 +23,104 @@ function parentportal_get_page_content_index($parent) {
 	
 	$children = parentportal_get_parents_children($parent->getGUID());
 	
+	// Which tab are we looking at, default parent
+	$tab = get_input('tab', 'parent');
+	
+	if ($tab != 'parent' || $tab != 'student') {
+		$tab = 'parent';
+	}
+	
+	// If we're on the student tab without children, that's a no-no
+	if ($tab == 'student' && !$children) {
+		$tab = 'parent';
+		set_input('tab', 'parent');
+	}
+	
 	// Left column view extender
-	$col_left .= elgg_view('parentportal/extend_left');
+	$col_left .= elgg_view('parentportal/extend_left', array('tab' => $tab));
 	
 	// Right column view extender
-	$col_right .= elgg_view('parentportal/extend_right');
+	$col_right .= elgg_view('parentportal/extend_right', array('tab' => $tab));
+
+	// Parent tab content
+	if ($tab == 'parent') {
+		
+		$col_left .= elgg_view('modules/ajaxmodule', array(
+			'title' => 'Welcome Documents',
+			'container_guid' => elgg_get_plugin_setting('parentgroup','parentportal'),
+			'tag' => 'welcome',
+			'subtypes' => array('file'),
+			'limit' => 5,
+			'module_type' => 'featured',
+			'module_id' => 'parentportal-module-welcome-documents',
+			'module_class' => 'parentportal-module',
+		));
+		
+		
+		$col_right .= elgg_view('modules/ajaxmodule', array(
+			'title' => elgg_echo('parentportal:title:parentinformation'),
+			'container_guid' => elgg_get_plugin_setting('parentgroup','parentportal'),
+			'tag' => elgg_get_plugin_setting('parenttag', 'parentportal'),
+			'subtypes' => array('blog', 'thewire'),
+			'listing_type' => 'simple',
+			'limit' => 3,
+			'module_type' => 'featured',
+			'module_id' => 'parentportal-module-parent-announcements',
+			'module_class' => 'parentportal-module',
+	 	));
 	
-	// Right content
-	$col_right .= elgg_view('parentportal/module/questions');
-	
-	$col_right .= elgg_view('modules/ajaxmodule', array(
-		'title' => 'Welcome Documents',
-		'container_guid' => elgg_get_plugin_setting('parentgroup','parentportal'),
-		'tag' => 'welcome',
-		'subtypes' => array('file'),
-		'limit' => 5,
-		'module_type' => 'featured',
-		'module_id' => 'parentportal-module-welcome-documents',
-		'module_class' => 'parentportal-module',
-	));
-	
-	$col_right .= elgg_view('modules/ajaxmodule', array(
-		'title' => elgg_echo('parentportal:title:parentinformation'),
-		'container_guid' => elgg_get_plugin_setting('parentgroup','parentportal'),
-		'tag' => elgg_get_plugin_setting('parenttag', 'parentportal'),
-		'subtypes' => array('blog', 'thewire'),
-		'listing_type' => 'simple',
-		'limit' => 3,
-		'module_type' => 'featured',
-		'module_id' => 'parentportal-module-parent-announcements',
-		'module_class' => 'parentportal-module',
- 	));
+		$col_right .= elgg_view('parentportal/module/questions');
 		
-	if ($children) {
-		
-		if (count($children) > 1) {
-			if (get_input('child_select')) {
-				$_SESSION['child_select'] = get_input('child_select');
-			}
-			$child = get_user($_SESSION['child_select']);
-			
-			$form_vars = array(
-				'action' => elgg_get_site_url() . 'parentportal',
-				'id' => 'parentportal-select-child-form'
-			);
-			
-			$header .= elgg_view_form('parentportal/childselect', $form_vars, array('children' => $children));	
-		} 
-		
-		if (!$child) {
-			$child = $children[0];
-		}
-		
-		// Left content
-		$col_left .= elgg_view('parentportal/module/profile', array('entity' => $child, 'section' => 'details'));
-		$col_left .= elgg_View('parentportal/module/groups', array('entity' => $child));
-		$col_left .= elgg_view('parentportal/module/activity', array('entity' => $child));
-		
-		// Check if todos is enabled
-		if (elgg_is_active_plugin('todo')) {
-			$col_right .= elgg_view('parentportal/module/todos', array('entity' => $child));
-		}
-		
-		//$col_left .= elgg_view('parentportal/parent_infocenter', array('entity' => $child, 'section' => 'details'));
-		
-	} else {
-		$header .= '<br />' . elgg_echo('parentportal:label:nochildren');
-		$col_left = $col_right;
-		$col_right = null;
 	}
 
+	if ($children) {
+		// Set input for menu
+		set_input('children', true);
+		
+		if ($tab == 'student') {
+			if (count($children) > 1) {
+				if (get_input('child_select')) {
+					$_SESSION['child_select'] = get_input('child_select');
+				}
+				$child = get_user($_SESSION['child_select']);
+			
+				$form_vars = array(
+					'action' => elgg_get_site_url() . 'parentportal?tab=student',
+					'id' => 'parentportal-select-child-form'
+				);
+			
+				$child_select = elgg_view_form('parentportal/childselect', $form_vars, array('children' => $children));	
+			} 
+		
+			if (!$child) {
+				$child = $children[0];
+			}
+		
+			// Left content
+			$col_left .= elgg_view('parentportal/module/profile', array('entity' => $child, 'section' => 'details'));
+			$col_left .= elgg_view('parentportal/module/activity', array('entity' => $child));
+		
+			// Right content 
+			$col_right .= elgg_View('parentportal/module/groups', array('entity' => $child));
+		
+			// Check if todos is enabled
+			if (elgg_is_active_plugin('todo')) {
+				$col_right .= elgg_view('parentportal/module/todos', array('entity' => $child));
+			}
+		
+		}
+	} 
+	
+	// Get the parentportal nav
+	$header .= "<br />" . elgg_view_menu('parentportal-nav', array(
+		'sort_by' => 'priority',
+		// recycle the menu filter css
+		'class' => 'elgg-menu-hz elgg-menu-filter elgg-menu-filter-default'
+	));
+	
+	// Show selector
+	$header .= "<br />" . $child_select;
+	
 	$params = array(
 			'header' => $header,
 			'left_column' => $col_left,

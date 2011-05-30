@@ -52,6 +52,7 @@ $subject_input = elgg_view('input/text', array(
 
 $body_label = elgg_echo('parentportal:label:questionbody');
 $body_input = elgg_view('input/plaintext', array(
+	'style' => 'height: 100px;',
 	'name' => 'question_body',
 	'value' => $body ? $body : $body_label,
 	'js' => "onblur=\"if (this.value == '') {this.value = '$body_label';}\" onfocus=\"if (this.value == '$body_label') {this.value = '';}\""
@@ -69,7 +70,7 @@ $form_body = <<<HTML
 			<td style='vertical-align: middle;'>$send_button</td>
 		</tr>
 		<tr>
-			<td colspan='2'>$subject_input</td>
+			<td colspan='2'><br />$subject_input</td>
 		</tr>
 		<tr>
 			<td colspan='2'>$body_input</td>

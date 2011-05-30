@@ -82,20 +82,6 @@ ul.parentportal-child-list li:first-child {
 	margin-bottom: 10px;
 }
 
-#parentportal-module-parent-questions #question-link:hover, #question-link:selected {
-	text-decoration: underline;
-	color: #555555;
-}
-
-#parentportal-module-parent-questions #question-link h3 {
-	text-decoration: none;
-	color: #9D1520
-}
-
-#parentportal-question-form {
-	display: none;
-}
-
 #parentportal-question-form input textarea table {
 	width: 98% !important;
 }
