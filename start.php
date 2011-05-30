@@ -184,7 +184,7 @@ function parentportal_nav_menu_setup($hook, $type, $return, $params) {
 		
 		$tab = get_input('tab', 'parent');
 		
-		if ($tab != 'parent' || $tab != 'student') {
+		if (!in_array($tab, array('student', 'parent'))) {
 			$tab = 'parent';
 		}
 		

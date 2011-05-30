@@ -26,7 +26,7 @@ function parentportal_get_page_content_index($parent) {
 	// Which tab are we looking at, default parent
 	$tab = get_input('tab', 'parent');
 	
-	if ($tab != 'parent' || $tab != 'student') {
+	if (!in_array($tab, array('student', 'parent'))) {
 		$tab = 'parent';
 	}
 	
@@ -35,6 +35,8 @@ function parentportal_get_page_content_index($parent) {
 		$tab = 'parent';
 		set_input('tab', 'parent');
 	}
+	
+
 	
 	// Left column view extender
 	$col_left .= elgg_view('parentportal/extend_left', array('tab' => $tab));
