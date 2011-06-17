@@ -154,7 +154,7 @@ function parentportal_site_menu_setup($hook, $type, $return, $params) {
 	
 		
 		// If calendar is enabled, include it
-		if (elgg_is_active_plugin('calendar')) {
+		if (elgg_is_active_plugin('tgscalendar')) {
 			$options = array(
 				'name' => 'calendar',
 				'text' => elgg_echo('tgscalendar:calendars'),
