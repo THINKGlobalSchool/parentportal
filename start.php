@@ -57,6 +57,11 @@ function parentportal_init() {
 	// Page handler
 	elgg_register_page_handler('parentportal','parentportal_page_handler');
 	
+	// Add announcements to parent portal, if enabled
+	if (elgg_is_active_plugin('announcements')) {
+		elgg_extend_view('parentportal/extend_right', 'parentportal/announcements');
+	}
+	
 	// Check if parent has children, if so add a menu item (for admin-type users)
 	$children = parentportal_get_parents_children(elgg_get_logged_in_user_guid());
 	
