@@ -82,7 +82,7 @@ function parentportal_get_page_content_index($parent) {
 			'title' => elgg_echo('parentportal:title:parentannouncements'),
 			'container_guid' => get_plugin_setting('parentgroup','parentportal'),
 			'tag' => get_plugin_setting('parenttag', 'parentportal'),
-			'subtypes' => array('blog', 'thewire'),
+			'subtypes' => array('blog'),
 			'listing_type' => 'simple',
 			'limit' => 3,
 			'header_class' => 'pp',
