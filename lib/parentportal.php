@@ -15,7 +15,11 @@
 function parentportal_get_page_content_index($parent) {	
 	global $CONFIG;
 	
-	$header .= "<span style='float: right; display: block;'><a href='{$CONFIG->wwwroot}pg/parentportal/settings'>Edit your settings</a></span>";
+	$header .= "<span style='float: right; display: block;'>";
+	$header .= "<a href='{$CONFIG->wwwroot}pg/profile/" . get_loggedin_user()->username . "'>Your Profile</a>";
+	$header .= " | <a href='{$CONFIG->wwwroot}pg/friends/" . get_loggedin_user()->username ." '>Friends</a>";
+	$header .= " | <a href='{$CONFIG->wwwroot}pg/parentportal/settings'>Edit your settings</a>";
+	$header .= "</span>";
 	$header .= elgg_view_title(elgg_echo('parentportal:title:header'));
 	
 	// Definitely need a better way of building the content..
