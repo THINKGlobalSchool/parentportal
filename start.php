@@ -44,6 +44,9 @@ function parentportal_init() {
 	
 	// Tabbed nav for todo module
 	elgg_register_plugin_hook_handler('register', 'menu:parentportal-todo-nav', 'parentportal_todo_nav_menu_setup');
+	
+	// Add search to the pp header
+	elgg_extend_view('page/elements/parentportal_header', 'search/search_box');
 
 	// Actions	
 	$action_base = elgg_get_plugins_path() . 'parentportal/actions/parentportal';
@@ -132,19 +135,13 @@ function parentportal_page_handler($page) {
  * Tweak the site menu
  */
 function parentportal_site_menu_setup($hook, $type, $return, $params) {	
-	if (elgg_in_context('parentportal')) {		
-		// Wipe out exising menu
-		$return = array();
-				
-		// If user doesn't have the flag set, add a link back to regular homepage
-		if (!parentportal_is_user_parent(elgg_get_logged_in_user_entity())) {
-			$options = array(
-				'name' => 'spot_home',
-				'text' => elgg_echo('parentportal:menu:spothome'),
-				'href' =>  elgg_get_site_url(),
-				'priority' => 1,
-			);
-			$return['default'][] = ElggMenuItem::factory($options);
+	if (elgg_in_context('parentportal')) {					
+		
+		// Remove home link from tgstheme
+		foreach($return['default'] as $idx => $item) {
+			if ($item->getName() == 'home') {
+				unset($return['default'][$idx]);
+			}
 		}
 		
 		// Add parent portal home
@@ -152,33 +149,26 @@ function parentportal_site_menu_setup($hook, $type, $return, $params) {
 			'name' => 'parentportal_home',
 			'text' => elgg_echo('parentportal:menu:home'),
 			'href' =>  elgg_get_site_url() . 'parentportal',
-			'priority' => 2,
-			//'context' => 'parentportal'
+			'priority' => 999,
+			'context' => 'parentportal',
 		);
-		$return['default'][] = ElggMenuItem::factory($options);
-	
 		
-		// If calendar is enabled, include it
-		if (elgg_is_active_plugin('tgscalendar')) {
-			$options = array(
-				'name' => 'calendar',
-				'text' => elgg_echo('tgscalendar:calendars'),
-				'href' =>  elgg_get_site_url() . 'calendar',
-				'priority' => 3,
-				//'context' => 'calendar'
-			);
-			$return['default'][] = ElggMenuItem::factory($options);
+		// Need to manually set selected here, not sure why, something is weird
+		if (elgg_http_url_is_identical(full_url(), $options['href'])) {
+			$options['selected'] = TRUE;
 		}
 		
-		// Add logout button
+		array_unshift($return['default'], ElggMenuItem::factory($options));
+				
+		/*Add logout button
 		$options = array(
 			'name' => 'logout',
 			'text' => elgg_echo('parentportal:menu:logout'),
 			'href' =>  elgg_add_action_tokens_to_url(elgg_get_site_url() . 'action/logout'),
-			'priority' => 999,
+			'priority' => 0,
 		);
 		$return['default'][] = ElggMenuItem::factory($options);
-		
+		*/
 	}
 	
 	return $return;

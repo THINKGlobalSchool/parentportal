@@ -77,6 +77,9 @@ $english = array(
 	'parentportal:label:todo:incomplete' => 'Incomplete To Do\'s',
 	'parentportal:label:parenttag' => 'Parent Tag (for including blogs/wire posts in announcements)',
 	
+	'parentportal:label:editsettings' => 'Edit your settings',
+	'parentportal:label:editprofile' => 'Edit profile',
+	
 	// Stat labels
 	'parentportal:stats:blog' => 'Blog Posts',
 	'parentportal:stats:photo' => 'Photos',

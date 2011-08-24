@@ -17,8 +17,16 @@
  */
 function parentportal_get_page_content_index($parent) {
 	
+	
 	$url = elgg_get_site_url();
-	$header .= "<span style='float: right; display: block;'><a href='{$url}parentportal/settings'>Edit your settings</a></span>";
+	$header .= "<span style='float: right; display: block; color: #888;'>";
+	$header .= "<a href='{$url}parentportal/settings'>" . elgg_echo('parentportal:label:editsettings') . "</a> | ";
+	$header .= "<a href='{$url}profile/{$parent->username}/edit'>" . elgg_echo('parentportal:label:editprofile') . "</a> | ";
+	
+	$logout_url = elgg_add_action_tokens_to_url(elgg_get_site_url() . 'action/logout');
+	
+	$header .= "<a href='{$logout_url}'>" . elgg_echo('parentportal:menu:logout') . "</a>";
+	$header .= "</span>";
 	$header .= elgg_view_title(elgg_echo('parentportal:title:header'));
 	
 	$children = parentportal_get_parents_children($parent->getGUID());
