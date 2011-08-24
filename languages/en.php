@@ -40,6 +40,7 @@ $english = array(
 	'parentportal:error:body' => 'Required field \'message\' is missing',
 	'parentportal:error:questionsent' => "There was an error submitting your question",
 	'parentportal:error:invalidparentgroup' => 'Parent group is invalid or not configured',
+	'parentportal:error:nopermissions' => 'You do not have permission to view this page',
 	
 	// Titles/Label
 	'parentportal:title:manageparent' => "Create/Manage Parent Settings",

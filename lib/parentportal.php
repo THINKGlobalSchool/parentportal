@@ -291,7 +291,7 @@ function parentportal_gatekeeper() {
 	}
 	
 	if (!$allowed) {
-	    //register_error(elgg_echo('parentportal')); 
+	    register_error(elgg_echo('parentportal:error:nopermissions')); 
 	    forward('parentportal');
 	}
    }
