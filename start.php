@@ -136,41 +136,15 @@ function parentportal_page_handler($page) {
  */
 function parentportal_site_menu_setup($hook, $type, $return, $params) {	
 	if (elgg_in_context('parentportal')) {					
-		
-		// Remove home link from tgstheme
+		// Set home link as selected if on parentportal
 		foreach($return['default'] as $idx => $item) {
 			if ($item->getName() == 'home') {
-				unset($return['default'][$idx]);
+				$href = elgg_get_site_url() . 'parentportal';
+				elgg_http_url_is_identical(full_url(), $options['href']);
+				$item->setSelected(true);
 			}
 		}
-		
-		// Add parent portal home
-		$options = array(
-			'name' => 'parentportal_home',
-			'text' => elgg_echo('parentportal:menu:home'),
-			'href' =>  elgg_get_site_url() . 'parentportal',
-			'priority' => 999,
-			'context' => 'parentportal',
-		);
-		
-		// Need to manually set selected here, not sure why, something is weird
-		if (elgg_http_url_is_identical(full_url(), $options['href'])) {
-			$options['selected'] = TRUE;
-		}
-		
-		array_unshift($return['default'], ElggMenuItem::factory($options));
-				
-		/*Add logout button
-		$options = array(
-			'name' => 'logout',
-			'text' => elgg_echo('parentportal:menu:logout'),
-			'href' =>  elgg_add_action_tokens_to_url(elgg_get_site_url() . 'action/logout'),
-			'priority' => 0,
-		);
-		$return['default'][] = ElggMenuItem::factory($options);
-		*/
 	}
-	
 	return $return;
 }
 
