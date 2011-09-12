@@ -284,7 +284,8 @@ function parentportal_gatekeeper() {
 	$allowed = $access_toggle ? false : true;
 	foreach($url_list as $u) {
 		$u = trim($u);
-		if(strcmp($url, elgg_get_site_url() . $u) == 0) {
+		//if(strcmp($url, elgg_get_site_url() . $u) == 0) {
+		if (strpos($url, $u)) {
 			$allowed = $access_toggle ? true : false;
 			break;
 		}
