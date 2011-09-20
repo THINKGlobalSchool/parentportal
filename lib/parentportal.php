@@ -52,7 +52,7 @@ function parentportal_get_page_content_index($parent) {
 
 	// Parent tab content
 	if ($tab == 'parent') {
-		
+
 		$col_left .= elgg_view('modules/ajaxmodule', array(
 			'title' => elgg_echo('Student Services Info'),
 			'container_guid' => elgg_get_plugin_setting('parentgroup','parentportal'),
@@ -65,8 +65,8 @@ function parentportal_get_page_content_index($parent) {
 			'module_id' => 'parentportal-module-parent-announcements',
 			'module_class' => 'parentportal-module',
 		));
-	
-	
+
+
 		$col_left .= elgg_view('modules/ajaxmodule', array(
 			'title' => elgg_echo('weXplore Info'),
 			'container_guid' => elgg_get_plugin_setting('parentgroup','parentportal'),
@@ -79,22 +79,36 @@ function parentportal_get_page_content_index($parent) {
 			'module_id' => 'parentportal-module-parent-announcements',
 			'module_class' => 'parentportal-module',
 		));
-		
+
 		$col_right .= elgg_view('modules/ajaxmodule', array(
 			'title' => elgg_echo('parentportal:title:parentinformation'),
 			'container_guid' => elgg_get_plugin_setting('parentgroup','parentportal'),
-			'tag' => elgg_get_plugin_setting('parenttag', 'parentportal'),
+			//'tag' => elgg_get_plugin_setting('parenttag', 'parentportal'),
+			'tag' => 'news',
 			'subtypes' => array('blog', 'thewire'),
 			'listing_type' => 'simple',
+			'restrict_tag' => TRUE,
 			'limit' => 3,
 			'module_type' => 'featured',
 			'module_id' => 'parentportal-module-parent-announcements',
 			'module_class' => 'parentportal-module',
 	 	));
-	
-	
+
+		$col_right .= elgg_view('modules/ajaxmodule', array(
+			'title' => elgg_echo('Res Life'),
+			'container_guid' => elgg_get_plugin_setting('parentgroup','parentportal'),
+			'tag' => 'reslife',
+			'subtypes' => array('blog', 'thewire'),
+			'listing_type' => 'simple',
+			'restrict_tag' => TRUE,
+			'limit' => 3,
+			'module_type' => 'featured',
+			'module_id' => 'parentportal-module-parent-announcements',
+			'module_class' => 'parentportal-module',
+	 	));
+
+
 		$col_right .= elgg_view('parentportal/module/questions');
-		
 	}
 
 	if ($children) {
