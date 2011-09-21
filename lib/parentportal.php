@@ -64,6 +64,7 @@ function parentportal_get_page_content_index($parent) {
 			'module_type' => 'featured',
 			'module_id' => 'parentportal-module-parent-announcements',
 			'module_class' => 'parentportal-module',
+			'hide_empty' => TRUE,
 		));
 
 
@@ -78,6 +79,7 @@ function parentportal_get_page_content_index($parent) {
 			'module_type' => 'featured',
 			'module_id' => 'parentportal-module-parent-announcements',
 			'module_class' => 'parentportal-module',
+			'hide_empty' => TRUE,
 		));
 
 		$col_right .= elgg_view('modules/ajaxmodule', array(
@@ -92,6 +94,7 @@ function parentportal_get_page_content_index($parent) {
 			'module_type' => 'featured',
 			'module_id' => 'parentportal-module-parent-announcements',
 			'module_class' => 'parentportal-module',
+			'hide_empty' => TRUE,
 	 	));
 
 		$col_right .= elgg_view('modules/ajaxmodule', array(
@@ -105,8 +108,8 @@ function parentportal_get_page_content_index($parent) {
 			'module_type' => 'featured',
 			'module_id' => 'parentportal-module-parent-announcements',
 			'module_class' => 'parentportal-module',
+			'hide_empty' => TRUE,
 	 	));
-
 
 		$col_right .= elgg_view('parentportal/module/questions');
 	}
