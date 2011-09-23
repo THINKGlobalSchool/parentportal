@@ -10,22 +10,13 @@
  * 
  */
 
-$title = elgg_echo("parentportal:title:childgroups");
-
-$body = elgg_list_entities_from_relationship_count(array(
+echo elgg_list_entities_from_relationship_count(array(
 	'type' => 'group',
 	'relationship' => 'member',
-	'relationship_guid' => $vars['entity']->getGUID(),
+	'relationship_guid' => $vars['guid'],
 	'inverse_relationship' => false,
 	'full_view' => false,
-	'pagination' => false,
-	'limit' => 0,
-	'offset' => 0,
+	'limit' => get_input('limit', 8),
+	'offset' => get_input('offset', 0),
 ));
 
-$options = array(
-	'id' => 'parentportal-module-child-groups',
-	'class' => 'parentportal-module',
-);
-
-echo elgg_view_module('featured', $title, $body, $options);

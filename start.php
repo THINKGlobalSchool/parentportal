@@ -151,40 +151,38 @@ function parentportal_site_menu_setup($hook, $type, $return, $params) {
 /**
  * Prepare the parentportal nav menu
  */
-function parentportal_nav_menu_setup($hook, $type, $return, $params) {	
-	if (elgg_in_context('parentportal')) {	
-		
-		$tab = get_input('tab', 'parent');
-		
-		if (!in_array($tab, array('student', 'parent'))) {
-			$tab = 'parent';
-		}
-		
-		$children = get_input('children', FALSE);
+function parentportal_nav_menu_setup($hook, $type, $return, $params) {			
+	$tab = get_input('tab', 'parent');
 	
-		if ($children) {
-			$options = array(
-				'name' => 'student_tab',
-				'text' => elgg_echo('parentportal:title:childinfo'),
-				'href' => '?tab=student',
-				'selected' => $tab == 'student',
-				'priority' => 1,
-			);
-			
-			$return[] = ElggMenuItem::factory($options);
-		}
+	if (!in_array($tab, array('student', 'parent'))) {
+		$tab = 'parent';
+	}
 	
-			
-	 	$options = array(
-			'name' => 'parent_tab',
-			'text' => elgg_echo('parentportal:title:parentinfo'),
-			'href' => '?tab=parent',
-			'selected' => $tab == 'parent',
-			'priority' => 0,
+	$children = get_input('children', FALSE);
+
+	if ($children) {
+		$options = array(
+			'name' => 'student_tab',
+			'text' => elgg_echo('parentportal:title:childinfo'),
+			'href' => '?tab=student',
+			'selected' => $tab == 'student',
+			'priority' => 1,
 		);
-	
+		
 		$return[] = ElggMenuItem::factory($options);
 	}
+
+		
+ 	$options = array(
+		'name' => 'parent_tab',
+		'text' => elgg_echo('parentportal:title:parentinfo'),
+		'href' => '?tab=parent',
+		'selected' => $tab == 'parent',
+		'priority' => 0,
+	);
+
+	$return[] = ElggMenuItem::factory($options);
+	
 	return $return;
 }
 
@@ -194,7 +192,7 @@ function parentportal_nav_menu_setup($hook, $type, $return, $params) {
 function parentportal_todo_nav_menu_setup($hook, $type, $return, $params) {	
 	$tab = get_input('show_todo', 'incomplete');
 	
-	if (!in_array($tab, array('incomplete', 'complete'))) {
+	if (!in_array($tab, array('incomplete', 'complete', 'past_due'))) {
 		$tab = 'incomplete';
 	}
 	
@@ -203,6 +201,16 @@ function parentportal_todo_nav_menu_setup($hook, $type, $return, $params) {
 		'text' => "<a class='parentportal-todos-nav' href='#parentportal-todos-incomplete'>" . elgg_echo('parentportal:label:todo:incomplete') . "</a>",
 		'href' => FALSE,
 		'selected' => $tab == 'incomplete',
+		'priority' => 0,
+	);
+	
+	$return[] = ElggMenuItem::factory($options);
+	
+	$options = array(
+		'name' => 'past_due_tab',
+		'text' => "<a class='parentportal-todos-nav' href='#parentportal-todos-pastdue'>" . elgg_echo('parentportal:label:todo:pastdue') . "</a>",
+		'href' => FALSE,
+		'selected' => $tab == 'past_due',
 		'priority' => 0,
 	);
 	

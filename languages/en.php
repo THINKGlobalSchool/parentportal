@@ -76,6 +76,7 @@ $english = array(
 	'parentportal:label:selectchild' => 'Select Child: ',
 	'parentportal:label:todo:complete' => 'Complete To Do\'s',
 	'parentportal:label:todo:incomplete' => 'Incomplete To Do\'s',
+	'parentportal:label:todo:pastdue' => 'Past Due To Do\'s',
 	'parentportal:label:parenttag' => 'Parent Tag (for including blogs/wire posts in announcements)',
 	
 	'parentportal:label:editsettings' => 'Edit your settings',

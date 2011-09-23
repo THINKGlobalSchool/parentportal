@@ -36,7 +36,7 @@ $options = array(
 	'order_by_metadata' => array('name' => 'due_date', 'as' => 'int', 'direction' => 'DESC'),
 	'full_view' => FALSE,
 	'pagination' => FALSE,
-	'limit' => 10,
+	'limit' => 15,
 	'offset' => 0,
 );
 
@@ -75,6 +75,48 @@ $options['wheres'] = $wheres;
 
 $incomplete_todos = elgg_list_entities_from_relationship($options);
 
+$options = array(
+	'type' => 'object',
+	'subtype' => 'todo',
+	'relationship' => TODO_ASSIGNEE_RELATIONSHIP, 
+	'relationship_guid' => $user_guid, 
+	'inverse_relationship' => FALSE,
+	'metadata_name_value_pairs' => array(
+		array(
+			'name' => 'status',
+			'value' => TODO_STATUS_PUBLISHED, 
+			'operand' => '='),
+		array(
+			'name' => 'due_date',
+			'value' => time(),
+			'operand' => '<',
+		)),
+	'metadata_name_value_pairs_operator' => 'AND',
+	'order_by_metadata' => array('name' => 'due_date', 'as' => 'int', 'direction' => 'ASC'),
+	'full_view' => FALSE,
+	'pagination' => FALSE,
+	'limit' => get_input('limit',10),
+	'offset' => get_input('offset', 0),
+);
+
+// Incomplete
+$wheres[] = "NOT EXISTS (
+		SELECT 1 FROM {$CONFIG->dbprefix}metadata md
+		WHERE md.entity_guid = e.guid
+			AND md.name_id = $test_id
+			AND md.value_id = $one_id)";
+
+$wheres[] = "NOT EXISTS (
+		SELECT 1 FROM {$CONFIG->dbprefix}entity_relationships r2 
+		WHERE r2.guid_one = '$user_guid'
+		AND r2.relationship = '$relationship'
+		AND r2.guid_two = e.guid)";
+
+$options['wheres'] = $wheres;
+
+$past_due_todos = elgg_list_entities_from_relationship($options);
+
+
 $todo_nav .= elgg_view_menu('parentportal-todo-nav', array(
 	'sort_by' => 'priority',
 	// recycle the menu filter css
@@ -85,6 +127,10 @@ $body = <<<HTML
 	$todo_nav
 	<div class='parentportal-todos-content' id='parentportal-todos-incomplete'>
 		$incomplete_todos
+		<span class='parentportal-view-all-link'><a href="todo/assigned/{$vars['entity']->username}?status=incomplete">View all incomplete</a></span>
+	</div>
+	<div class='parentportal-todos-content' id='parentportal-todos-pastdue'>
+		$past_due_todos
 		<span class='parentportal-view-all-link'><a href="todo/assigned/{$vars['entity']->username}?status=incomplete">View all incomplete</a></span>
 	</div>
 	<div class='parentportal-todos-content' id='parentportal-todos-complete'>

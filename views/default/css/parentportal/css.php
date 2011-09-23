@@ -94,7 +94,7 @@ ul.parentportal-child-list li:first-child {
 }
 
 /** Todo Module **/
-#parentportal-todos-complete {
+#parentportal-todos-complete, #parentportal-todos-pastdue {
 	display: none;
 }
 

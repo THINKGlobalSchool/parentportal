@@ -10,18 +10,10 @@
  * 
  */
 
-$title = elgg_echo("parentportal:title:childactivity");
-
 $params = array(
-	'subject_guid' => $vars['entity']->getGUID(),
+	'subject_guid' => $vars['guid'],
 	'limit' => 5,
 );
 
-$body = elgg_list_river($params);
+echo elgg_list_river($params);
 
-$options = array(
-	'id' => 'parentportal-module-child-activity',
-	'class' => 'parentportal-module',
-);
-
-echo elgg_view_module('featured', $title, $body, $options);

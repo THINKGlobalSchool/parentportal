@@ -139,16 +139,42 @@ function parentportal_get_page_content_index($parent) {
 		
 			// Left content
 			$col_left .= elgg_view('parentportal/module/profile', array('entity' => $child, 'section' => 'details'));
-			$col_left .= elgg_view('parentportal/module/activity', array('entity' => $child));
-		
-			// Right content 
-			$col_right .= elgg_View('parentportal/module/groups', array('entity' => $child));
+			
+			// Activity Module					
+			$activity_module .= elgg_view('modules/genericmodule', array(
+				'view' => 'parentportal/module/activity',
+				'module_id' => 'pp-activity-module',
+				'module_class' => 'pp-activity-module',
+				'view_vars' => array('guid' => $child->guid), 
+			));
+
+			$col_left .= elgg_view_module('featured', elgg_echo("parentportal:title:childactivity"), $activity_module, array(
+				'id' => 'parentportal-module-child-activity',
+				'class' => 'parentportal-module',
+			));
+			
 		
 			// Check if todos is enabled
 			if (elgg_is_active_plugin('todo')) {
 				$col_right .= elgg_view('parentportal/module/todos', array('entity' => $child));
 			}
 		
+			// Right content 
+			// Groups Module					
+			$groups_module .= elgg_view('modules/genericmodule', array(
+				'view' => 'parentportal/module/groups',
+				'module_id' => 'pp-groups-module',
+				'module_class' => 'pp-groups-module',
+				'view_vars' => array('guid' => $child->guid), 
+			));
+			
+
+			$col_right .= elgg_view_module('featured', elgg_echo("parentportal:title:childgroups"), $groups_module, array(
+				'id' => 'parentportal-module-child-groups',
+				'class' => 'parentportal-module',
+			));
+			
+			
 		}
 	} 
 	
