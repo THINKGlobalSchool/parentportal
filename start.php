@@ -225,10 +225,11 @@ function parentportal_todo_nav_menu_setup($hook, $type, $return, $params) {
  * Extend the user hover menu
  */
 function parentportal_user_hover_menu_setup($hook, $type, $return, $params) {
+
 	$options = array(
 		'name' => 'manage_parent',
 		'text' => elgg_echo('parentportal:menu:admin:manageparent'),
-		'href' => elgg_get_site_url() . 'parentportal/manageparent/' . elgg_get_page_owner_entity()->username,
+		'href' => elgg_get_site_url() . 'parentportal/manageparent/' . $params['entity']->username,
 		'section' => 'admin',
 	);
 	$return[] = ElggMenuItem::factory($options);
