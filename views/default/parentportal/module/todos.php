@@ -127,15 +127,15 @@ $body = <<<HTML
 	$todo_nav
 	<div class='parentportal-todos-content' id='parentportal-todos-incomplete'>
 		$incomplete_todos
-		<span class='parentportal-view-all-link'><a href="todo/assigned/{$vars['entity']->username}?status=incomplete">View all incomplete</a></span>
+		<span class='parentportal-view-all-link'><a href="todo/dashboard/{$vars['entity']->username}?status=incomplete">View all incomplete</a></span>
 	</div>
 	<div class='parentportal-todos-content' id='parentportal-todos-pastdue'>
 		$past_due_todos
-		<span class='parentportal-view-all-link'><a href="todo/assigned/{$vars['entity']->username}?status=incomplete">View all incomplete</a></span>
+		<span class='parentportal-view-all-link'><a href="todo/dashboard/{$vars['entity']->username}?status=incomplete">View all incomplete</a></span>
 	</div>
 	<div class='parentportal-todos-content' id='parentportal-todos-complete'>
 		$complete_todos
-		<span class='parentportal-view-all-link'><a href="todo/assigned/{$vars['entity']->username}?status=complete">View all complete</a></span>
+		<span class='parentportal-view-all-link'><a href="todo/dashboard/{$vars['entity']->username}?status=complete">View all complete</a></span>
 	</div>
 HTML;
 
