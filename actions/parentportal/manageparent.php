@@ -34,6 +34,7 @@ if (elgg_instanceof($user, 'user')) {
 	forward(REFERER);
 } 	
 
+
 // Get group
 $group = get_entity(elgg_get_plugin_setting('parentgroup','parentportal'));
 if (!elgg_instanceof($group, 'group')) {
@@ -46,10 +47,13 @@ elgg_set_page_owner_guid($group->guid);
 
 // Enable/Disable parent
 if ($enabled) {
-	// access ignore so user can be added to access collection of invisible group
-	$ia = elgg_set_ignore_access(TRUE);
-	$success &= $group->join($user);
-	elgg_set_ignore_access($ia);
+	// Only add to parent group if not already a member
+	if (!$group->isMember($user)) {
+		// access ignore so user can be added to access collection of invisible group
+		$ia = elgg_set_ignore_access(TRUE);
+		$success &= $group->join($user);
+		elgg_set_ignore_access($ia);
+	}
 	
 	if ($success) {
 		// flush user's access info so the collection is added
@@ -60,8 +64,10 @@ if ($enabled) {
 		remove_entity_relationship($user->guid, 'membership_request', $group->guid);
 	}
 } else {
-	// Remove parent from group
-	$success &= $group->leave($user);
+	// Remove parent from group, if a member
+	if ($group->isMember($user)) {
+		$success &= $group->leave($user);
+	}
 }
 	
 if ($success) {
