@@ -1,6 +1,6 @@
 <?php
 /**
- * Parent Portal Child ToDo list
+ * Parent Portal Child todo content
  * 
  * @package ParentPortal
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
@@ -9,12 +9,14 @@
  * @link http://www.thinkglobalschool.com/
  * 
  */
+// How are we viewing these todos? 
+$view_filter = $vars['view_filter'];
+$user_guid = $vars['guid'];
 
 // Use modules' simpleicon view here
 set_input('ajaxmodule_listing_type', 'simpleicon');
-		
-$title = elgg_echo('parentportal:title:childtodos');		
-		
+
+
 // get the user's todos, will be seperating complete/incomplete
 global $CONFIG;
 
@@ -22,7 +24,7 @@ $test_id = get_metastring_id('manual_complete');
 $one_id = get_metastring_id(1);
 $wheres = array();
 
-$user_guid = $vars['entity']->getGUID();		
+		
 $relationship = COMPLETED_RELATIONSHIP;
 
 $options = array(
@@ -35,114 +37,75 @@ $options = array(
 	'metadata_value' => TODO_STATUS_PUBLISHED,
 	'order_by_metadata' => array('name' => 'due_date', 'as' => 'int', 'direction' => 'DESC'),
 	'full_view' => FALSE,
-	'pagination' => FALSE,
-	'limit' => 15,
-	'offset' => 0,
-);
-
-// Complete
-$wheres[] = "(EXISTS (
-		SELECT 1 FROM {$CONFIG->dbprefix}entity_relationships r2 
-		WHERE r2.guid_one = '$user_guid'
-		AND r2.relationship = '$relationship'
-		AND r2.guid_two = e.guid) OR 
-			EXISTS (
-		SELECT 1 FROM {$CONFIG->dbprefix}metadata md
-		WHERE md.entity_guid = e.guid
-			AND md.name_id = $test_id
-			AND md.value_id = $one_id))";
-
-$options['wheres'] = $wheres;
-
-$complete_todos = elgg_list_entities_from_relationship($options);
-
-$wheres = array();
-
-// Incomplete
-$wheres[] = "NOT EXISTS (
-		SELECT 1 FROM {$CONFIG->dbprefix}metadata md
-		WHERE md.entity_guid = e.guid
-			AND md.name_id = $test_id
-			AND md.value_id = $one_id)";
-
-$wheres[] = "NOT EXISTS (
-		SELECT 1 FROM {$CONFIG->dbprefix}entity_relationships r2 
-		WHERE r2.guid_one = '$user_guid'
-		AND r2.relationship = '$relationship'
-		AND r2.guid_two = e.guid)";
-
-$options['wheres'] = $wheres;
-
-$incomplete_todos = elgg_list_entities_from_relationship($options);
-
-$options = array(
-	'type' => 'object',
-	'subtype' => 'todo',
-	'relationship' => TODO_ASSIGNEE_RELATIONSHIP, 
-	'relationship_guid' => $user_guid, 
-	'inverse_relationship' => FALSE,
-	'metadata_name_value_pairs' => array(
-		array(
-			'name' => 'status',
-			'value' => TODO_STATUS_PUBLISHED, 
-			'operand' => '='),
-		array(
-			'name' => 'due_date',
-			'value' => time(),
-			'operand' => '<',
-		)),
-	'metadata_name_value_pairs_operator' => 'AND',
-	'order_by_metadata' => array('name' => 'due_date', 'as' => 'int', 'direction' => 'ASC'),
-	'full_view' => FALSE,
-	'pagination' => FALSE,
-	'limit' => get_input('limit',10),
+	'pagination' => TRUE,
+	'limit' => get_input('limit', 8),
 	'offset' => get_input('offset', 0),
 );
 
-// Incomplete
-$wheres[] = "NOT EXISTS (
-		SELECT 1 FROM {$CONFIG->dbprefix}metadata md
-		WHERE md.entity_guid = e.guid
-			AND md.name_id = $test_id
-			AND md.value_id = $one_id)";
+switch($view_filter) {
+	case 'complete':
+	default:
+		// COMPLETE
+		$wheres = array();
+		$wheres[] = "(EXISTS (
+				SELECT 1 FROM {$CONFIG->dbprefix}entity_relationships r2 
+				WHERE r2.guid_one = '$user_guid'
+				AND r2.relationship = '$relationship'
+				AND r2.guid_two = e.guid) OR 
+					EXISTS (
+				SELECT 1 FROM {$CONFIG->dbprefix}metadata md
+				WHERE md.entity_guid = e.guid
+					AND md.name_id = $test_id
+					AND md.value_id = $one_id))";
 
-$wheres[] = "NOT EXISTS (
-		SELECT 1 FROM {$CONFIG->dbprefix}entity_relationships r2 
-		WHERE r2.guid_one = '$user_guid'
-		AND r2.relationship = '$relationship'
-		AND r2.guid_two = e.guid)";
+		$options['wheres'] = $wheres;
+		break;
+	case 'past_due':
+		// Past Due
+		$options['metadata_name_value_pairs'] = array(
+			array(
+				'name' => 'status',
+				'value' => TODO_STATUS_PUBLISHED, 
+				'operand' => '='),
+			array(
+				'name' => 'due_date',
+				'value' => time(),
+				'operand' => '<',
+		));
+		$options['metadata_name_value_pairs_operator'] = 'AND';
+		// Past Due
+		$wheres[] = "NOT EXISTS (
+				SELECT 1 FROM {$CONFIG->dbprefix}metadata md
+				WHERE md.entity_guid = e.guid
+					AND md.name_id = $test_id
+					AND md.value_id = $one_id)";
 
-$options['wheres'] = $wheres;
+		$wheres[] = "NOT EXISTS (
+				SELECT 1 FROM {$CONFIG->dbprefix}entity_relationships r2 
+				WHERE r2.guid_one = '$user_guid'
+				AND r2.relationship = '$relationship'
+				AND r2.guid_two = e.guid)";
 
-$past_due_todos = elgg_list_entities_from_relationship($options);
+		$options['wheres'] = $wheres;
+		break;
+	case 'incomplete':
+		// Incomplete
+		$wheres = array();
+		$wheres[] = "NOT EXISTS (
+				SELECT 1 FROM {$CONFIG->dbprefix}metadata md
+				WHERE md.entity_guid = e.guid
+					AND md.name_id = $test_id
+					AND md.value_id = $one_id)";
 
+		$wheres[] = "NOT EXISTS (
+				SELECT 1 FROM {$CONFIG->dbprefix}entity_relationships r2 
+				WHERE r2.guid_one = '$user_guid'
+				AND r2.relationship = '$relationship'
+				AND r2.guid_two = e.guid)";
 
-$todo_nav .= elgg_view_menu('parentportal-todo-nav', array(
-	'sort_by' => 'priority',
-	// recycle the menu filter css
-	'class' => 'elgg-menu-hz elgg-menu-filter elgg-menu-filter-default'
-));
+		$options['wheres'] = $wheres;
+		break;
+}
 
-$body = <<<HTML
-	$todo_nav
-	<div class='parentportal-todos-content' id='parentportal-todos-incomplete'>
-		$incomplete_todos
-		<span class='parentportal-view-all-link'><a href="todo/dashboard/{$vars['entity']->username}?status=incomplete">View all incomplete</a></span>
-	</div>
-	<div class='parentportal-todos-content' id='parentportal-todos-pastdue'>
-		$past_due_todos
-		<span class='parentportal-view-all-link'><a href="todo/dashboard/{$vars['entity']->username}?status=incomplete">View all incomplete</a></span>
-	</div>
-	<div class='parentportal-todos-content' id='parentportal-todos-complete'>
-		$complete_todos
-		<span class='parentportal-view-all-link'><a href="todo/dashboard/{$vars['entity']->username}?status=complete">View all complete</a></span>
-	</div>
-HTML;
-
-$options = array(
-	'id' => 'parentportal-module-child-todos',
-	'class' => 'parentportal-module',
-);
-
-echo elgg_view_module('featured', $title, $body, $options);
+echo elgg_list_entities_from_relationship($options);
 

@@ -77,7 +77,7 @@ function parentportal_init() {
 	// PP Gatekeeper
 	if (elgg_is_logged_in() && parentportal_is_user_parent(elgg_get_logged_in_user_entity())) {
 		parentportal_gatekeeper();
-    }	
+    }
 }
 
 /**

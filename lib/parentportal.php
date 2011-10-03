@@ -156,7 +156,7 @@ function parentportal_get_page_content_index($parent) {
 		
 			// Check if todos is enabled
 			if (elgg_is_active_plugin('todo')) {
-				$col_right .= elgg_view('parentportal/module/todos', array('entity' => $child));
+				$col_right .= elgg_view('parentportal/module/todo_container', array('entity' => $child));
 			}
 		
 			// Right content 
