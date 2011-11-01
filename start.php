@@ -24,10 +24,12 @@ function parentportal_init() {
 	
 	// Register CSS
 	$parentportal_css = elgg_get_simplecache_url('css', 'parentportal/css');
+	elgg_register_simplecache_view('css/parentportal/css');
 	elgg_register_css('elgg.parentportal', $parentportal_css);
 	
 	// Register JS
 	$parentportal_js = elgg_get_simplecache_url('js', 'parentportal/parentportal');
+	elgg_register_simplecache_view('js/parentportal/parentportal');
 	elgg_register_js('elgg.parentportal', $parentportal_js);
 		
 	// Register for view plugin hook 
