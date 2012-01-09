@@ -310,8 +310,15 @@ function parentportal_gatekeeper() {
 	// Will be true for whitelist, false for blacklist
 	$access_toggle = elgg_get_plugin_setting('urltoggle', 'parentportal');
 	
-	$url_list = elgg_get_plugin_setting('urllist','parentportal');
-	$url_list = explode("\n", $url_list);
+	
+	$url_list = elgg_get_plugin_setting('urllist','parentportal');;
+
+	// Make sure the list isn't empty
+	if (!empty($url_list)) {
+		$url_list = explode("\n", $url_list);
+	} else {
+		$url_list = array();
+	}
 	
 	if ($access_toggle) {
 		// exceptions for blacklist
@@ -325,6 +332,7 @@ function parentportal_gatekeeper() {
 	
 	// Allowed is defaulted to the opposite (false for white, true for blacklist)
 	$allowed = $access_toggle ? false : true;
+
 	foreach($url_list as $u) {
 		$u = trim($u);
 		//if(strcmp($url, elgg_get_site_url() . $u) == 0) {
