@@ -131,6 +131,7 @@ function parentportal_page_handler($page) {
 			echo elgg_view_page($params['title'], $body, 'parentportal');
 			break;
 	}
+	return TRUE;
 }
 
 /**

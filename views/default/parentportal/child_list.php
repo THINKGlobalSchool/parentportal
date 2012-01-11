@@ -13,7 +13,7 @@
 $children = $vars['children'];
 
 foreach ($children as $child) {
-	$icon = $child->getIcon('tiny');
+	$icon = $child->getIconURL('tiny');
 	$content .= "<li>";
 	$content .= "<img class=\"livesearch_icon\" src=\"$icon\" />";
 	$content .= $child->name . ' - ' . $child->username;

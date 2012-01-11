@@ -43,10 +43,10 @@ $success = elgg_send_email($from->email, $user->email, $subject, $body);
 	
 if ($success) {
 	// Clear Cached Data
-	remove_metadata($_SESSION['user']->guid, 'is_question_cached');
-	remove_metadata($_SESSION['user']->guid,'question_to');
-	remove_metadata($_SESSION['user']->guid,'question_subject');
-	remove_metadata($_SESSION['user']->guid,'question_message');
+	elgg_delete_metadata(array('guid' => $_SESSION['user']->guid, 'metadata_name' => 'is_question_cached'));
+	elgg_delete_metadata(array('guid' => $_SESSION['user']->guid, 'metadata_name' => 'question_to'));
+	elgg_delete_metadata(array('guid' => $_SESSION['user']->guid, 'metadata_name' => 'question_subject'));
+	elgg_delete_metadata(array('guid' => $_SESSION['user']->guid, 'metadata_name' => 'question_message'));
 	
 	// Save successful, forward to index
 	system_message(elgg_echo("parentportal:confirm:questionsent"));
