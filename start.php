@@ -80,6 +80,11 @@ function parentportal_init() {
 	if (elgg_is_logged_in() && parentportal_is_user_parent(elgg_get_logged_in_user_entity())) {
 		parentportal_gatekeeper();
     }
+
+	// Whitelist ajax views
+	elgg_register_ajax_view('parentportal/module/activity');
+	elgg_register_ajax_view('parentportal/module/groups');
+	elgg_register_ajax_view('parentportal/module/todos');
 }
 
 /**
