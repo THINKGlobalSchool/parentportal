@@ -53,7 +53,6 @@ function parentportal_init() {
 	// Actions	
 	$action_base = elgg_get_plugins_path() . 'parentportal/actions/parentportal';
 	elgg_register_action('parentportal/manageparent', "$action_base/manageparent.php", 'admin');
-	elgg_register_action('parentportal/clearchildren', "$action_base/clearchildren.php", 'admin');
 	elgg_register_action('parentportal/submitquestion', "$action_base/submitquestion.php");
 	
 	// Plugin hook for index redirect
