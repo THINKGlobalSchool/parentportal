@@ -270,7 +270,7 @@ function parentportal_get_parents_children($parent_guid) {
 														'relationship_guid' => $parent_guid,
 														'inverse_relationship' => TRUE,
 														'types' => array('user'),
-														'limit' => 9999,
+														'limit' => 0,
 														'offset' => 0,
 														'count' => false,
 													));

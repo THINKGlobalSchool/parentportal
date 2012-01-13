@@ -11,13 +11,19 @@
  */
 		
 // get input
-$parent 	= get_input('parent');
-$children 	= get_input('children');
+$guid 	= get_input('parent');
+$children 	= get_input('members');
 $enabled 	= get_input('parent_enabled');
 
-
 // Get user and add children
-$user = get_user($parent);
+$user = get_user($guid);
+
+// Wipe out current children
+$current_children = parentportal_get_parents_children($guid); 
+foreach ($current_children as $child) {
+	remove_entity_relationship($child->getGUID(), PARENT_CHILD_RELATIONSHIP, $guid);
+}
+
 if (elgg_instanceof($user, 'user')) {	
 	$user->is_parent = $enabled;
 	// Loop through and assign children
