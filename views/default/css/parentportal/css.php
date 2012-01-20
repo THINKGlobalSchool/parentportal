@@ -114,3 +114,8 @@ ul.parentportal-child-list li:first-child {
 #parentportal-child-stats table#parentportal-stats-table td.stat {
 	color: #800518;
 }
+
+/** Columns **/
+#pp_right_column > div.elgg-output, #pp_left_column > div.elgg-output {
+	margin-top: 0;
+}
