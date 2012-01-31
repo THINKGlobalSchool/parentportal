@@ -10,18 +10,21 @@
  * 
  */
 
-$content = elgg_list_entities_from_relationship_count(array(
-	'type' => 'group',
-	'relationship' => 'member',
-	'relationship_guid' => $vars['guid'],
+elgg_push_context('ajaxmodule');
+$content .= elgg_list_entities_from_relationship(array(
+	'relationship' => 'phototag', 
+	'relationship_guid' => $vars['guid'], 
 	'inverse_relationship' => false,
-	'full_view' => false,
-	'limit' => get_input('limit', 8),
-	'offset' => get_input('offset', 0),
-));
+	'types' => 'object', 
+	'subtypes' => 'image', 
+	'full_view'=> false,
+	'list_type' => 'gallery',
+	'limit' => 9,
+)); 	
 
 if (!$content) {
 	echo "<h3 class='center'>" . elgg_echo('parentportal:label:noresults') . "</h3>"; 
 } else {
 	echo $content;
 }
+elgg_pop_context();

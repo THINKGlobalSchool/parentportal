@@ -54,6 +54,7 @@ $english = array(
 	'parentportal:title:childgroups' => 'Your Child\'s Groups', 
 	'parentportal:title:childtodos' => 'Your Child\'s To Do\'s', 
 	'parentportal:title:usersettings' => 'User Settings', 
+	'parentportal:title:childphotos' => 'Photo\'s tagged with your child',
 	
 	'parentportal:label:profile' => "%s's Profile", 
 	'parentportal:label:enableparent' => "Parent Enabled", 
@@ -78,7 +79,7 @@ $english = array(
 	'parentportal:label:todo:incomplete' => 'Incomplete To Do\'s',
 	'parentportal:label:todo:pastdue' => 'Past Due To Do\'s',
 	'parentportal:label:parenttag' => 'Parent Tag (for including blogs/wire posts in announcements)',
-	
+	'parentportal:label:noresults' => 'No Results',
 	'parentportal:label:editsettings' => 'Edit your settings',
 	'parentportal:label:editprofile' => 'Edit profile',
 	

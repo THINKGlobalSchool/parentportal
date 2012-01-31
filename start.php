@@ -84,6 +84,7 @@ function parentportal_init() {
 	elgg_register_ajax_view('parentportal/module/activity');
 	elgg_register_ajax_view('parentportal/module/groups');
 	elgg_register_ajax_view('parentportal/module/todos');
+	elgg_register_ajax_view('parentportal/module/photos');
 }
 
 /**

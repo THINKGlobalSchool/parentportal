@@ -44,4 +44,3 @@ elgg.parentportal.todoNavClick = function(event) {
 }
 
 elgg.register_hook_handler('init', 'system', elgg.parentportal.init);
-//</script>

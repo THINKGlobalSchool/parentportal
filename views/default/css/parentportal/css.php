@@ -98,6 +98,21 @@ ul.parentportal-child-list li:first-child {
 	display: none;
 }
 
+/** Child photos **/
+
+#parentportal-module-child-photos .tidypics_album_images,
+#parentportal-module-child-photos .tidypics_album_gallery_item {
+	text-align:center;
+	width:120px; 
+	height:120px;
+}
+
+#parentportal-module-child-photos .tidypics_album_images img,
+#parentportal-module-child-photos .tidypics_album_gallery_item img {
+	width: 120px;
+	height: 120px;
+}
+
 /** Stats **/
 #parentportal-child-stats table#parentportal-stats-table {
 	margin-top: 10px;
