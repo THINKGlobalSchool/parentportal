@@ -153,6 +153,19 @@ function parentportal_get_page_content_index($parent) {
 				'class' => 'parentportal-module',
 			));
 			
+			// Child tagged photos module
+			$photos_module .= elgg_view('modules/genericmodule', array(
+				'view' => 'parentportal/module/photos',
+				'module_id' => 'pp-photos-module',
+				'module_class' => 'pp-photos-module',
+				'view_vars' => array('guid' => $child->guid), 
+			));
+			
+
+			$col_left .= elgg_view_module('featured', elgg_echo("parentportal:title:childphotos"), $photos_module, array(
+				'id' => 'parentportal-module-child-photos',
+				'class' => 'parentportal-module',
+			));
 		
 			// Check if todos is enabled
 			if (elgg_is_active_plugin('todo')) {
@@ -173,21 +186,6 @@ function parentportal_get_page_content_index($parent) {
 				'id' => 'parentportal-module-child-groups',
 				'class' => 'parentportal-module',
 			));
-			
-			// Child tagged photos module
-			$photos_module .= elgg_view('modules/genericmodule', array(
-				'view' => 'parentportal/module/photos',
-				'module_id' => 'pp-photos-module',
-				'module_class' => 'pp-photos-module',
-				'view_vars' => array('guid' => $child->guid), 
-			));
-			
-
-			$col_right .= elgg_view_module('featured', elgg_echo("parentportal:title:childphotos"), $photos_module, array(
-				'id' => 'parentportal-module-child-photos',
-				'class' => 'parentportal-module',
-			));
-
 		}
 	} 
 	
