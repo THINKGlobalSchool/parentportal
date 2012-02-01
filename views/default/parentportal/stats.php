@@ -24,16 +24,8 @@ $bookmark_count = $bookmark_count ? $bookmark_count : 0;
 
 if (elgg_is_active_plugin('todo')) {
 	$todo_label = elgg_echo('parentportal:stats:todo');
-	$todos = get_users_todos($vars['entity']->getGUID());
 	
-	$todo_count = 0;
-	if ($todos) {
-		foreach ($todos as $todo) {
-			if (has_user_submitted($vars['entity']->getGUID(), $todo->getGUID())) {
-				$todo_count++;
-			}
-		}
-	}
+	$todo_count = count_complete_todos($vars['entity']->getGUID());
 	
 	$todo_content = <<<HTML
 	<tr>
