@@ -54,7 +54,7 @@ function parentportal_get_page_content_index($parent) {
 	if ($tab == 'parent') {
 
 		$col_left .= elgg_view('modules/ajaxmodule', array(
-			'title' => elgg_echo('Student Services Info'),
+			'title' => elgg_echo('School Documents'),
 			'container_guid' => elgg_get_plugin_setting('parentgroup','parentportal'),
 			'tag' => 'studentservices',
 			'subtypes' => array('blog', 'bookmarks', 'file'),
@@ -69,7 +69,7 @@ function parentportal_get_page_content_index($parent) {
 
 
 		$col_left .= elgg_view('modules/ajaxmodule', array(
-			'title' => elgg_echo('weXplore Info'),
+			'title' => elgg_echo('Travel Updates'),
 			'container_guid' => elgg_get_plugin_setting('parentgroup','parentportal'),
 			'tag' => 'wexplore',
 			'subtypes' => array('blog', 'bookmarks', 'file'),
@@ -81,6 +81,18 @@ function parentportal_get_page_content_index($parent) {
 			'module_class' => 'parentportal-module',
 			'hide_empty' => TRUE,
 		));
+		
+		$col_right .= elgg_view('modules/ajaxmodule', array(
+			'title' => elgg_echo('weXplore Updates'),
+			'container_guid' => elgg_get_plugin_setting('wexploregroup','parentportal'),
+			'subtypes' => array('blog', 'thewire'),
+			'listing_type' => 'simple',
+			'limit' => 5,
+			'module_type' => 'featured',
+			'module_id' => 'parentportal-module-parent-announcements',
+			'module_class' => 'parentportal-module',
+			'hide_empty' => TRUE,
+	 	));
 
 		$col_right .= elgg_view('modules/ajaxmodule', array(
 			'title' => elgg_echo('parentportal:title:parentinformation'),

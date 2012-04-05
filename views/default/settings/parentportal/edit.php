@@ -54,6 +54,17 @@
 	?>
 </div>
 <div>
+	<label><?php echo elgg_echo('parentportal:label:wexploregroup'); ?></label><br />
+	<?php 
+		
+	echo elgg_view('input/dropdown', array(
+										'name' => 'params[wexploregroup]', 
+										'value' => $vars['entity']->wexploregroup, 
+										'options_values' => $groups_array
+										));
+	?>
+</div>
+<div>
     <label><?php echo elgg_echo('parentportal:label:parenttag'); ?></label><br />
     <?php 
 	echo elgg_view('input/text', array(

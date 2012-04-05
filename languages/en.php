@@ -67,6 +67,7 @@ $english = array(
 	'parentportal:label:whitelist' => "Whitelist", 
 	'parentportal:label:nochildren' => "Sorry. You have no Children",
 	'parentportal:label:parentgroup' => 'Parent Group',
+	'parentportal:label:wexploregroup' => 'weXplore Group',
 	'parentportal:label:parentcontacts' => 'Parent Portal Contacts',
 	'parentportal:label:noannouncements' => 'No News',
 	'parentportal:label:havequestions' => 'Have a question? Use the form below and we\'ll get back to you!',
