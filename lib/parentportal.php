@@ -56,7 +56,7 @@ function parentportal_get_page_content_index($parent) {
 		$col_left .= elgg_view('modules/ajaxmodule', array(
 			'title' => elgg_echo('School Documents'),
 			'container_guid' => elgg_get_plugin_setting('parentgroup','parentportal'),
-			'tag' => 'studentservices',
+			'tag' => 'schooldocuments',
 			'subtypes' => array('blog', 'bookmarks', 'file'),
 			'limit' => 10,
 			'listing_type' => 'simpleicon',
