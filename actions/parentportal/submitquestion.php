@@ -39,6 +39,9 @@ if (empty($body) || $body == elgg_echo('parentportal:label:questionbody')) {
 $user = get_user_by_username($to);
 $from = get_user($from_guid);
 
+// Append text to identify that this email came from Spot
+$subject = elgg_echo('parentportal:label:spotquestion', array($subject));
+
 $success = elgg_send_email($from->email, $user->email, $subject, $body);
 	
 if ($success) {

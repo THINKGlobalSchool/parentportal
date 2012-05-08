@@ -83,6 +83,7 @@ $english = array(
 	'parentportal:label:noresults' => 'No Results',
 	'parentportal:label:editsettings' => 'Edit your settings',
 	'parentportal:label:editprofile' => 'Edit profile',
+	'parentportal:label:spotquestion' => 'Spot Parent Portal Question: %s',
 	
 	// Stat labels
 	'parentportal:stats:blog' => 'Blog Posts',
