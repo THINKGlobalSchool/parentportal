@@ -129,7 +129,7 @@ function parentportal_get_page_content_index($parent) {
 		$popup_label = elgg_echo('parentportal:label:whatisthis');
 		$popup_info = elgg_echo('parentportal:label:weeklywhat');
 		
-		$weekly_title = elgg_echo('Weekly Update') . "<span class='parentportal-small right'><a rel='popup' href='#info'>$popup_label</a><div id='info' class='parentportal-popup' style='display: none;'>$popup_info</div>";
+		$weekly_title = elgg_echo('TGS Weekly') . "<span class='parentportal-small right'><a rel='popup' href='#info'>$popup_label</a><div id='info' class='parentportal-popup' style='display: none;'>$popup_info</div>";
 		
 		$col_right .= elgg_view('modules/ajaxmodule', array(
 			'title' => $weekly_title,
@@ -304,11 +304,16 @@ function parentportal_assign_child_to_parent($child_guid, $parent_guid) {
  * @return array 
  */
 function parentportal_get_parents_children($parent_guid) {
-	
 	$parent = get_user($parent_guid);
-	
+
 	if ($parent) {
-		if (!$parent->isAdmin()) {
+		if ($parent->isAdmin()) {
+			$children = elgg_get_entities(array('types' => array('user'), 'limit' => 0));
+		} else if (elgg_is_active_plugin('roles') && roles_is_member(elgg_get_plugin_setting('view_students_role', 'parentportal'), $parent_guid)) {
+			// If this parent/user is in the view all students role, display those users in the student role
+			$students_role = elgg_get_plugin_setting('students_role', 'parentportal');
+			$children = roles_get_members($students_role, 0);
+		} else {
 			$children = elgg_get_entities_from_relationship(array(
 														'relationship' => PARENT_CHILD_RELATIONSHIP,
 														'relationship_guid' => $parent_guid,
@@ -318,8 +323,6 @@ function parentportal_get_parents_children($parent_guid) {
 														'offset' => 0,
 														'count' => false,
 													));
-		} else {
-			$children = elgg_get_entities(array('types' => array('user'), 'limit' => 9999));
 		}	
 	} 
 	return $children ? $children : array();

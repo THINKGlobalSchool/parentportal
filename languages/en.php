@@ -84,8 +84,10 @@ $english = array(
 	'parentportal:label:editsettings' => 'Edit your settings',
 	'parentportal:label:editprofile' => 'Edit profile',
 	'parentportal:label:spotquestion' => 'Spot Parent Portal Question: %s',
+	'parentportal:label:viewstudents' => 'View all students role',
+	'parentportal:label:studentsrole' => 'Student Role (Restrict users displayed in View all students role to these users)', 
 	'parentportal:label:whatisthis' => 'What is this?',
-	'parentportal:label:weeklywhat' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+	'parentportal:label:weeklywhat' => 'A digest containing the highlights of the week at TGS as created and curated by students and staff.',
 	
 	// Stat labels
 	'parentportal:stats:blog' => 'Blog Posts',
