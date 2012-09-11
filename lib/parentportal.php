@@ -109,11 +109,26 @@ function parentportal_get_page_content_index($parent) {
 			'hide_empty' => TRUE,
 	 	));
 
+		/**
 		$col_right .= elgg_view('modules/ajaxmodule', array(
 			'title' => elgg_echo('Res Life'),
 			'container_guid' => elgg_get_plugin_setting('parentgroup','parentportal'),
 			'tag' => 'reslife',
 			'subtypes' => array('blog', 'thewire'),
+			'listing_type' => 'simple',
+			'restrict_tag' => TRUE,
+			'limit' => 3,
+			'module_type' => 'featured',
+			'module_id' => 'parentportal-module-parent-announcements',
+			'module_class' => 'parentportal-module',
+			'hide_empty' => TRUE,
+	 	));
+		**/
+		
+		$col_right .= elgg_view('modules/ajaxmodule', array(
+			'title' => elgg_echo('Weekly Update'),
+			'tag' => 'weekly',
+			'subtypes' => array('tagdashboard'),
 			'listing_type' => 'simple',
 			'restrict_tag' => TRUE,
 			'limit' => 3,

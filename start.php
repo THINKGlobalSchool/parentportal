@@ -66,15 +66,10 @@ function parentportal_init() {
 		elgg_extend_view('parentportal/extend_right', 'parentportal/announcements');
 	}
 	
-	// Check if parent has children, if so add a menu item (for admin-type users)
-	$children = parentportal_get_parents_children(elgg_get_logged_in_user_guid());
-	
-	if ($children) {
-		// add a site navigation item
-		$item = new ElggMenuItem('parentportal', elgg_echo('parentportal'), 'parentportal');
-		elgg_register_menu_item('site', $item);
-	}
-	
+	// add a site navigation item
+	$item = new ElggMenuItem('parentportal', elgg_echo('parentportal'), 'parentportal');
+	elgg_register_menu_item('site', $item);
+
 	// PP Gatekeeper
 	if (elgg_is_logged_in() && parentportal_is_user_parent(elgg_get_logged_in_user_entity())) {
 		parentportal_gatekeeper();
