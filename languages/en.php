@@ -84,6 +84,8 @@ $english = array(
 	'parentportal:label:editsettings' => 'Edit your settings',
 	'parentportal:label:editprofile' => 'Edit profile',
 	'parentportal:label:spotquestion' => 'Spot Parent Portal Question: %s',
+	'parentportal:label:whatisthis' => 'What is this?',
+	'parentportal:label:weeklywhat' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
 	
 	// Stat labels
 	'parentportal:stats:blog' => 'Blog Posts',

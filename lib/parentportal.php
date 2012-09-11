@@ -125,8 +125,14 @@ function parentportal_get_page_content_index($parent) {
 	 	));
 		**/
 		
+		// Popup label/content
+		$popup_label = elgg_echo('parentportal:label:whatisthis');
+		$popup_info = elgg_echo('parentportal:label:weeklywhat');
+		
+		$weekly_title = elgg_echo('Weekly Update') . "<span class='parentportal-small right'><a rel='popup' href='#info'>$popup_label</a><div id='info' class='parentportal-popup' style='display: none;'>$popup_info</div>";
+		
 		$col_right .= elgg_view('modules/ajaxmodule', array(
-			'title' => elgg_echo('Weekly Update'),
+			'title' => $weekly_title,
 			'tag' => 'weekly',
 			'subtypes' => array('tagdashboard'),
 			'listing_type' => 'simple',

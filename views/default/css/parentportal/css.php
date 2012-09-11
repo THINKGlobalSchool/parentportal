@@ -134,3 +134,20 @@ ul.parentportal-child-list li:first-child {
 #pp_right_column > div.elgg-output, #pp_left_column > div.elgg-output {
 	margin-top: 0;
 }
+
+/** What's this popup **/
+.parentportal-small {
+	font-size: 85% !important; 
+}
+
+.parentportal-popup { 
+	position: absolute;
+	border: 1px solid #bbb;
+    background-color: #fff;
+    width: 200px;
+	padding: 5px;
+	height: auto;
+	top: -2em;
+	text-align: left;
+	display: block;
+}
