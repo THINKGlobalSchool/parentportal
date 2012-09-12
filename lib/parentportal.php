@@ -307,12 +307,12 @@ function parentportal_get_parents_children($parent_guid) {
 	$parent = get_user($parent_guid);
 
 	if ($parent) {
-		if ($parent->isAdmin()) {
-			$children = elgg_get_entities(array('types' => array('user'), 'limit' => 0));
-		} else if (elgg_is_active_plugin('roles') && roles_is_member(elgg_get_plugin_setting('view_students_role', 'parentportal'), $parent_guid)) {
+		if (elgg_is_active_plugin('roles') && roles_is_member(elgg_get_plugin_setting('view_students_role', 'parentportal'), $parent_guid)) {
 			// If this parent/user is in the view all students role, display those users in the student role
 			$students_role = elgg_get_plugin_setting('students_role', 'parentportal');
 			$children = roles_get_members($students_role, 0);
+		} else if ($parent->isAdmin()) {
+			$children = elgg_get_entities(array('types' => array('user'), 'limit' => 0));
 		} else {
 			$children = elgg_get_entities_from_relationship(array(
 														'relationship' => PARENT_CHILD_RELATIONSHIP,
