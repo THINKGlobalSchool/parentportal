@@ -133,7 +133,7 @@ function parentportal_get_page_content_index($parent) {
 		
 		$col_right .= elgg_view('modules/ajaxmodule', array(
 			'title' => $weekly_title,
-			'tag' => 'weekly',
+			'tag' => 'tgsweekly',
 			'subtypes' => array('tagdashboard'),
 			'listing_type' => 'simple',
 			'restrict_tag' => TRUE,
