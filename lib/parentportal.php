@@ -135,7 +135,7 @@ function parentportal_get_page_content_index($parent) {
 			'title' => $weekly_title,
 			'tag' => 'tgsweekly',
 			'subtypes' => array('tagdashboard'),
-			'listing_type' => 'simple',
+			'listing_type' => 'simpleicon',
 			'restrict_tag' => TRUE,
 			'limit' => 3,
 			'module_type' => 'featured',
