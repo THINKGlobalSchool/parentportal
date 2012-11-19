@@ -7,7 +7,7 @@
  * @author Jeff Tilson
  * @copyright THINK Global School 2010
  * @link http://www.thinkglobalschool.com
- **/
+ */
 
 
 $blog_label = elgg_echo('parentportal:stats:blog');

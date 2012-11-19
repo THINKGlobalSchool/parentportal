@@ -206,19 +206,7 @@ function parentportal_get_page_content_index($parent) {
 			}
 		
 			// Right content 
-			// Groups Module					
-			$groups_module .= elgg_view('modules/genericmodule', array(
-				'view' => 'parentportal/module/groups',
-				'module_id' => 'pp-groups-module',
-				'module_class' => 'pp-groups-module',
-				'view_vars' => array('guid' => $child->guid), 
-			));
-			
-
-			$col_right .= elgg_view_module('featured', elgg_echo("parentportal:title:childgroups"), $groups_module, array(
-				'id' => 'parentportal-module-child-groups',
-				'class' => 'parentportal-module',
-			));
+			$col_right .= elgg_view('parentportal/child_groups', array('child_guid' => $child->guid));
 		}
 	} 
 	
