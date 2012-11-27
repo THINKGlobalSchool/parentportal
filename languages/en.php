@@ -14,6 +14,7 @@ $english = array(
 	
 	// Default Content & Entity/Object Related
 	'parentportal' => 'Parent Portal',
+	'admin:administer_utilities:question_log' => 'Parent Question Log',
 	
 	// Menu's
 	'parentportal:menu:admin:manageparent' => "Manage Parent",
@@ -41,6 +42,8 @@ $english = array(
 	'parentportal:error:questionsent' => "There was an error submitting your question",
 	'parentportal:error:invalidparentgroup' => 'Parent group is invalid or not configured',
 	'parentportal:error:nopermissions' => 'You do not have permission to view this page',
+	'parentportal:error:questionlog' => 'Error saving question to log',
+	'parentportal:error:invaliduser' => 'Invalid \'to\' user',
 	
 	// Titles/Label
 	'parentportal:title:manageparent' => "Create/Manage Parent Settings",
@@ -88,7 +91,10 @@ $english = array(
 	'parentportal:label:studentsrole' => 'Student Role (Restrict users displayed in View all students role to these users)', 
 	'parentportal:label:whatisthis' => 'What is this?',
 	'parentportal:label:weeklywhat' => 'A digest containing the highlights of the week at TGS as created and curated by students and staff.',
-	
+	'parentportal:label:viewmessagebody' => 'View Message Body',
+	'parentportal:label:question_status' => 'Status',
+	'parentportal:label:question_status_text' => 'Status Text',	
+
 	// Stat labels
 	'parentportal:stats:blog' => 'Blog Posts',
 	'parentportal:stats:photo' => 'Photos',

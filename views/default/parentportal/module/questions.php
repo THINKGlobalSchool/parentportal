@@ -15,8 +15,8 @@ $title = elgg_echo('parentportal:title:parentquestions');
 $questions = elgg_echo('parentportal:label:havequestions');
 
 $form_vars = array(
-	'id' => 'parentportal-submit-question-form',
-	'name' => 'parentportal_submit_question_form',
+	'id' => 'parentportal_question',
+	'name' => 'parentportal_question',
 );
 
 $form .=  elgg_view_form('parentportal/submitquestion', $form_vars);

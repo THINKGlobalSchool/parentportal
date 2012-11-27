@@ -37,6 +37,9 @@ function parentportal_init() {
 	
 	// Hook for site menu
 	elgg_register_plugin_hook_handler('prepare', 'menu:site', 'parentportal_site_menu_setup');
+
+	// Set up entity menu for question log items
+	elgg_register_plugin_hook_handler('register', 'menu:entity', 'parentportal_entity_menu_setup', 9999);
 	
 	// Extend Admin Menu 
 	elgg_register_plugin_hook_handler('register', 'menu:user_hover', 'parentportal_user_hover_menu_setup');
@@ -47,6 +50,9 @@ function parentportal_init() {
 	// Tabbed nav for todo module
 	elgg_register_plugin_hook_handler('register', 'menu:parentportal-todo-nav', 'parentportal_todo_nav_menu_setup');
 	
+	// Pagesetup event handler
+	elgg_register_event_handler('pagesetup', 'system', 'parentportal_pagesetup');
+
 	// Add search to the pp header
 	elgg_extend_view('page/elements/parentportal_header', 'search/search_box');
 
@@ -54,6 +60,9 @@ function parentportal_init() {
 	$action_base = elgg_get_plugins_path() . 'parentportal/actions/parentportal';
 	elgg_register_action('parentportal/manageparent', "$action_base/manageparent.php", 'admin');
 	elgg_register_action('parentportal/submitquestion', "$action_base/submitquestion.php");
+
+	$action_base = elgg_get_plugins_path() . 'parentportal/actions/question_log';
+	elgg_register_action('question_log/delete', "$action_base/delete.php", 'admin');
 	
 	// Plugin hook for index redirect
 	elgg_register_plugin_hook_handler('index', 'system', 'parentportal_redirect');
@@ -61,7 +70,7 @@ function parentportal_init() {
 	// Page handler
 	elgg_register_page_handler('parentportal','parentportal_page_handler');
 	
-	// Add announcements to parent portal, if enabled
+	// add announcements to parent portal, if enabled
 	if (elgg_is_active_plugin('announcements')) {
 		elgg_extend_view('parentportal/extend_right', 'parentportal/announcements');
 	}
@@ -152,6 +161,24 @@ function parentportal_site_menu_setup($hook, $type, $return, $params) {
 }
 
 /**
+ * Entity menu setup for question log items
+ */
+function parentportal_entity_menu_setup($hook, $type, $return, $params) {
+	$entity = $params['entity'];	
+	if (elgg_instanceof($entity, 'object', 'pp_question_log')) {		
+		$new_menu = array();			
+		foreach ($return as $idx => $item) {
+			if ($item->getName() == 'delete') {
+				$new_menu[] = $item;
+			}
+		}
+
+		return $new_menu;
+	}
+	return $return;
+}
+
+/**
  * Prepare the parentportal nav menu
  */
 function parentportal_nav_menu_setup($hook, $type, $return, $params) {			
@@ -230,6 +257,17 @@ function parentportal_todo_nav_menu_setup($hook, $type, $return, $params) {
 	$return[] = ElggMenuItem::factory($options);
 
 	return $return;
+}
+
+/**
+* Pagesetup event handler
+* 
+* @return NULL
+ */
+function parentportal_pagesetup() {
+	if (elgg_in_context('admin')) {
+		elgg_register_admin_menu_item('administer', 'question_log', 'administer_utilities');
+	}
 }
 
 /**

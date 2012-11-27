@@ -16,11 +16,8 @@ $from_guid = get_input('from_guid');
 $subject = get_input('question_subject');
 $body = get_input('question_body');
 
-// Cache to session
-$_SESSION['user']->is_question_cached = true;
-$_SESSION['user']->question_to = $to;
-$_SESSION['user']->question_subject = $subject;
-$_SESSION['user']->question_body = $body;
+// Make form sticky
+elgg_make_sticky_form('parentportal_question');
 
 // Check inputs
 if (empty($to)) {
@@ -36,25 +33,67 @@ if (empty($body) || $body == elgg_echo('parentportal:label:questionbody')) {
 	forward(REFERER);
 }
 
+// Get to/from users
 $user = get_user_by_username($to);
 $from = get_user($from_guid);
+
+// Double check from user
+if (!$from) {
+	$from = elgg_get_logged_in_user_entity();
+}
+
+// Make sure we have a valid to user
+if (!elgg_instanceof($user, 'user')) {
+	register_error(elgg_echo('parentportal:error:invaliduser'));
+	forward(REFERER);
+}
 
 // Append text to identify that this email came from Spot
 $subject = elgg_echo('parentportal:label:spotquestion', array($subject));
 
-$success = elgg_send_email($from->email, $user->email, $subject, $body);
-	
+// Before we try sending an email, save a log entity
+$question_log = new ElggObject();
+$question_log->subtype = "pp_question_log";
+$question_log->owner_guid = $from->guid;
+$question_log->access_id = ACCESS_PRIVATE;
+$question_log->title = $subject;
+$question_log->description = $body;
+$question_log->to_email = $user->email;
+
+// Make sure log entity saved
+if (!$question_log->save()) {
+	register_error(elgg_echo('parentportal:error:questionlog'));
+	forward(REFERER);
+}
+
+try {
+	$success = elgg_send_email($from->email, $user->email, $subject, $body);	
+} catch (Exception $e) {
+	register_error($e->getMessage());
+	// Set failed status
+	$question_log->status = 0;
+	$question_log->status_message = $e->getMessage();
+	forward(REFERER);
+}
+
 if ($success) {
-	// Clear Cached Data
-	elgg_delete_metadata(array('guid' => $_SESSION['user']->guid, 'metadata_name' => 'is_question_cached'));
-	elgg_delete_metadata(array('guid' => $_SESSION['user']->guid, 'metadata_name' => 'question_to'));
-	elgg_delete_metadata(array('guid' => $_SESSION['user']->guid, 'metadata_name' => 'question_subject'));
-	elgg_delete_metadata(array('guid' => $_SESSION['user']->guid, 'metadata_name' => 'question_message'));
-	
-	// Save successful, forward to index
-	system_message(elgg_echo("parentportal:confirm:questionsent"));
+	// Set success status
+	$msg = elgg_echo("parentportal:confirm:questionsent");
+	$question_log->status = 1;
+	$question_log->status_message = $msg;
+
+	// Clear sticky form
+	elgg_clear_sticky_form('parentportal_question');
+
+	// Send successful, forward to index
+	system_message($msg);
 	forward(REFERER);
 } else {
-	register_error(elgg_echo('parentportal:error:questionsent'));
+	// Set failed status
+	$msg = elgg_echo('parentportal:error:questionsent');
+	$question_log->status = 0;
+	$question_log->status_message = $msg;\
+
+	register_error($msg);
 	forward(REFERER);
 }

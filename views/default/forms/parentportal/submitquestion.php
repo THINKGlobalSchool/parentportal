@@ -23,11 +23,15 @@ foreach ($contacts as $idx => $contact) {
 	$contacts_array[$contacts[$idx][0]] = $user->name . ' - ' . $contacts[$idx][1]; 
 } 	
 
-// Load cached data (result of an error)
-if ($vars['user']->is_question_cached) {
-	$to 		= $vars['user']->question_to;
-	$subject 	= $vars['user']->question_subject;
-	$body 		= $vars['user']->question_body;
+// Get values from sticky form, if any
+if (elgg_is_sticky_form('parentportal_question')) {
+	$values = elgg_get_sticky_values('parentportal_question');
+	elgg_clear_sticky_form('parentportal_question');
+
+	$to = elgg_extract('question_to', $values);
+	$from = elgg_extract('question_from', $values);
+	$subject = elgg_extract('question_subject', $values);
+	$body = elgg_extract('question_body', $values);
 }
 
 // Form labels/inputs
