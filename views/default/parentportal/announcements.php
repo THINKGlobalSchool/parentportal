@@ -17,12 +17,19 @@ $options = array(
 	'container_guid' => elgg_get_plugin_setting('parentgroup','parentportal'),
 );
 
+// Ignore expired announcements
+$options['metadata_name_value_pairs'] = array(
+	array(
+		'name' => 'expiry_date', 
+		'value' => time(),
+		'operand' => '>',
+	),
+);
 
 // Grab announcements
-$announcements = elgg_get_entities($options);
+$announcements = elgg_get_entities_from_metadata($options);
 
 foreach($announcements as $announcement) {	
-	
 	// Check if the announcement has been viewed
 	if (!check_entity_relationship(elgg_get_logged_in_user_guid(), 'has_viewed_announcement', $announcement->getGUID())) {
 		$announcements_content .= elgg_view('announcements/announcement', array('entity' => $announcement));
