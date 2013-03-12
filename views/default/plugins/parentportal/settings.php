@@ -64,6 +64,13 @@ $parent_tag_input = elgg_view('input/text', array(
 	'value' => $vars['entity']->parenttag)
 );
 
+// Parent tag input
+$parent_announcement_tag_label = elgg_echo('parentportal:label:parentannouncementtag');
+$parent_announcement_tag_input = elgg_view('input/text', array(
+	'name' => 'params[parentannouncementtag]', 
+	'value' => $vars['entity']->parentannouncementtag)
+);
+
 // Parent contacts input
 $parent_contacts_label = elgg_echo('parentportal:label:parentcontacts');
 $parent_contacts_input = elgg_view('input/plaintext', array(
@@ -118,12 +125,16 @@ $content = <<<HTML
 		$parent_group_input
 	</div>
 	<div>
-		<label>$wexplore_group_label></label><br />
+		<label>$wexplore_group_label</label><br />
 		$wexplore_group_input
 	</div>
 	<div>
 	    <label>$parent_tag_label</label><br />
 		$parent_tag_input
+	</div>
+		<div>
+	    <label>$parent_announcement_tag_label</label><br />
+		$parent_announcement_tag_input
 	</div>
 	<div>
 		<label>$parent_contacts_label</label><br />
