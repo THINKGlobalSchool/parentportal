@@ -60,13 +60,13 @@ function parentportal_get_page_content_index($parent) {
 			'subtypes' => array('blog', 'bookmarks', 'file'),
 			'limit' => 10,
 			'listing_type' => 'simpleicon',
+			'listing_type_override' => 'download_files',
 			'restrict_tag' => TRUE,
 			'module_type' => 'featured',
 			'module_id' => 'parentportal-module-parent-announcements',
 			'module_class' => 'parentportal-module',
 			'hide_empty' => TRUE,
 		));
-
 
 		$col_left .= elgg_view('modules/ajaxmodule', array(
 			'title' => elgg_echo('Travel Updates'),
@@ -75,6 +75,7 @@ function parentportal_get_page_content_index($parent) {
 			'subtypes' => array('blog', 'bookmarks', 'file'),
 			'limit' => 10,
 			'listing_type' => 'simpleicon',
+			'listing_type_override' => 'download_files',
 			'restrict_tag' => TRUE,
 			'module_type' => 'featured',
 			'module_id' => 'parentportal-module-parent-announcements',
@@ -87,6 +88,7 @@ function parentportal_get_page_content_index($parent) {
 			'container_guid' => elgg_get_plugin_setting('wexploregroup','parentportal'),
 			'subtypes' => array('blog', 'thewire'),
 			'listing_type' => 'simple',
+			'listing_type_override' => 'download_files',
 			'limit' => 5,
 			'module_type' => 'featured',
 			'module_id' => 'parentportal-module-parent-announcements',
@@ -101,6 +103,7 @@ function parentportal_get_page_content_index($parent) {
 			'tag' => 'news',
 			'subtypes' => array('blog', 'thewire'),
 			'listing_type' => 'simple',
+			'listing_type_override' => 'download_files',
 			'restrict_tag' => TRUE,
 			'limit' => 3,
 			'module_type' => 'featured',
