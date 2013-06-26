@@ -28,6 +28,10 @@ ul.parentportal-child-list li:first-child {
 	border-top:1px solid #cccccc;
 }
 
+.parentportal-header {
+	
+}
+
 .parentportal-header-two-column {
 	padding-right: 40px !important;
 }

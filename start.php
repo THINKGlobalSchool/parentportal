@@ -54,7 +54,7 @@ function parentportal_init() {
 	elgg_register_event_handler('pagesetup', 'system', 'parentportal_pagesetup');
 
 	// Add search to the pp header
-	elgg_extend_view('page/elements/parentportal_header', 'search/search_box');
+	elgg_extend_view('page/elements/parentportal_header', 'search/header');
 
 	// Actions	
 	$action_base = elgg_get_plugins_path() . 'parentportal/actions/parentportal';
@@ -267,6 +267,12 @@ function parentportal_todo_nav_menu_setup($hook, $type, $return, $params) {
 function parentportal_pagesetup() {
 	if (elgg_in_context('admin')) {
 		elgg_register_admin_menu_item('administer', 'question_log', 'administer_utilities');
+	}
+
+	if (parentportal_is_user_parent(elgg_get_logged_in_user_entity())) {
+		// Site menu 'home' item
+		$item = new ElggMenuItem('home', elgg_view_icon('home'), elgg_normalize_url('parentportal'));
+		elgg_register_menu_item('site', $item);
 	}
 }
 

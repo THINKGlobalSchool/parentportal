@@ -45,7 +45,7 @@ header("Content-type: text/html; charset=UTF-8");
 	</div>
 		
 	<div class="elgg-page-header">
-		<div class="elgg-inner">
+		<div class="elgg-inner parentportal-header">
 			<?php echo elgg_view('page/elements/parentportal_header', $vars); ?>
 		</div>
 	</div>
