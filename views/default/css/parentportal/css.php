@@ -32,10 +32,6 @@ ul.parentportal-child-list li:first-child {
 	
 }
 
-.parentportal-header-two-column {
-	padding-right: 40px !important;
-}
-
 .parentportal-header-two-column #pp_top {
 	width: 98%;
 	padding: 10px;

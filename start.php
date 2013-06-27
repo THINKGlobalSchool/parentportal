@@ -53,9 +53,6 @@ function parentportal_init() {
 	// Pagesetup event handler
 	elgg_register_event_handler('pagesetup', 'system', 'parentportal_pagesetup');
 
-	// Add search to the pp header
-	elgg_extend_view('page/elements/parentportal_header', 'search/header');
-
 	// Actions	
 	$action_base = elgg_get_plugins_path() . 'parentportal/actions/parentportal';
 	elgg_register_action('parentportal/manageparent', "$action_base/manageparent.php", 'admin');
@@ -137,7 +134,7 @@ function parentportal_page_handler($page) {
 		case 'pp_header_two_column':
 			$params['header'] = elgg_view('navigation/breadcrumbs') . $params['header'];
 			$body = elgg_view_layout($params['layout'], $params);
-			echo elgg_view_page($params['title'], $body, 'parentportal');
+			echo elgg_view_page($params['title'], $body);
 			break;
 	}
 	return TRUE;
