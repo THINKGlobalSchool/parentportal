@@ -33,7 +33,7 @@ function parentportal_init() {
 	elgg_register_js('elgg.parentportal', $parentportal_js);
 	
 	// Hook for site menu
-	elgg_register_plugin_hook_handler('prepare', 'menu:site', 'parentportal_site_menu_setup');
+	elgg_register_plugin_hook_handler('prepare', 'menu:topbar', 'parentportal_site_menu_setup');
 
 	// Set up entity menu for question log items
 	elgg_register_plugin_hook_handler('register', 'menu:entity', 'parentportal_entity_menu_setup', 9999);
@@ -261,12 +261,6 @@ function parentportal_todo_nav_menu_setup($hook, $type, $return, $params) {
 function parentportal_pagesetup() {
 	if (elgg_in_context('admin')) {
 		elgg_register_admin_menu_item('administer', 'question_log', 'administer_utilities');
-	}
-
-	if (parentportal_is_user_parent(elgg_get_logged_in_user_entity())) {
-		// Site menu 'home' item
-		$item = new ElggMenuItem('home', elgg_view_icon('home'), elgg_normalize_url('parentportal'));
-		elgg_register_menu_item('site', $item);
 	}
 }
 
