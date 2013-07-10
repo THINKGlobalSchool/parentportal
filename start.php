@@ -31,9 +31,6 @@ function parentportal_init() {
 	$parentportal_js = elgg_get_simplecache_url('js', 'parentportal/parentportal');
 	elgg_register_simplecache_view('js/parentportal/parentportal');
 	elgg_register_js('elgg.parentportal', $parentportal_js);
-		
-	// Register for view plugin hook 
-	elgg_register_plugin_hook_handler('view', 'page/default', 'parentportal_default_view_handler');
 	
 	// Hook for site menu
 	elgg_register_plugin_hook_handler('prepare', 'menu:site', 'parentportal_site_menu_setup');
@@ -99,7 +96,7 @@ function parentportal_page_handler($page) {
 	// Load JS/CSS
 	elgg_load_js('elgg.parentportal');
 	elgg_load_css('elgg.parentportal');
-	
+
 	switch ($page[0]) {
 		// Manage Parent
 		case 'manageparent':
@@ -287,30 +284,6 @@ function parentportal_user_hover_menu_setup($hook, $type, $return, $params) {
 	$return[] = ElggMenuItem::factory($options);
 	
 	return $return;
-}
-
-
-
-/**
- * Plugin hook handler interrupt the page/default view
- *
- * @param sting  $hook   view
- * @param string $type   input/tags
- * @param mixed  $value  Value
- * @param mixed  $params Params
- *
- * @return array
- */
-function parentportal_default_view_handler($hook, $type, $value, $params) {
-	$user = elgg_get_logged_in_user_entity(); 
-
-	// If the user is a parent, output the parentportal page shell instead of the default
-	if (parentportal_is_user_parent($user)) {
-		elgg_set_context('parentportal');
-		$value = elgg_view('page/parentportal', $params['vars']);
-	}
-	
-	return $value;
 }
 
 /**
