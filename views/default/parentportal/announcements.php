@@ -40,7 +40,7 @@ $options['joins'] = $joins;
 // Container where clause
 $container_sql = "e.container_guid IN ({$container_guid})";
 
-$access_sql = get_access_sql_suffix('tmd');
+$access_sql = _elgg_get_access_where_sql(array('table_alias' => 'tmd', 'guid_column' => 'entity_guid'));
 
 // Tag sql where clause
 $tag_sql = "
