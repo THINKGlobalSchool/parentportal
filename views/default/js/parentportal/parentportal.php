@@ -48,11 +48,11 @@ elgg.parentportal.todoNavClick = function(event) {
  * Handle todo submission filter click
  */
 elgg.parentportal.todoSubmissionFilterClick = function(event) {
-	console.log($(this).attr('href'));
+
 	$(".parentportal-submissions-filter").removeClass('selected');
 	$(this).addClass('selected');
-	
-	$(this).parent().parent().load($(this).attr('href'));
+
+	$(this).parent().parent().html("<div class='elgg-ajax-loader'></div>").load($(this).attr('href'));;
 
 	event.preventDefault();
 }
