@@ -45,6 +45,38 @@ $options = array(
 switch($view_filter) {
 	case 'complete':
 	default:
+		$submissions_filter = get_input('submissions_filter', 1);
+
+		// Build the filter url
+		$complete_filter_url = substr(current_page_url(), 0, strrpos(current_page_url(), "?")) . "?t=1" . "&view_filter=complete&guid={$user_guid}";
+
+		if ((bool)$submissions_filter) {
+			$submissions_selected = 'selected';
+			$options['metadata_name'] = 'return_required';
+			$options['metadata_value'] = true;
+		} else {
+			$all_selected = 'selected';
+		}
+
+		// Submission filter link
+		$submissions_link = elgg_view('output/url', array(
+			'text' => elgg_echo('todo:label:submissions'),
+			'class' => "parentportal-submissions-filter {$submissions_selected}",
+			'href' =>  $complete_filter_url . '&submissions_filter=1'
+		));
+
+		// All link
+		$all_link = elgg_view('output/url', array(
+			'text' => elgg_echo('all'),
+			'class' => "parentportal-submissions-filter {$all_selected}",
+			'href' => $complete_filter_url . '&submissions_filter=0'
+		));
+
+		// Output filter
+		echo "<div class='parentportal-submissions-filter-container'>
+			{$submissions_link} | {$all_link}
+		</div>";
+
 		// COMPLETE
 		$wheres = array();
 		$wheres[] = "(EXISTS (

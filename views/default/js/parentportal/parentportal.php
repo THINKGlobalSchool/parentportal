@@ -22,6 +22,7 @@ elgg.parentportal.init = function() {
 	// Make todo nav menu items clickable
 	$(".parentportal-todos-nav").live('click', elgg.parentportal.todoNavClick);
 
+	$(".parentportal-submissions-filter").live('click', elgg.parentportal.todoSubmissionFilterClick);
 }
 
 /**
@@ -42,5 +43,21 @@ elgg.parentportal.todoNavClick = function(event) {
 	
 	event.preventDefault();
 }
+
+/** 
+ * Handle todo submission filter click
+ */
+elgg.parentportal.todoSubmissionFilterClick = function(event) {
+	console.log($(this).attr('href'));
+	$(".parentportal-submissions-filter").removeClass('selected');
+	$(this).addClass('selected');
+	
+	$(this).parent().parent().load($(this).attr('href'));
+
+	event.preventDefault();
+}
+
+
+
 
 elgg.register_hook_handler('init', 'system', elgg.parentportal.init);

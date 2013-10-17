@@ -98,6 +98,22 @@ ul.parentportal-child-list li:first-child {
 	display: none;
 }
 
+a.parentportal-submissions-filter {
+	text-transform: uppercase;
+	color: #666;
+}
+
+a.parentportal-submissions-filter.selected {
+	color: #000;
+}
+
+div.parentportal-submissions-filter-container {
+	float: right;
+	font-size: 11px;
+	font-weight: bold;
+    margin-right: 10px;
+}
+
 /** Child photos **/
 
 #parentportal-module-child-photos .tidypics_album_images,
