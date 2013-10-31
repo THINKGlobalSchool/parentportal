@@ -387,7 +387,34 @@ function parentportal_gatekeeper() {
 	    register_error(elgg_echo('parentportal:error:nopermissions')); 
 	    forward('parentportal');
 	}
-   }
+}
+
+/**
+ * Get current child (for use in widgets) 
+ * 
+ * @return mixed Array of child info, or false if no children/current
+ */
+function parentportal_get_widget_child_info() {
+	$children = parentportal_get_parents_children(elgg_get_logged_in_user_guid());
+
+	if (count($children) > 1) {
+		if (get_input('child_select')) {
+			$_SESSION['child_select'] = get_input('child_select');
+		}
+		$child = get_user($_SESSION['child_select']);
+	} else if (count($children) == 1) {
+		$child = $children[0];
+	} else {
+		return false;
+	}
+
+	$child_info = array(
+		'current_child' => $child,
+		'children' => $children
+	);
+
+	return $child_info;
+}
 
 /** 
  * Compare given entities by date updated

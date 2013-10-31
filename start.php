@@ -8,6 +8,9 @@
  * @copyright THINK Global School 2010
  * @link http://www.thinkglobalschool.com/
  * 
+ * @TODO
+ * - rework parent handling (roles instead of metadata)
+ * - remove old views
  */
 
 // Register init
@@ -59,7 +62,7 @@ function parentportal_init() {
 	elgg_register_action('question_log/delete', "$action_base/delete.php", 'admin');
 	
 	// Plugin hook for index redirect
-	elgg_register_plugin_hook_handler('index', 'system', 'parentportal_redirect');
+	//elgg_register_plugin_hook_handler('index', 'system', 'parentportal_redirect');
 		
 	// Page handler
 	elgg_register_page_handler('parentportal','parentportal_page_handler');
@@ -76,6 +79,27 @@ function parentportal_init() {
 	// PP Gatekeeper
 	if (elgg_is_logged_in() && parentportal_is_user_parent(elgg_get_logged_in_user_entity())) {
 		parentportal_gatekeeper();
+    }
+
+    // Register widgets
+    $widgets = array(
+    	'childprofile',
+    	'news',
+    	'question',
+    	'schooldocs',
+    	'travelupdates',
+    	'wexplore',
+    	'groups',
+    	'reports',
+    	'activity',
+    	'todos',
+    	'photos',
+    );
+
+    foreach ($widgets as $name) {
+    	$title = elgg_echo("parentportal:widget:{$name}_title");
+    	$desc = elgg_echo("parentportal:widget:{$name}_desc");
+    	elgg_register_widget_type("parentportal_{$name}", $title, $desc, 'rolewidget');
     }
 
 	// Whitelist ajax views

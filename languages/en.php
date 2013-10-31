@@ -104,6 +104,31 @@ $english = array(
 	'parentportal:stats:group' => 'Groups',
 	'parentportal:stats:todo' => 'Complete To Do\'s',
 	
+	// Widgets
+	'parentportal:widget:childprofile_title' => 'Your Child',
+	'parentportal:widget:news_title' => 'News and Bulletins',
+	'parentportal:widget:question_title' => 'Ask a Question',
+	'parentportal:widget:schooldocs_title' => 'School Documents',
+	'parentportal:widget:travelupdates_title' => 'Travel Updates',
+	'parentportal:widget:wexplore_title' => 'weXplore Updates',
+	'parentportal:widget:groups_title' => 'Your Child\'s Groups',
+	'parentportal:widget:reports_title' => 'Report Cards',
+	'parentportal:widget:activity_title' => 'Your Child\'s Recent Activity',
+	'parentportal:widget:todos_title' => 'Your Child\'s To Do\'s',
+	'parentportal:widget:photos_title' => 'Photos Tagged With Your Child',
+
+	'parentportal:widget:childprofile_desc' => 'Displays Child Profile Info',
+	'parentportal:widget:news_desc' => 'Display News and Bulletins',
+	'parentportal:widget:question_desc' => 'Display the question form',
+	'parentportal:widget:schooldocs_desc' => 'Display school documents',
+	'parentportal:widget:travelupdates_desc' => 'Display travel updates',
+	'parentportal:widget:wexplore_desc' => 'Display wexplore updates',
+	'parentportal:widget:groups_desc' => 'Display list of child groups',
+	'parentportal:widget:reports_desc' => 'Display child report cards',
+	'parentportal:widget:activity_desc' => 'Display child activity',
+	'parentportal:widget:todos_desc' => 'Display child todos',
+	'parentportal:widget:photos_desc' => 'Display child tagged photos',
+
 	// Other
 	
 

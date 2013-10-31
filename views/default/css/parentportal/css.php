@@ -115,18 +115,8 @@ div.parentportal-submissions-filter-container {
 }
 
 /** Child photos **/
-
-#parentportal-module-child-photos .tidypics_album_images,
-#parentportal-module-child-photos .tidypics_album_gallery_item {
-	text-align:center;
-	width:120px; 
-	height:120px;
-}
-
-#parentportal-module-child-photos .tidypics_album_images img,
-#parentportal-module-child-photos .tidypics_album_gallery_item img {
-	width: 120px;
-	height: 120px;
+#pp-photos-module ul.elgg-gallery li {
+	margin: 6px;
 }
 
 /** Stats **/

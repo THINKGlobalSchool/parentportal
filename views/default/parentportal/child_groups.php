@@ -17,7 +17,4 @@ $groups_module .= elgg_view('modules/genericmodule', array(
 	'view_vars' => array('guid' => $vars['child_guid']), 
 ));
 
-echo elgg_view_module('featured', elgg_echo("parentportal:title:childgroups"), $groups_module, array(
-	'id' => 'parentportal-module-child-groups',
-	'class' => 'parentportal-module',
-));
+echo $groups_module;
