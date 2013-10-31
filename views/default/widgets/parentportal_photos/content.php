@@ -10,7 +10,7 @@
  *
  */
 
-$child = get_user($_SESSION['child_select']);
+$child = get_user(get_input('child_select', $_SESSION['child_select']));
 
 // Child tagged photos module
 $photos_module = elgg_view('modules/genericmodule', array(
