@@ -142,8 +142,8 @@ function parentportal_page_handler($page) {
 		default:
 			gatekeeper();
 			$user = elgg_get_logged_in_user_entity();
-			set_input('parentportal', true);
-			$params = parentportal_get_page_content_index($user);
+		//	set_input('role', elgg_get_plugin_setting('parents_role','parentportal'));
+			forward('home?role=' . elgg_get_plugin_setting('parents_role','parentportal'));
 			break;
 	}
 	
