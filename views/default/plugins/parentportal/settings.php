@@ -97,50 +97,78 @@ if (elgg_is_active_plugin('roles')) {
 		'value' => $vars['entity']->students_role,
 		'show_hidden' => TRUE,
 	));
+
+	$parents_role_label = elgg_echo('parentportal:label:parentsrole');
+	$parents_role_input = elgg_view('input/roledropdown', array(
+		'name' => 'params[parents_role]',
+		'id' => 'parents-role',
+		'value' => $vars['entity']->parents_role,
+		'show_hidden' => TRUE,
+	));
 	
-	$view_students_content = <<<HTML
+	$role_settings_content = <<<HTML
 		<div>
 			<label>$view_students_label</label><br />
 			$view_students_input
-		</div>
+		</div><br />
 		<div>
 			<label>$students_role_label</label><br />
 			$students_role_input
+		</div><br />
+		<div>
+			<label>$parents_role_label</label><br />
+			$parents_role_input
 		</div>
 HTML;
+
+	$role_settings_content = elgg_view_module('inline', elgg_echo('parentportal:title:role_settings'), $role_settings_content);
 }
 
-$content = <<<HTML
-	<br />
+$url_filtering_content = <<<HTML
 	<div>
 	    <label>$url_toggle_label</label><br />
 	  	$url_toggle_input
-	</div>
+	</div><br />
 	<div>
 	    <label>$url_list_label</label><br />
 		$url_list_input
 	</div>
+HTML;
+
+echo elgg_view_module('inline', elgg_echo('parentportal:title:url_filtering'), $url_filtering_content);
+
+$group_settings_content = <<<HTML
 	<div>
 		<label>$parent_group_label</label><br />
 		$parent_group_input
-	</div>
+	</div><br />
 	<div>
 		<label>$wexplore_group_label</label><br />
 		$wexplore_group_input
 	</div>
+HTML;
+
+echo elgg_view_module('inline', elgg_echo('parentportal:title:group_settings'), $group_settings_content);
+
+$tag_settings_content = <<<HTML
 	<div>
 	    <label>$parent_tag_label</label><br />
 		$parent_tag_input
-	</div>
+	</div><br />
 		<div>
 	    <label>$parent_announcement_tag_label</label><br />
 		$parent_announcement_tag_input
 	</div>
+HTML;
+
+echo elgg_view_module('inline', elgg_echo('parentportal:title:tag_settings'), $tag_settings_content);
+
+$content = <<<HTML
 	<div>
 		<label>$parent_contacts_label</label><br />
 		$parent_contacts_input
 	</div>
-	$view_students_content
+	$role_settings_content
 HTML;
 
 echo $content;

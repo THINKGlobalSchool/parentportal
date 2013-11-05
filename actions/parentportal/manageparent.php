@@ -9,11 +9,13 @@
  * @link http://www.thinkglobalschool.com/
  * 
  */
-		
+
 // get input
 $guid 	= get_input('parent');
 $children 	= get_input('members');
 $enabled 	= get_input('parent_enabled');
+$parent_role_guid = elgg_get_plugin_setting('parents_role','parentportal');
+$parent_role = get_entity($parent_role_guid);
 
 // Get user and add children
 $user = get_user($guid);
@@ -59,6 +61,12 @@ if ($enabled) {
 		$ia = elgg_set_ignore_access(TRUE);
 		$success &= $group->join($user);
 		elgg_set_ignore_access($ia);
+
+		if (!elgg_instanceof($parent_role, 'object', 'role')) {
+			register_error(elgg_echo('parentportal:error:invalidparentrole'));
+		} else {
+			$success &= $parent_role->add($user);
+		}
 	}
 	
 	if ($success) {
@@ -73,6 +81,13 @@ if ($enabled) {
 	// Remove parent from group, if a member
 	if ($group->isMember($user)) {
 		$success &= $group->leave($user);
+
+		if (!elgg_instanceof($parent_role, 'object', 'role')) {
+			register_error(elgg_echo('parentportal:error:invalidparentrole'));
+		} else {
+			$success &= $parent_role->remove($user);
+		}
+
 	}
 }
 	

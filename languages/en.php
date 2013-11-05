@@ -44,6 +44,7 @@ $english = array(
 	'parentportal:error:nopermissions' => 'You do not have permission to view this page',
 	'parentportal:error:questionlog' => 'Error saving question to log',
 	'parentportal:error:invaliduser' => 'Invalid \'to\' user',
+	'parentportal:error:invalidparentrole' => 'Invalid Parent Role',
 	
 	// Titles/Label
 	'parentportal:title:manageparent' => "Create/Manage Parent Settings",
@@ -58,6 +59,10 @@ $english = array(
 	'parentportal:title:childtodos' => 'Your Child\'s To Do\'s', 
 	'parentportal:title:usersettings' => 'User Settings', 
 	'parentportal:title:childphotos' => 'Photo\'s tagged with your child',
+	'parentportal:title:url_filtering' => 'URL Filtering',
+	'parentportal:title:group_settings' => 'Group Settings',
+	'parentportal:title:tag_settings' => 'Tag Settings',
+	'parentportal:title:role_settings' => 'Role Settings',
 	
 	'parentportal:label:profile' => "%s's Profile", 
 	'parentportal:label:enableparent' => "Parent Enabled", 
@@ -90,6 +95,7 @@ $english = array(
 	'parentportal:label:spotquestion' => 'Spot Parent Portal Question: %s',
 	'parentportal:label:viewstudents' => 'View all students role',
 	'parentportal:label:studentsrole' => 'Student Role (Restrict users displayed in View all students role to these users)', 
+	'parentportal:label:parentsrole' => 'Parents Role', 
 	'parentportal:label:whatisthis' => 'What is this?',
 	'parentportal:label:weeklywhat' => 'A digest containing the highlights of the week at TGS as created and curated by students and staff.',
 	'parentportal:label:viewmessagebody' => 'View Message Body',
