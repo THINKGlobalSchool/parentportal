@@ -9,7 +9,6 @@
  * @link http://www.thinkglobalschool.com/
  * 
  * @TODO
- * - rework parent handling (roles instead of metadata)
  * - remove old views
  */
 
@@ -71,6 +70,8 @@ function parentportal_init() {
 	if (elgg_is_active_plugin('announcements')) {
 		elgg_extend_view('parentportal/extend_right', 'parentportal/announcements');
 	}
+
+	elgg_extend_view('page/layouts/role_widgets', 'parentportal/child_preload', 1);
 	
 	// add a site navigation item
 	$item = new ElggMenuItem('parentportal', elgg_echo('parentportal'), 'parentportal');

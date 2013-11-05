@@ -14,7 +14,8 @@ echo "<pre>";
 $parents = elgg_get_entities_from_metadata(array(
 	'type' => 'user',
 	'metadata_name' => 'is_parent',
-	'metadata_value' => 1
+	'metadata_value' => 1,
+	'limit' => 0
 ));
 
 $parent_role_guid = elgg_get_plugin_setting('parents_role','parentportal');

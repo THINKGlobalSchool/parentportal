@@ -13,8 +13,6 @@ elgg_load_js('elgg.parentportal');
 elgg_load_css('elgg.parentportal');
 set_input('children', true);
 
-$children = parentportal_get_parents_children(elgg_get_logged_in_user_guid());
-
 $child_info = parentportal_get_widget_child_info();
 
 if (!$child_info) {

@@ -400,10 +400,14 @@ function parentportal_get_widget_child_info() {
 	if (count($children) > 1) {
 		if (get_input('child_select')) {
 			$_SESSION['child_select'] = get_input('child_select');
+			$child = get_user($_SESSION['child_select']);
+		} else {
+			$child = $children[0];
+			$_SESSION['child_select'] = $child->guid;
 		}
-		$child = get_user($_SESSION['child_select']);
 	} else if (count($children) == 1) {
 		$child = $children[0];
+		$_SESSION['child_select'] = $child->guid;
 	} else {
 		return false;
 	}
