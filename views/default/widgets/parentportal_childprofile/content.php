@@ -35,7 +35,7 @@ $location = elgg_view("output/tags",array('value' => $child->location));
 
 $icon = elgg_view_entity_icon($child, 'large', array('hover' => FALSE));
 
-$child_stats = elgg_view('parentportal/stats', $vars);
+$child_stats = elgg_view('parentportal/stats', array('child' => $child_info['current_child']));
 
 $body = <<<HTML
 <div id="parentportal-child-profile">
