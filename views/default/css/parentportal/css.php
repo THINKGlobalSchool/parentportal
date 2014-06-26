@@ -157,3 +157,8 @@ div.parentportal-submissions-filter-container {
 	text-align: left;
 	display: block;
 }
+
+/** Tag for parents **/
+.elgg-menu-item-tag-for-parents {
+	background-position: 0 -1044px !important;
+}

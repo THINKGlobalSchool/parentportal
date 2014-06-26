@@ -101,6 +101,7 @@ $english = array(
 	'parentportal:label:viewmessagebody' => 'View Message Body',
 	'parentportal:label:question_status' => 'Status',
 	'parentportal:label:question_status_text' => 'Status Text',	
+	'parentportal:label:tagforparents' => 'Tag For Parents',
 
 	// Stat labels
 	'parentportal:stats:blog' => 'Blog Posts',
@@ -122,6 +123,7 @@ $english = array(
 	'parentportal:widget:activity_title' => 'Your Child\'s Recent Activity',
 	'parentportal:widget:todos_title' => 'Your Child\'s To Do\'s',
 	'parentportal:widget:photos_title' => 'Photos Tagged With Your Child',
+	'parentportal:widget:forparentsactivity_title' => 'Activity For Parents',
 
 	'parentportal:widget:childprofile_desc' => 'Displays Child Profile Info',
 	'parentportal:widget:news_desc' => 'Display News and Bulletins',
@@ -134,6 +136,7 @@ $english = array(
 	'parentportal:widget:activity_desc' => 'Display child activity',
 	'parentportal:widget:todos_desc' => 'Display child todos',
 	'parentportal:widget:photos_desc' => 'Display child tagged photos',
+	'parentportal:widget:forparentsactivity_desc' => 'Display activity for items tagged \'forparents\'',
 
 	// Other
 	

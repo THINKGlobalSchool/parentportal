@@ -25,19 +25,22 @@ function parentportal_init() {
 	define('PARENT_CHILD_RELATIONSHIP', "is_child_of");
 	
 	// Register CSS
-	$parentportal_css = elgg_get_simplecache_url('css', 'parentportal/css');
-	elgg_register_simplecache_view('css/parentportal/css');
-	elgg_register_css('elgg.parentportal', $parentportal_css);
-	
+	elgg_extend_view('css/elgg', 'css/parentportal/css');
+
 	// Register JS
 	$parentportal_js = elgg_get_simplecache_url('js', 'parentportal/parentportal');
 	elgg_register_simplecache_view('js/parentportal/parentportal');
 	elgg_register_js('elgg.parentportal', $parentportal_js);
+
+	$parentportal_js = elgg_get_simplecache_url('js', 'parentportal/global');
+	elgg_register_simplecache_view('js/parentportal/global');
+	elgg_register_js('elgg.parentportalglobal', $parentportal_js);
+	elgg_load_js('elgg.parentportalglobal');
 	
 	// Hook for site menu
 	elgg_register_plugin_hook_handler('prepare', 'menu:topbar', 'parentportal_site_menu_setup');
 
-	// Set up entity menu for question log items
+	// Set up entity menu
 	elgg_register_plugin_hook_handler('register', 'menu:entity', 'parentportal_entity_menu_setup', 9999);
 	
 	// Extend Admin Menu 
@@ -49,6 +52,9 @@ function parentportal_init() {
 	// Tabbed nav for todo module
 	elgg_register_plugin_hook_handler('register', 'menu:parentportal-todo-nav', 'parentportal_todo_nav_menu_setup');
 	
+	// Set up activity menu for 'forparents' activity widget
+	elgg_register_plugin_hook_handler('register', 'menu:activity_filter', 'parentportal_activity_menu_setup', 999);
+
 	// Pagesetup event handler
 	elgg_register_event_handler('pagesetup', 'system', 'parentportal_pagesetup');
 
@@ -85,6 +91,7 @@ function parentportal_init() {
     // Register widgets
     $widgets = array(
     	'childprofile',
+    	'forparentsactivity',
     	'news',
     	'question',
     	'schooldocs',
@@ -120,7 +127,6 @@ function parentportal_init() {
 function parentportal_page_handler($page) {
 	// Load JS/CSS
 	elgg_load_js('elgg.parentportal');
-	elgg_load_css('elgg.parentportal');
 
 	switch ($page[0]) {
 		// Manage Parent
@@ -180,10 +186,12 @@ function parentportal_site_menu_setup($hook, $type, $return, $params) {
 }
 
 /**
- * Entity menu setup for question log items
+ * Entity menu setup
  */
 function parentportal_entity_menu_setup($hook, $type, $return, $params) {
 	$entity = $params['entity'];	
+
+	// Set up question log items
 	if (elgg_instanceof($entity, 'object', 'pp_question_log')) {		
 		$new_menu = array();			
 		foreach ($return as $idx => $item) {
@@ -194,6 +202,40 @@ function parentportal_entity_menu_setup($hook, $type, $return, $params) {
 
 		return $new_menu;
 	}
+
+	// Set up 'tag for parents'
+	if (elgg_instanceof($entity, 'object') && elgg_is_logged_in()) {	
+		// Check if entity has the 'forparents' tag
+		$params = array(
+			'guid' => $entity->guid,
+			'limit' => 1,
+			'metadata_name_value_pairs' => array(
+				'name' => 'tags', 
+				'value' => 'forparents', 
+				'operand' => '=',
+				'case_sensitive' => FALSE
+			),
+			'count' => TRUE
+		);
+
+		$has_parent_tag = (int)elgg_get_entities_from_metadata($params);
+
+		// If this entity does not have the 'forparents' tag, show the add button
+		if (!$has_parent_tag) {
+			$options = array(
+				'name' => 'tag_for_parents',
+				'text' => elgg_echo('parentportal:label:tagforparents'),
+				'title' => 'tag_for_parents',
+				'href' => "#{$entity->guid}",
+				'class' => 'tag-for-parents',
+				'section' => 'actions',
+				'priority' => 200,
+				'id' => "tag-for-parents-{$entity->guid}",
+			);
+			$return[] = ElggMenuItem::factory($options);
+		}
+	}
+
 	return $return;
 }
 
@@ -274,6 +316,22 @@ function parentportal_todo_nav_menu_setup($hook, $type, $return, $params) {
 	);
 
 	$return[] = ElggMenuItem::factory($options);
+
+	return $return;
+}
+
+/**
+ * Set up activity filter menu items for 'forparents' activity widget
+ */
+function parentportal_activity_menu_setup($h999, $type, $return, $params) {
+
+	if (elgg_in_context('parentportal_activity_widget')) {
+		foreach ($return as $idx => $item) {
+			if ($item->getName() == 'role-filter' || $item->getName() == 'tag-filter') {
+				unset($return[$idx]);
+			}
+		}
+	}
 
 	return $return;
 }
