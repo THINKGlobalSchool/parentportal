@@ -162,3 +162,7 @@ div.parentportal-submissions-filter-container {
 .elgg-menu-item-tag-for-parents {
 	background-position: 0 -1044px !important;
 }
+
+.elgg-widget-instance-parentportal_forparentsactivity ul.elgg-menu-widget {
+	float: right;
+}

@@ -55,6 +55,9 @@ function parentportal_init() {
 	// Set up activity menu for 'forparents' activity widget
 	elgg_register_plugin_hook_handler('register', 'menu:activity_filter', 'parentportal_activity_menu_setup', 999);
 
+	// Modify widget menu
+	elgg_register_plugin_hook_handler('register', 'menu:widget', 'parentportal_widget_menu_setup', 502);
+
 	// Pagesetup event handler
 	elgg_register_event_handler('pagesetup', 'system', 'parentportal_pagesetup');
 
@@ -331,6 +334,31 @@ function parentportal_activity_menu_setup($h999, $type, $return, $params) {
 				unset($return[$idx]);
 			}
 		}
+	}
+
+	return $return;
+}
+
+/**
+ * Modify widget menus for role widgets
+ */
+function parentportal_widget_menu_setup($hook, $type, $return, $params) {
+	if (get_input('custom_widget_controls')) {
+		$widget = $params['entity'];
+		
+		if ($widget->handler == 'parentportal_forparentsactivity') {
+			$options = array(
+				'name' => 'river_view_all',
+				'text' => elgg_echo('parentportal:label:viewallactivity'),
+				'title' => 'river_view_all',
+				'href' => elgg_get_site_url() . 'activity',
+				'class' => 'home-small'
+			);
+
+			$return[] = ElggMenuItem::factory($options);
+		}
+
+		return $return;
 	}
 
 	return $return;
