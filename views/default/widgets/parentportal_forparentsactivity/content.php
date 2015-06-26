@@ -15,11 +15,9 @@ echo elgg_view('filtrate/dashboard', array(
 	'menu_name' => 'activity_filter',
 	'infinite_scroll' => false,
 	'default_params' => array(
-		'type' => 0,
-		'role' => 0,
 		'tag' => 'forparents'
 	),
-	'list_url' => elgg_get_site_url() . 'ajax/view/tgstheme/activity_list',
+	'list_url' => elgg_get_site_url() . 'ajax/view/spiffy/activity_list',
 	'disable_advanced' => true,
 	'disable_history' => true,
 	'ignore_query_string' => true,

@@ -29,7 +29,7 @@ $enable_input = elgg_view('input/dropdown', array(
 $child_label = elgg_echo('parentportal:label:childselect');
 $child_input = elgg_view('input/userpicker', array(
 	'id' => 'child-picker',
-	'value' => $children,
+	'values' => $children,
 ));
 											
 $save_button = elgg_view('input/submit', array(

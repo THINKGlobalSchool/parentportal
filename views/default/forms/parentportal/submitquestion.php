@@ -5,8 +5,8 @@
  * @package ParentPortal
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
  * @author Jeff Tilson
- * @copyright THINK Global School 2010
- * @link http://www.thinkglobalschool.com/
+ * @copyright THINK Global School 2010 - 2015
+ * @link http://www.thinkglobalschool.org/
  * 
  */
 
@@ -51,7 +51,8 @@ $subject_label = elgg_echo('parentportal:label:questionsubject');
 $subject_input = elgg_view('input/text', array(
 	'name' => 'question_subject', 
 	'value' => $subject ? $subject : $subject_label,
-	'js' => "onblur=\"if (this.value == '') {this.value = '$subject_label';}\" onfocus=\"if (this.value == '$subject_label') {this.value = '';}\""
+	'onblur' => "if (this.value == '') {this.value = '$subject_label';}",
+	'onfocus' => "if (this.value == '$subject_label') {this.value = '';}"
 ));
 
 $body_label = elgg_echo('parentportal:label:questionbody');
@@ -59,7 +60,8 @@ $body_input = elgg_view('input/plaintext', array(
 	'style' => 'height: 100px;',
 	'name' => 'question_body',
 	'value' => $body ? $body : $body_label,
-	'js' => "onblur=\"if (this.value == '') {this.value = '$body_label';}\" onfocus=\"if (this.value == '$body_label') {this.value = '';}\""
+	'onblur' => "if (this.value == '') {this.value = '$body_label';}",
+	'onfocus' => "if (this.value == '$body_label') {this.value = '';}"
 ));
 										
 $send_button = elgg_view('input/submit', array(

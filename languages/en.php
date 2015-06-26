@@ -5,12 +5,12 @@
  * @package ParentPortal
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
  * @author Jeff Tilson
- * @copyright THINK Global School 2010
- * @link http://www.thinkglobalschool.com/
+ * @copyright THINK Global School 2010 - 2015
+ * @link http://www.thinkglobalschool.org/
  * 
  */
 
-$english = array(
+return array(
 	
 	// Default Content & Entity/Object Related
 	'parentportal' => 'Parent Portal',
@@ -140,8 +140,4 @@ $english = array(
 	'parentportal:widget:forparentsactivity_desc' => 'Display activity for items tagged \'forparents\'',
 
 	// Other
-	
-
 );
-
-add_translation('en',$english);

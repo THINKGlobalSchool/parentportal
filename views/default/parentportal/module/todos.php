@@ -5,8 +5,8 @@
  * @package ParentPortal
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
  * @author Jeff Tilson
- * @copyright THINK Global School 2010
- * @link http://www.thinkglobalschool.com/
+ * @copyright THINK Global School 2010 - 2015
+ * @link http://www.thinkglobalschool.org/
  * 
  */
 // How are we viewing these todos? 
@@ -20,8 +20,8 @@ set_input('ajaxmodule_listing_type', 'simpleicon');
 // get the user's todos, will be seperating complete/incomplete
 global $CONFIG;
 
-$test_id = get_metastring_id('manual_complete');
-$one_id = get_metastring_id(1);
+$test_id = elgg_get_metastring_id('manual_complete');
+$one_id = elgg_get_metastring_id(1);
 $wheres = array();
 
 		
