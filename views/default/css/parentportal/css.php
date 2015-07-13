@@ -160,7 +160,7 @@ div.parentportal-submissions-filter-container {
 
 /** Tag for parents **/
 .elgg-menu-item-tag-for-parents {
-	background-position: 0 -1044px !important;
+	background-position: 0px -1260px !important;
 }
 
 .elgg-widget-instance-parentportal_forparentsactivity ul.elgg-menu-widget {
